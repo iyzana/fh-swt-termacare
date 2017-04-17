@@ -1,3 +1,5 @@
 package de.adesso.termacare.entity;
 
-public class Doctor implements EntityInterface{}
+public class Doctor extends Person implements EntityInterface{
+
+}
