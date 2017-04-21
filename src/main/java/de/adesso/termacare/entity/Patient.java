@@ -8,13 +8,11 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Table(name = "Patient")
 public class Patient extends Person implements EntityInterface{
 	@Id @GeneratedValue
 	private long id;
