@@ -34,7 +34,10 @@
 - Alternativen:
     - maven
 
-## 5. Entscheidung: 
+## 5. Entscheidung: Bilder auf Buttons
 
 - Beweggründe:
+    - Für ein leichteres Verständnis der Buttons
+    - Schnellere Einarbeitung möglich
 - Alternativen:
+    - Nur Texte
