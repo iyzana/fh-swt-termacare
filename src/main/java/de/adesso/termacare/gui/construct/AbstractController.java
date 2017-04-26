@@ -6,7 +6,7 @@ public abstract class AbstractController<T extends AbstractView> implements Cont
 
 	protected T view;
 
-	public void init(T view) {
+	protected void init(T view) {
 		this.view = view;
 		view.init();
 		logger.info("Initialised in: \"" + this.getClass().getSimpleName() + "\" the view: \"" + view.getClass().getSimpleName() + "\"");
