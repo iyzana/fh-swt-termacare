@@ -1,4 +1,4 @@
-package de.adesso.termacare.entity;
+package de.adesso.termacare.data.entity;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -21,4 +21,12 @@ public class Address implements EntityInterface{
 	private String address;
 	@Column(name = "homeNumber")
 	private String number;
+
+	String getCompressedDeparture(){
+		return postcode + " " + departure;
+	}
+
+	String getCompressedAddress(){
+		return address + " " + number;
+	}
 }

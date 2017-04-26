@@ -1,4 +1,4 @@
-package de.adesso.termacare.entity;
+package de.adesso.termacare.data.entity;
 
 import javax.persistence.Entity;
 
