@@ -68,4 +68,8 @@ public class OverviewController extends AbstractController<Overview>{
 	public void deletePatient(){
 
 	}
+
+	public void infoPatient(){
+
+	}
 }

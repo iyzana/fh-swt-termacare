@@ -23,6 +23,7 @@ public class Overview extends AbstractView<OverviewController>{
 	private	Button newPatient = new Button("new");
 	private	Button editPatient = new Button("edit");
 	private	Button deletePatient = new Button("delete");
+	private Button infoPatient = new Button("info");
 	private HBox bottomBox = new HBox();
 
 	public Overview(OverviewController controller, Stage stage, Scene scene){
@@ -31,7 +32,7 @@ public class Overview extends AbstractView<OverviewController>{
 
 	@Override
 	public void init(){
-		bottomBox.getChildren().addAll(newPatient, editPatient, deletePatient);
+		bottomBox.getChildren().addAll(newPatient, editPatient, deletePatient, infoPatient);
 
 		pane.setCenter(patientTableView);
 		pane.setBottom(bottomBox);
@@ -50,6 +51,7 @@ public class Overview extends AbstractView<OverviewController>{
 		fillComponentWithText(newPatient, "newPatient");
 		fillComponentWithText(editPatient, "editPatient");
 		fillComponentWithText(deletePatient, "deletePatient");
+		fillComponentWithText(infoPatient, "infoPatient");
 	}
 
 	@Override
@@ -57,6 +59,7 @@ public class Overview extends AbstractView<OverviewController>{
 		newPatient.setOnMouseClicked(event -> controller.newPatient());
 		editPatient.setOnMouseClicked(event -> controller.editPatient());
 		deletePatient.setOnMouseClicked(event -> controller.deletePatient());
+		infoPatient.setOnMouseClicked(event -> controller.infoPatient());
 	}
 
 	@Override
@@ -64,6 +67,7 @@ public class Overview extends AbstractView<OverviewController>{
 		newPatient.setId("newPatient");
 		editPatient.setId("editPatient");
 		deletePatient.setId("deletePatient");
+		infoPatient.setId("infoPatient");
 		patientTableView.setId("patientList");
 	}
 }
