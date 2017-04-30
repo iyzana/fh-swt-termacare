@@ -7,13 +7,15 @@ import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public abstract class AbstractView<T extends AbstractController> implements View {
 
 	protected T controller;
-	protected Stage stage;
+	private Stage stage;
+	@Getter
 	protected Scene scene;
 
 	public AbstractView(T controller, Stage stage, Scene scene) {
