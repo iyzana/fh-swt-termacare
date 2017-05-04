@@ -24,8 +24,8 @@ public class OverviewController extends AbstractController<Overview>{
 
 	private void fillTableWithColumns(){
 		generateColumnFor("gender", 0, 50);
-		generateColumnFor("givenName", 100, 0);
-		generateColumnFor("familyName", 100, 0);
+		generateColumnFor("givenNameLabel", 100, 0);
+		generateColumnFor("familyNameLabel", 100, 0);
 		generateColumnFor("livingPostcode");
 		generateColumnFor("livingAddress");
 		generateColumnFor("billingPostcode");

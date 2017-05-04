@@ -14,8 +14,8 @@ abstract class Person{
 	private String title;
 	@Column(name = "gender")
 	private Gender gender;
-	@Column(name = "givenName")
+	@Column(name = "givenNameLabel")
 	private String givenName;
-	@Column(name = "familyName")
+	@Column(name = "familyNameLabel")
 	private String familyName;
 }
