@@ -68,6 +68,8 @@ public class Overview extends AbstractView<OverviewController>{
 		editPatient.setId("editPatient");
 		deletePatient.setId("deletePatient");
 		infoPatient.setId("infoPatient");
+
 		patientTableView.setId("patientList");
+		bottomBox.setId("bottomBox");
 	}
 }
