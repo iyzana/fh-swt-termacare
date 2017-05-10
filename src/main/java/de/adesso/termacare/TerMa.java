@@ -9,9 +9,11 @@ import de.adesso.termacare.database.services.PatientService;
 import de.adesso.termacare.gui.controller.OverviewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class TerMa extends Application {
 
     public static Logger logger = LoggerFactory.getLogger(TerMa.class);
@@ -30,7 +32,7 @@ public class TerMa extends Application {
         PatientService patientService = DependencyInjector.getInstance(PatientService.class);
         patientService.createPatient("Herr", Gender.MALE, "Jannis", "Kaiser", new Address(), new Address());
     
-        patientService.getPatients().forEach(System.out::println);
+        patientService.getPatients().forEach(p -> log.debug(p.toString()));
     }
     
     public static void main(String[] args) {
