@@ -5,6 +5,7 @@ import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.data.entity.Patient;
 import de.adesso.termacare.database.construct.AbstractService;
+import de.adesso.termacare.database.repo.AddressRepo;
 import de.adesso.termacare.database.repo.MedicationRepo;
 import de.adesso.termacare.database.repo.PatientRepo;
 
@@ -16,12 +17,20 @@ import static java.util.stream.Collectors.toList;
  * Created by kaiser on 09.05.2017.
  */
 public class PatientService extends AbstractService<PatientRepo, Patient, Integer> {
+    private AddressRepo addresses;
     private PatientRepo patients;
     private MedicationRepo medication;
+    
+    public List<Patient> getPatients() {
+        return patients.list();
+    }
 
     public void createPatient(String title, Gender gender, String givenName, String familyName, Address billing, Address living) {
+        addresses.add(billing);
+        addresses.add(living);
+        
         Patient patient = new Patient();
-
+        
         patient.setTitle(title);
         patient.setGender(gender);
         patient.setGivenName(givenName);

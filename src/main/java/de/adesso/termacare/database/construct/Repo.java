@@ -17,10 +17,9 @@ interface Repo<T extends EntityInterface, ID extends Serializable> {
 	/**
 	 * Updates the instance with the given id with the new instance
 	 *
-	 * @param id       The id of the entity in the database
 	 * @param instance The instance with the new values
 	 */
-	void update(ID id, T instance);
+	void update(T instance);
 
 	/**
 	 * Method to add an instance of T in the database

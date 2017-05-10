@@ -2,14 +2,16 @@ apply plugin: 'java'
 
 repositories {
     jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.apache.logging.log4j:log4j-core:2.8.1'
     compile 'org.hibernate:hibernate-core:5.2.9.Final'
-    compile 'mysql:mysql-connector-java:6.0.6'
+    compile 'org.xerial:sqlite-jdbc:3.16.1'
     compileOnly 'org.projectlombok:lombok:1.16.16'
+    compile 'com.github.gwenn:sqlite-dialect:master'
 
     testCompile 'junit:junit:4.12'
 }
