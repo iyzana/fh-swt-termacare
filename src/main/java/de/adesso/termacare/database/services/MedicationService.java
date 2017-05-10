@@ -22,6 +22,9 @@ public class MedicationService {
     }
 
     public void createMedication(Patient patient, List<Doctor> doctors, MedicationType type, LocalDateTime appointment) {
+        if(!timeSlotFree(appointment))
+            throw new IllegalStateException("there is another appointment at this time");
+        
         Medication medication = new Medication();
         
         medication.setPatient(patient);
@@ -49,9 +52,12 @@ public class MedicationService {
         
         medications.delete(medicationId);
     
-        if(timeSlotFree(appointment))
-            medication.setAppointment(appointment);
-        
+        if(!timeSlotFree(appointment)) {
+            medications.add(medication);
+            throw new IllegalStateException("there is another appointment at this time");
+        }
+    
+        medication.setAppointment(appointment);
         medications.add(medication);
     }
     
