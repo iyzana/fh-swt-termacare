@@ -4,7 +4,11 @@ import de.adesso.termacare.data.DependencyInjector;
 import de.adesso.termacare.data.entity.Address;
 import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.database.repo.AddressRepo;
+import de.adesso.termacare.database.repo.DoctorRepo;
+import de.adesso.termacare.database.repo.MedicationRepo;
 import de.adesso.termacare.database.repo.PatientRepo;
+import de.adesso.termacare.database.services.DoctorService;
+import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.database.services.PatientService;
 import de.adesso.termacare.gui.controller.OverviewController;
 import javafx.application.Application;
@@ -20,7 +24,8 @@ public class TerMa extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        DependencyInjector.inject(PatientService.class, PatientRepo.class, AddressRepo.class);
+        DependencyInjector.inject(PatientService.class, MedicationService.class, DoctorService.class,
+                PatientRepo.class, AddressRepo.class, MedicationRepo.class, DoctorRepo.class);
         createTestData();
         
         OverviewController overview = new OverviewController();
