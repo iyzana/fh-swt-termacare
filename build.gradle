@@ -1,4 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.0'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName='de.adesso.termacare.TerMa'
 
 repositories {
     jcenter()
@@ -14,4 +27,13 @@ dependencies {
     compile 'com.github.gwenn:sqlite-dialect:master'
 
     testCompile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': (configurations.compile + configurations.compileOnly).collect { it.getName() }.join(' '),
+                'Main-Class': 'de.adesso.termacare.TerMa'
+        )
+    }
 }
