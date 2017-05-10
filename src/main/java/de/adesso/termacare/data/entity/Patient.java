@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +21,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "patient")
+@ToString(callSuper = true)
 public class Patient extends Person implements EntityInterface{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
