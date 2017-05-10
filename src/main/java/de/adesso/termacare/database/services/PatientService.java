@@ -4,7 +4,6 @@ import de.adesso.termacare.data.entity.Address;
 import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.data.entity.Patient;
-import de.adesso.termacare.database.repo.AddressRepo;
 import de.adesso.termacare.database.repo.MedicationRepo;
 import de.adesso.termacare.database.repo.PatientRepo;
 
@@ -16,9 +15,8 @@ import static java.util.stream.Collectors.toList;
  * Created by kaiser on 09.05.2017.
  */
 public class PatientService {
-    private AddressRepo addresses;
     private PatientRepo patients;
-    private MedicationRepo medication;
+    private MedicationRepo medications;
 
     public List<Patient> getPatients() {
         return patients.list();
@@ -38,7 +36,7 @@ public class PatientService {
     }
 
      public List<Medication> getMedications(int patientId) {
-         return medication.list().stream()
+         return medications.list().stream()
                  .filter(med -> patientId == med.getPatient().getId())
                  .collect(toList());
      }
