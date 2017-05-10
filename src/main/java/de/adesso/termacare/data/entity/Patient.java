@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,9 +31,11 @@ public class Patient extends Person implements EntityInterface{
 
 	@OneToOne
 	@JoinColumn(name = "billingAddress")
+	@Cascade(value = CascadeType.ALL)
 	private Address billingAddress;
 	@OneToOne()
 	@JoinColumn(name = "livingAddress")
+	@Cascade(value = CascadeType.ALL)
 	private Address livingAddress;
 
 	public DAOPatient toDAO(){
