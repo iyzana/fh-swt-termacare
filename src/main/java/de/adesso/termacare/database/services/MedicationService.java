@@ -32,7 +32,7 @@ public class MedicationService {
         medication.setMedicationType(type);
         medication.setAppointment(appointment);
     
-        medications.add(medication);
+        medications.save(medication);
     }
 
     public List<Medication> getMedications(int patientId) {
@@ -53,12 +53,12 @@ public class MedicationService {
         medications.delete(medicationId);
     
         if(!timeSlotFree(appointment)) {
-            medications.add(medication);
+            medications.save(medication);
             throw new IllegalStateException("there is another appointment at this time");
         }
     
         medication.setAppointment(appointment);
-        medications.add(medication);
+        medications.save(medication);
     }
     
     private boolean timeSlotFree(LocalDateTime appointment) {

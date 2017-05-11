@@ -13,21 +13,14 @@ interface Repo<T extends EntityInterface, ID extends Serializable> {
 	 * @return A list of all entities
 	 */
 	List<T> list();
-
+	
 	/**
-	 * Updates the instance with the given id with the new instance
+	 * Method to save an instance of T in the database
 	 *
-	 * @param instance The instance with the new values
-	 */
-	void update(T instance);
-
-	/**
-	 * Method to add an instance of T in the database
-	 *
-	 * @param instance The instance to add
+	 * @param instance The instance to save
 	 * @return The ID of the created entity
 	 */
-	ID add(T instance);
+	void save(T instance);
 
 	/**
 	 * Method to get an instance with the given id

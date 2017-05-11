@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,31 +51,16 @@ public abstract class AbstractRepo<T extends EntityInterface, ID extends Seriali
     }
     
     @Override
-    public void update(T instance) {
-        Transaction tx = null;
-        try (Session session = factory.openSession()) {
-            tx = session.beginTransaction();
-            session.update(instance);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            logger.error("Failed to update the instance of " + clazz.getSimpleName(), e);
-        }
-    }
-    
-    @Override
-    public ID add(T instance) {
+    public void save(T instance) {
         try (Session session = factory.openSession()) {
             Transaction tx = null;
             try {
                 tx = session.beginTransaction();
-                ID id = (ID) session.save(instance);
+                session.saveOrUpdate(instance);
                 tx.commit();
-                
-                return id;
             } catch (HibernateException e) {
                 if (tx != null) tx.rollback();
-                logger.error("Failed to add an instance of " + clazz.getSimpleName(), e);
+                logger.error("Failed to save an instance of " + clazz.getSimpleName(), e);
                 
                 throw e;
             }

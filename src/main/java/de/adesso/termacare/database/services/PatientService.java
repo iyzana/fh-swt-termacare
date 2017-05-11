@@ -32,7 +32,11 @@ public class PatientService {
         patient.setBillingAddress(billing);
         patient.setLivingAddress(living);
 
-        patients.add(patient);
+        patients.save(patient);
+    }
+    
+    public void updatePatient(Patient patient) {
+        patients.save(patient);
     }
 
      public List<Medication> getMedications(int patientId) {

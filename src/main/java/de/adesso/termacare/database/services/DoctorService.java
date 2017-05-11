@@ -32,7 +32,7 @@ public class DoctorService {
         doctor.setGivenName(givenName);
         doctor.setFamilyName(familyName);
         
-        doctors.add(doctor);
+        doctors.save(doctor);
     }
     
     public List<Medication> getMedications(int doctorId) {
