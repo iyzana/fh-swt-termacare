@@ -4,7 +4,8 @@
 
 - Reißen der Deadline
 - Technologien
-- 3 more
+- Kommunikation
+- 2 more
 
 ## Risko 1: Reißen der Deadline
 
@@ -34,7 +35,21 @@ stark
 
 Die Vokenntnisse der verwendeten Technologien reichen nicht aus.
 
-## Risko 3: 
+## Risko 3: Kommunikation
+
+### Wahrscheinlichkeit:
+
+30%
+
+### Auswirkungen:
+
+groß
+
+### Beschreibung:
+
+Die Kommunikation im Team klappt nicht, bzw. die Teammitglieder verstreiten sich.
+
+## Risko 4: 
 
 ### Wahrscheinlichkeit:
 
@@ -42,7 +57,22 @@ n%
 
 ### Auswirkungen:
 
-<Auswirkungen>
+x
 
 ### Beschreibung:
+
+
+
+## Risko 5: 
+
+### Wahrscheinlichkeit:
+
+n%
+
+### Auswirkungen:
+
+x
+
+### Beschreibung:
+
 
