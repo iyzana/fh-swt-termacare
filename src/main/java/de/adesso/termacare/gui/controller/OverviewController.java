@@ -1,22 +1,25 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.entity.Patient;
+import de.adesso.termacare.database.services.PatientService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.Overview;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.stream.Collectors;
+
 public class OverviewController extends AbstractController<Overview>{
 
-//	private PatientRepo repo = new PatientRepo();
+	private PatientService service;
 
 	@Override
 	public void init(Stage stage, Scene scene){
 		super.init(new Overview(this, stage, scene));
-		this.stage = stage;
-		this.scene = view.getScene();
 		fillTableWithColumns();
 		loadPersonsToTable();
 		checkButtons();
@@ -45,8 +48,8 @@ public class OverviewController extends AbstractController<Overview>{
 	}
 
 	private void loadPersonsToTable(){
-//		view.setPatients(
-//						FXCollections.observableArrayList(repo.list().stream().map(Patient::toDAO).collect(Collectors.toList())));
+		view.setPatients(
+						FXCollections.observableArrayList(service.getPatients().stream().map(Patient::toDAO).collect(Collectors.toList())));
 	}
 
 	private void checkButtons(){
@@ -56,6 +59,8 @@ public class OverviewController extends AbstractController<Overview>{
 
 	public void newPatient(){
 		PatientEditController patientEditController = new PatientEditController();
+		patientEditController.init(stage, scene);
+		patientEditController.show();
 	}
 
 	public void editPatient(){

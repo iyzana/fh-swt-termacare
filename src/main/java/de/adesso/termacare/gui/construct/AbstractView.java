@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public abstract class AbstractView<T extends AbstractController> implements View {
 
 	protected T controller;
+	@Getter
 	private Stage stage;
 	@Getter
 	protected Scene scene;
