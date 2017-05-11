@@ -39,7 +39,7 @@ public class Patient extends Person implements EntityInterface{
 	private Address livingAddress;
 
 	public DAOPatient toDAO(){
-		return new DAOPatient(getGender().getValue(), getGivenName(), getFamilyName(),
+		return new DAOPatient(id, getGender().getValue(), getGivenName(), getFamilyName(),
 						getLivingAddress().getCompressedDeparture(), getLivingAddress().getCompressedAddress(),
 						getBillingAddress().getCompressedDeparture(), getBillingAddress().getCompressedAddress());
 	}

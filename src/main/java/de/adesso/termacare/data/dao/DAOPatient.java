@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public final class DAOPatient{
+	private long id;
+
 	private String gender;
 	private String givenName;
 	private String familyName;
