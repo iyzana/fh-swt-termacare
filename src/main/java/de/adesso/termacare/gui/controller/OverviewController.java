@@ -1,5 +1,6 @@
 package de.adesso.termacare.gui.controller;
 
+import de.adesso.termacare.data.DependencyInjector;
 import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.data.entity.Patient;
 import de.adesso.termacare.database.services.PatientService;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class OverviewController extends AbstractController<Overview>{
@@ -52,20 +54,24 @@ public class OverviewController extends AbstractController<Overview>{
 						FXCollections.observableArrayList(service.getPatients().stream().map(Patient::toDAO).collect(Collectors.toList())));
 	}
 
-	private void checkButtons(){
-		DAOPatient focusedItem = view.getPatientTableView().getFocusModel().getFocusedItem();
-
+	public void checkButtons(){
+		Optional<DAOPatient> patient = Optional.ofNullable(view.getPatientTableView().getFocusModel().getFocusedItem());
+		Boolean visible = patient.map(daoPatient -> false).orElse(true);
+		view.getEditPatient().setDisable(visible);
+		view.getDeletePatient().setDisable(visible);
+		view.getInfoPatient().setDisable(visible);
 	}
 
 	public void newPatient(){
-		PatientEditController patientEditController = new PatientEditController();
+		PatientEditController patientEditController = DependencyInjector.getInstance(PatientEditController.class);
 		patientEditController.init(stage, scene);
 		patientEditController.show();
 	}
 
 	public void editPatient(){
 		DAOPatient focusedItem = view.getPatientTableView().getFocusModel().getFocusedItem();
-		PatientEditController patientEditController = new PatientEditController(focusedItem);
+		PatientEditController patientEditController = DependencyInjector.getInstance(PatientEditController.class);
+		patientEditController.setPatient(focusedItem);
 		patientEditController.init(stage, scene);
 		patientEditController.show();
 	}

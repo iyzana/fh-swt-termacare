@@ -21,16 +21,21 @@ public class PatientEdit extends AbstractView<PatientEditController>{
 	private Label familyNameLabel = new Label("family name:");
 	private Label titleLabel = new Label("title Label");
 
-	private Label addressLabel = new Label("address Label");
+	private Label billingAddressLabel = new Label("billing address Label");
+	private Label livingAddressLabel = new Label("living address Label");
 
 	private TextField givenNameField = new TextField("given Field");
 	private TextField familyNameField = new TextField("family Field");
 	private TextField titleField = new TextField("title Field");
 
-	private TextField streetField = new TextField("street Field");
-	private TextField postcodeField = new TextField("postcode Field");
-	private TextField departureField = new TextField("departure Field");
-	private TextField numberField = new TextField("number Field");
+	private TextField billingStreetField = new TextField("street Field");
+	private TextField billingPostcodeField = new TextField("postcode Field");
+	private TextField billingDepartureField = new TextField("departure Field");
+	private TextField billingNumberField = new TextField("number Field");
+	private TextField livingStreetField = new TextField("street Field");
+	private TextField livingPostcodeField = new TextField("postcode Field");
+	private TextField livingDepartureField = new TextField("departure Field");
+	private TextField livingNumberField = new TextField("number Field");
 
 	private Button save = new Button("save");
 	private Button cancel = new Button("backToOverview");
@@ -38,7 +43,8 @@ public class PatientEdit extends AbstractView<PatientEditController>{
 	private HBox titleBox = new HBox();
 	private HBox givenNameBox = new HBox();
 	private HBox familyNameBox = new HBox();
-	private HBox addressBox = new HBox();
+	private HBox billingAddressBox = new HBox();
+	private HBox livingAddressBox = new HBox();
 	private VBox contentBox = new VBox();
 	private BorderPane pain = new BorderPane();
 	private HBox bottomBox = new HBox();
@@ -54,8 +60,15 @@ public class PatientEdit extends AbstractView<PatientEditController>{
 		givenNameBox.getChildren().addAll(givenNameLabel, givenNameField);
 		familyNameBox.getChildren().addAll(familyNameLabel, familyNameField);
 
-		addressBox.getChildren().addAll(addressLabel, postcodeField, departureField, streetField, numberField);
-		contentBox.getChildren().addAll(titleBox, givenNameBox, familyNameBox, addressBox);
+		billingAddressBox.getChildren()
+						.addAll(billingAddressLabel, billingPostcodeField, billingDepartureField, billingStreetField,
+						        billingNumberField
+						);
+		livingAddressBox.getChildren()
+						.addAll(livingAddressLabel, livingPostcodeField, livingDepartureField, livingStreetField,
+						        livingNumberField
+						);
+		contentBox.getChildren().addAll(titleBox, givenNameBox, familyNameBox, billingAddressBox, livingAddressBox);
 		bottomBox.getChildren().addAll(save, cancel);
 
 		pain.setCenter(contentBox);
@@ -89,10 +102,10 @@ public class PatientEdit extends AbstractView<PatientEditController>{
 		familyNameField.setId("familyNameField");
 		titleField.setId("titleField");
 
-		addressLabel.setId("addressLabel");
-		postcodeField.setId("postcodeField");
-		departureField.setId("departureField");
-		streetField.setId("streetField");
-		numberField.setId("numberField");
+		billingAddressLabel.setId("billingAddressLabel");
+		billingPostcodeField.setId("billingPostcodeField");
+		billingDepartureField.setId("billingDepartureField");
+		billingStreetField.setId("billingStreetField");
+		billingNumberField.setId("billingNumberField");
 	}
 }

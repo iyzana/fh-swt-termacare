@@ -56,6 +56,7 @@ public class Overview extends AbstractView<OverviewController>{
 
 	@Override
 	public void registerListener(){
+		patientTableView.setOnMouseClicked(event -> controller.checkButtons());
 		newPatient.setOnMouseClicked(event -> controller.newPatient());
 		editPatient.setOnMouseClicked(event -> controller.editPatient());
 		deletePatient.setOnMouseClicked(event -> controller.deletePatient());
