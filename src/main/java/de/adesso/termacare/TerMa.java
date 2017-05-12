@@ -9,6 +9,8 @@ import de.adesso.termacare.database.repo.PatientRepo;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.database.services.PatientService;
+import de.adesso.termacare.gui.controller.DoctorEditController;
+import de.adesso.termacare.gui.controller.MedicationEditController;
 import de.adesso.termacare.gui.controller.OverviewController;
 import de.adesso.termacare.gui.controller.PatientEditController;
 import javafx.application.Application;
@@ -20,29 +22,31 @@ import org.slf4j.LoggerFactory;
 import static de.adesso.termacare.data.DependencyInjector.*;
 
 @Slf4j
-public class TerMa extends Application {
+public class TerMa extends Application{
 
-    public static Logger logger = LoggerFactory.getLogger(TerMa.class);
+	public static Logger logger = LoggerFactory.getLogger(TerMa.class);
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        inject(PatientService.class, MedicationService.class, DoctorService.class,
-                PatientRepo.class, AddressRepo.class, MedicationRepo.class, DoctorRepo.class, OverviewController.class, PatientEditController.class);
-        createTestData();
+	@Override
+	public void start(Stage primaryStage) throws Exception{
+		inject(PatientService.class, MedicationService.class, DoctorService.class, PatientRepo.class, AddressRepo.class,
+		       MedicationRepo.class, DoctorRepo.class, OverviewController.class, PatientEditController.class,
+		       DoctorEditController.class, MedicationEditController.class
+		);
+		createTestData();
 
-        OverviewController overview = getInstance(OverviewController.class);
-        overview.init(primaryStage, null);
-        overview.show();
-    }
+		OverviewController overview = getInstance(OverviewController.class);
+		overview.init(primaryStage, null);
+		overview.show();
+	}
 
-    private void createTestData() {
-        PatientService patientService = getInstance(PatientService.class);
-        patientService.createPatient("Herr", Gender.MALE, "Jannis", "Kaiser", new Address(), new Address());
+	private void createTestData(){
+		PatientService patientService = getInstance(PatientService.class);
+		patientService.createPatient("Herr", Gender.MALE, "Jannis", "Kaiser", new Address(), new Address());
 
-        patientService.getPatients().forEach(p -> log.debug(p.toString()));
-    }
+		patientService.getPatients().forEach(p -> log.debug(p.toString()));
+	}
 
-    public static void main(String[] args) {
-        Application.launch(TerMa.class, args);
-    }
+	public static void main(String[] args){
+		Application.launch(TerMa.class, args);
+	}
 }
