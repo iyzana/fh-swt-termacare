@@ -5,7 +5,7 @@ import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.data.entity.Patient;
 import de.adesso.termacare.database.services.PatientService;
 import de.adesso.termacare.gui.construct.AbstractController;
-import de.adesso.termacare.gui.view.Overview;
+import de.adesso.termacare.gui.view.PatientOverview;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -15,13 +15,13 @@ import javafx.stage.Stage;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class OverviewController extends AbstractController<Overview>{
+public class PatientOverviewController extends AbstractController<PatientOverview>{
 
 	private PatientService service;
 
 	@Override
 	public void init(Stage stage, Scene scene){
-		super.init(new Overview(this, stage, scene));
+		super.init(new PatientOverview(this, stage, scene));
 		fillTableWithColumns();
 		loadPersonsToTable();
 		checkButtons();

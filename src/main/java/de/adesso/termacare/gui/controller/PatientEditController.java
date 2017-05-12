@@ -56,7 +56,7 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 	}
 
 	public void backToOverview(){
-		OverviewController oc = DependencyInjector.getInstance(OverviewController.class);
+		PatientOverviewController oc = DependencyInjector.getInstance(PatientOverviewController.class);
 		oc.init(stage, scene);
 		oc.show();
 	}

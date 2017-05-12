@@ -2,7 +2,7 @@ package de.adesso.termacare.gui.view;
 
 import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.gui.construct.AbstractView;
-import de.adesso.termacare.gui.controller.OverviewController;
+import de.adesso.termacare.gui.controller.PatientOverviewController;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Overview extends AbstractView<OverviewController>{
+public class PatientOverview extends AbstractView<PatientOverviewController>{
 
 	private BorderPane pane = new BorderPane();
 	private ObservableList<DAOPatient> patients;
@@ -26,7 +26,7 @@ public class Overview extends AbstractView<OverviewController>{
 	private Button infoPatient = new Button("info");
 	private HBox bottomBox = new HBox();
 
-	public Overview(OverviewController controller, Stage stage, Scene scene){
+	public PatientOverview(PatientOverviewController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
 	}
 
