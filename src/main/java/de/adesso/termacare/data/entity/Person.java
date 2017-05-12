@@ -5,17 +5,19 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-abstract class Person{
-	@Column(name = "title")
-	private String title;
-	@Column(name = "gender")
-	private Gender gender;
-	@Column(name = "givenNameLabel")
-	private String givenName;
-	@Column(name = "familyNameLabel")
-	private String familyName;
+@MappedSuperclass
+abstract class Person {
+    @Column(name = "title")
+    protected String title;
+    @Column(name = "gender")
+    protected Gender gender;
+    @Column(name = "givenNameLabel")
+    protected String givenName;
+    @Column(name = "familyNameLabel")
+    protected String familyName;
 }
