@@ -59,7 +59,7 @@ public class PatientOverview extends AbstractView<PatientOverviewController>{
 		patientTableView.setOnMouseClicked(event -> controller.checkButtons());
 		newPatient.setOnMouseClicked(event -> controller.newPatient());
 		editPatient.setOnMouseClicked(event -> controller.editPatient());
-		deletePatient.setOnMouseClicked(event -> controller.deletePatient(patientTableView.getSelectionModel().getSelectedItem()));
+		deletePatient.setOnMouseClicked(event -> controller.deletePatient());
 		infoPatient.setOnMouseClicked(event -> controller.infoPatient());
 	}
 
