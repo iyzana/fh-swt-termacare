@@ -1,6 +1,5 @@
 package de.adesso.termacare.gui.view;
 
-import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.PatientEditController;
 import javafx.scene.Scene;
@@ -13,9 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -52,8 +48,6 @@ public class PatientEdit extends AbstractView<PatientEditController> {
     private VBox contentBox = new VBox();
     private BorderPane pain = new BorderPane();
     private HBox bottomBox = new HBox();
-
-    private DAOPatient patient;
 
     public PatientEdit(PatientEditController controller, Stage stage, Scene scene) {
         super(controller, stage, scene);
@@ -114,49 +108,4 @@ public class PatientEdit extends AbstractView<PatientEditController> {
         billingNumberField.setId("billingNumberField");
     }
 
-    public void setPatient(DAOPatient patient) {
-        this.patient = patient;
-        titleField.setText(patient.getTitle());
-        givenNameField.setText(patient.getGivenName());
-        familyNameField.setText(patient.getFamilyName());
-
-        setBillingAddress(patient);
-        setLivingAddress(patient);
-    }
-
-    private void setBillingAddress(DAOPatient patient) {
-        String[] billingPostcode = patient.getBillingPostcode().split(" ");
-        if (billingPostcode.length >= 2) {
-            String departure = IntStream.range(1, billingPostcode.length).mapToObj(i -> billingPostcode[i]).collect(Collectors.joining(" "));
-
-            billingPostcodeField.setText(billingPostcode[0]);
-            billingDepartureField.setText(departure);
-        }
-
-        String[] billingAddress = patient.getBillingAddress().split(" ");
-        if (billingAddress.length >= 2) {
-            String street = IntStream.range(0, billingAddress.length - 1).mapToObj(i -> billingAddress[i]).collect(Collectors.joining(" "));
-
-            billingStreetField.setText(street);
-            billingNumberField.setText(billingAddress[billingAddress.length - 1]);
-        }
-    }
-
-    private void setLivingAddress(DAOPatient patient) {
-        String[] livingPostcode = patient.getLivingPostcode().split(" ");
-        if (livingPostcode.length >= 2) {
-            String departure = IntStream.range(1, livingPostcode.length).mapToObj(i -> livingPostcode[i]).collect(Collectors.joining(" "));
-
-            livingPostcodeField.setText(livingPostcode[0]);
-            livingDepartureField.setText(departure);
-        }
-
-        String[] livingAddress = patient.getLivingAddress().split(" ");
-        if (livingAddress.length >= 2) {
-            String street = IntStream.range(0, livingAddress.length - 1).mapToObj(i -> livingAddress[i]).collect(Collectors.joining(" "));
-
-            livingStreetField.setText(street);
-            livingNumberField.setText(livingAddress[livingAddress.length - 1]);
-        }
-    }
 }

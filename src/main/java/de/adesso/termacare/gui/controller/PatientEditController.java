@@ -11,14 +11,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 @NoArgsConstructor
 public class PatientEditController extends AbstractController<PatientEdit>{
 
-	private long id = 0;
+	private long id;
 	private PatientService service;
 
 	@Override
 	public void init(Stage stage, Scene scene){
+		id = 0;
 		init(new PatientEdit(this, stage, scene));
 	}
 
@@ -60,6 +64,47 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 
 	public void setPatient(DAOPatient patient) {
 		id = patient.getId();
-		view.setPatient(patient);
+		view.getTitleField().setText(patient.getTitle());
+		view.getGivenNameField().setText(patient.getGivenName());
+		view.getFamilyNameField().setText(patient.getFamilyName());
+
+		setBillingAddress(patient);
+		setLivingAddress(patient);
+	}
+
+	private void setBillingAddress(DAOPatient patient) {
+		String[] billingPostcode = patient.getBillingPostcode().split(" ");
+		if (billingPostcode.length >= 2) {
+			String departure = IntStream.range(1, billingPostcode.length).mapToObj(i -> billingPostcode[i]).collect(Collectors.joining(" "));
+
+			view.getBillingPostcodeField().setText(billingPostcode[0]);
+			view.getBillingDepartureField().setText(departure);
+		}
+
+		String[] billingAddress = patient.getBillingAddress().split(" ");
+		if (billingAddress.length >= 2) {
+			String street = IntStream.range(0, billingAddress.length - 1).mapToObj(i -> billingAddress[i]).collect(Collectors.joining(" "));
+
+			view.getBillingStreetField().setText(street);
+			view.getBillingNumberField().setText(billingAddress[billingAddress.length - 1]);
+		}
+	}
+
+	private void setLivingAddress(DAOPatient patient) {
+		String[] livingPostcode = patient.getLivingPostcode().split(" ");
+		if (livingPostcode.length >= 2) {
+			String departure = IntStream.range(1, livingPostcode.length).mapToObj(i -> livingPostcode[i]).collect(Collectors.joining(" "));
+
+			view.getLivingPostcodeField().setText(livingPostcode[0]);
+			view.getLivingDepartureField().setText(departure);
+		}
+
+		String[] livingAddress = patient.getLivingAddress().split(" ");
+		if (livingAddress.length >= 2) {
+			String street = IntStream.range(0, livingAddress.length - 1).mapToObj(i -> livingAddress[i]).collect(Collectors.joining(" "));
+
+			view.getLivingStreetField().setText(street);
+			view.getLivingNumberField().setText(livingAddress[livingAddress.length - 1]);
+		}
 	}
 }

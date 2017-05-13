@@ -1,15 +1,13 @@
 package de.adesso.termacare.data.entity;
 
 import de.adesso.termacare.data.dao.DAODoctor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "doctor")
@@ -20,6 +18,6 @@ public class Doctor extends Person implements EntityInterface{
 	private long id;
 
 	public DAODoctor toDAO(){
-		return new DAODoctor(id, getGender().getValue(), getGivenName(), getFamilyName());
+		return new DAODoctor(id, title, getGender().getValue(), getGivenName(), getFamilyName());
 	}
 }

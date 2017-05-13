@@ -25,9 +25,10 @@ public class DoctorService {
         return doctors.list();
     }
 
-    public void createDoctor(String title, Gender gender, String givenName, String familyName) {
+    public void createOrUpdateDoctor(long id, String title, Gender gender, String givenName, String familyName) {
         Doctor doctor = new Doctor();
-        
+
+        doctor.setId(id);
         doctor.setTitle(title);
         doctor.setGender(gender);
         doctor.setGivenName(givenName);

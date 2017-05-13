@@ -13,6 +13,8 @@ public final class DAODoctor{
 	private long id;
 
 	@NonNull
+	private String title;
+	@NonNull
 	private String gender;
 	@NonNull
 	private String givenName;

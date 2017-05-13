@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -64,11 +63,12 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     public void checkButtons() {
-        Optional<DAODoctor> patient = Optional.ofNullable(view.getDoctorTableView().getFocusModel().getFocusedItem());
-        Boolean visible = patient.map(daoPatient -> false).orElse(true);
-        view.getEditDoctor().setDisable(visible);
-        view.getDeleteDoctor().setDisable(visible);
-        view.getInfoDoctor().setDisable(visible);
+        view.getDoctorTableView().getFocusModel().focusedItemProperty().addListener((observable, oldValue, newValue) -> {
+            Boolean visible = newValue != null;
+            view.getEditDoctor().setDisable(visible);
+            view.getDeleteDoctor().setDisable(visible);
+            view.getInfoDoctor().setDisable(visible);
+        });
     }
 
     public void newDoctor() {
@@ -80,8 +80,8 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     public void editDoctor() {
         DAODoctor focusedItem = view.getDoctorTableView().getFocusModel().getFocusedItem();
         DoctorEditController doctorEditController = DependencyInjector.getInstance(DoctorEditController.class);
-        doctorEditController.setDoctor(focusedItem);
         doctorEditController.init(stage, scene);
+        doctorEditController.setDoctor(focusedItem);
         doctorEditController.show();
     }
 

@@ -8,30 +8,35 @@ import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.DoctorEdit;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.Setter;
 
-public class DoctorEditController extends AbstractController<DoctorEdit>{
+public class DoctorEditController extends AbstractController<DoctorEdit> {
 
-	@Setter
-	private DAODoctor doctor;
+    private DoctorService service;
+    private long id;
 
-	private DoctorService service;
+    @Override
+    public void init(Stage stage, Scene scene) {
+        id = 0;
+        init(new DoctorEdit(this, stage, scene));
+    }
 
-	@Override
-	public void init(Stage stage, Scene scene){
-		init(new DoctorEdit(this, stage, scene));
-	}
+    public void save() {
+        service.createOrUpdateDoctor(id, view.getTitleField().getText(), Gender.MALE, view.getGivenNameField().getText(),
+                view.getFamilyNameField().getText()
+        );
+        backToOverview();
+    }
 
-	public void save(){
-		service.createDoctor(view.getTitleField().getText(), Gender.MALE, view.getGivenNameField().getText(),
-		                      view.getFamilyNameField().getText()
-		);
-		backToOverview();
-	}
+    public void backToOverview() {
+        DoctorOverviewController oc = DependencyInjector.getInstance(DoctorOverviewController.class);
+        oc.init(stage, scene);
+        oc.show();
+    }
 
-	public void backToOverview(){
-		DoctorOverviewController oc = DependencyInjector.getInstance(DoctorOverviewController.class);
-		oc.init(stage, scene);
-		oc.show();
-	}
+    public void setDoctor(DAODoctor doctor) {
+        id = doctor.getId();
+        view.getTitleField().setText(doctor.getTitle());
+        view.getGivenNameField().setText(doctor.getGivenName());
+        view.getFamilyNameField().setText(doctor.getFamilyName());
+    }
 }

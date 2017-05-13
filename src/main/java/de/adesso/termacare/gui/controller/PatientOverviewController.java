@@ -39,7 +39,7 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
     }
 
     private void generateColumnFor(String identifier) {
-        generateColumnFor(identifier, 0, 10000);
+        generateColumnFor(identifier, 0, 0);
     }
 
     private void generateColumnFor(String identifier, int minWidth, int maxWidth) {
