@@ -20,6 +20,13 @@ import lombok.EqualsAndHashCode;
 public class MedicationOverview extends AbstractView<MedicationOverviewController>{
 
 	private BorderPane pane = new BorderPane();
+	private ObservableList<DAOMedication> daoDoctors;
+	private TableView<DAOMedication> doctorTableView = new TableView<>(daoDoctors);
+	private	Button newMedication = new Button("new");
+	private	Button editMedication = new Button("edit");
+	private	Button deleteMedication = new Button("delete");
+	private Button infoMedication = new Button("info");
+	private HBox bottomBox = new HBox();
 
 	private Button doctors = new Button("doktoren ansehen");
 	private Button patients = new Button("patienten ansehen");
@@ -39,16 +46,13 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 	@Override
 	public void init(){
 		gotoBox.getChildren().addAll(doctors, patients);
+		bottomBox.getChildren().addAll(newMedication, editMedication, deleteMedication, infoMedication);
 
-
-		scene = new Scene(gotoBox);
-		scene.getStylesheets().add("main.css");
-		bottomBox.getChildren().addAll(newMedication, deleteMedication, infoMedication);
-
-		pane.setCenter(medicationTableView);
 		pane.setBottom(bottomBox);
-
-		scene.setRoot(pane);
+		pane.setCenter(doctorTableView);
+		pane.setRight(gotoBox);
+		scene = new Scene(pane);
+		scene.getStylesheets().add("main.css");
 	}
 
 	@Override

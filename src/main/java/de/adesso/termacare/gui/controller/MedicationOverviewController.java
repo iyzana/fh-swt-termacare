@@ -1,7 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DAODoctor;
+import de.adesso.termacare.data.dao.DAOMedication;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.gui.construct.AbstractController;
@@ -50,13 +50,13 @@ public class MedicationOverviewController extends AbstractController<MedicationO
         generateColumnFor(identifier, 0, 0);
     }
 
-    private void generateColumnFor(String identifier, int minWidth, int maxWidth) {
-        TableColumn<DAOMedication, String> column = new TableColumn<>(identifier);
-        if (minWidth != 0) column.setMinWidth(minWidth);
-        if (maxWidth != 0) column.setMaxWidth(maxWidth);
-        column.setCellValueFactory(new PropertyValueFactory<>(identifier));
-        view.getMedicationTableView().getColumns().add(column);
-    }
+	private void generateColumnFor(String identifier, int minWidth, int maxWidth){
+		TableColumn<DAOMedication, String> column = new TableColumn<>(identifier);
+		if(minWidth != 0) column.setMinWidth(minWidth);
+		if(maxWidth != 0) column.setMaxWidth(maxWidth);
+		column.setCellValueFactory(new PropertyValueFactory<>(identifier));
+		view.getDoctorTableView().getColumns().add(column);
+	}
 
     private void loadMedicationssToTable() {
         List<DAOMedication> medications = service.getMedications().stream().map(Medication::toDao).collect(toList());
