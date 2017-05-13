@@ -32,9 +32,9 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
 
     private void fillTableWithColumns() {
         generateColumnFor("gender", 0, 50);
-        generateColumnFor("givenNameLabel", 100, 0);
-        generateColumnFor("familyNameLabel", 100, 0);
-        generateColumnFor("Anzahl Behandlungen", 200, 0);
+        generateColumnFor("givenName", 100, 0);
+        generateColumnFor("familyName", 100, 0);
+        generateColumnFor("amountOfPatients", 200, 0);
     }
 
     private void generateColumnFor(String identifier) {
@@ -72,9 +72,9 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     public void newDoctor() {
-        PatientEditController patientEditController = DependencyInjector.getInstance(PatientEditController.class);
-        patientEditController.init(stage, scene);
-        patientEditController.show();
+        DoctorEditController doctorEditController = DependencyInjector.getInstance(DoctorEditController.class);
+        doctorEditController.init(stage, scene);
+        doctorEditController.show();
     }
 
     public void editDoctor() {
