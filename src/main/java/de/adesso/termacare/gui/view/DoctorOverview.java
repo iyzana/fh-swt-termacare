@@ -3,6 +3,7 @@ package de.adesso.termacare.gui.view;
 import de.adesso.termacare.data.dao.DAODoctor;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.DoctorOverviewController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ import lombok.EqualsAndHashCode;
 public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 
 	private BorderPane pane = new BorderPane();
-	private ObservableList<DAODoctor> doctors;
+	private ObservableList<DAODoctor> doctors = FXCollections.observableArrayList();
 	private TableView<DAODoctor> doctorTableView = new TableView<>(doctors);
 	private	Button newDoctor = new Button("new");
 	private	Button editDoctor = new Button("edit");
