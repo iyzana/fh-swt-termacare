@@ -86,7 +86,9 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     public void deleteDoctor() {
-
+        DAODoctor focusedItem = view.getDoctorTableView().getFocusModel().getFocusedItem();
+        view.getDoctors().remove(focusedItem);
+        service.deleteDoctor(focusedItem.getId());
     }
 
     public void infoDoctor() {
