@@ -20,4 +20,8 @@ abstract class Person {
     protected String givenName;
     @Column(name = "familyNameLabel")
     protected String familyName;
+
+	String getName(){
+		return familyName + ", " + givenName;
+	}
 }

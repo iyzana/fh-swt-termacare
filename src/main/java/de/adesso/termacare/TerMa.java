@@ -1,5 +1,7 @@
 package de.adesso.termacare;
 
+import de.adesso.termacare.data.entity.Address;
+import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.database.repo.AddressRepo;
 import de.adesso.termacare.database.repo.DoctorRepo;
 import de.adesso.termacare.database.repo.MedicationRepo;
@@ -25,7 +27,7 @@ public class TerMa extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		inject(PatientService.class, MedicationService.class, DoctorService.class, PatientRepo.class, AddressRepo.class,
-		       MedicationRepo.class, DoctorRepo.class, MainController.class, DoctorOverviewController.class,
+		       MedicationRepo.class, DoctorRepo.class, MedicationOverviewController.class, DoctorOverviewController.class,
 		       PatientOverviewController.class, PatientEditController.class,
 		       DoctorEditController.class, MedicationEditController.class
 		);
@@ -33,7 +35,7 @@ public class TerMa extends Application{
 		primaryStage.setHeight(900);
 		primaryStage.setWidth(1200);
 
-		MainController view = getInstance(MainController.class);
+		MedicationOverviewController view = getInstance(MedicationOverviewController.class);
 		view.init(primaryStage, null);
 		view.show();
 	}

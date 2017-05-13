@@ -1,6 +1,12 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
+import de.adesso.termacare.data.dao.DAODoctor;
+import de.adesso.termacare.data.entity.Medication;
+import de.adesso.termacare.database.services.MedicationService;
+import de.adesso.termacare.gui.construct.AbstractController;
+import de.adesso.termacare.gui.view.MedicationOverview;
+import javafx.collections.FXCollections;
 import de.adesso.termacare.data.dao.DAOMedication;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.database.services.DoctorService;
@@ -83,4 +89,16 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     public void infoMedication() {
 
     }
+
+	public void gotoDoctors(){
+		DoctorOverviewController doctorOverviewController = DependencyInjector.getInstance(DoctorOverviewController.class);
+		doctorOverviewController.init(stage, scene);
+		doctorOverviewController.show();
+	}
+
+	public void gotoPatients(){
+		PatientOverviewController patientOverviewController = DependencyInjector.getInstance(PatientOverviewController.class);
+		patientOverviewController.init(stage, scene);
+		patientOverviewController.show();
+	}
 }

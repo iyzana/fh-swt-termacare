@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,11 @@ import lombok.EqualsAndHashCode;
 public class MedicationOverview extends AbstractView<MedicationOverviewController>{
 
 	private BorderPane pane = new BorderPane();
+
+	private Button doctors = new Button("doktoren ansehen");
+	private Button patients = new Button("patienten ansehen");
+	private VBox gotoBox = new VBox();
+
 	private ObservableList<DAOMedication> medications = FXCollections.observableArrayList();
 	private TableView<DAOMedication> medicationTableView = new TableView<>(medications);
 	private	Button newMedication = new Button("new");
@@ -32,6 +38,11 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 
 	@Override
 	public void init(){
+		gotoBox.getChildren().addAll(doctors, patients);
+
+
+		scene = new Scene(gotoBox);
+		scene.getStylesheets().add("main.css");
 		bottomBox.getChildren().addAll(newMedication, deleteMedication, infoMedication);
 
 		pane.setCenter(medicationTableView);
@@ -58,6 +69,8 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 		newMedication.setOnMouseClicked(event -> controller.newMedication());
 		deleteMedication.setOnMouseClicked(event -> controller.deleteMedication());
 		infoMedication.setOnMouseClicked(event -> controller.infoMedication());
+		doctors.setOnMouseClicked(event -> controller.gotoDoctors());
+		patients.setOnMouseClicked(event -> controller.gotoPatients());
 	}
 
 	@Override

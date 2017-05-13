@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -19,10 +20,10 @@ import static java.util.stream.Collectors.toList;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "medications")
-public class Medication implements EntityInterface {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Medication implements EntityInterface{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
     @OneToOne
     @JoinColumn(name = "patient")

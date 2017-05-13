@@ -6,12 +6,15 @@ import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.DoctorOverview;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -19,15 +22,15 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class DoctorOverviewController extends AbstractController<DoctorOverview> {
 
-    private DoctorService service;
+	private DoctorService service;
 
-    @Override
-    public void init(Stage stage, Scene scene) {
-        super.init(new DoctorOverview(this, stage, scene));
-        fillTableWithColumns();
-        loadPersonsToTable();
-        checkButtons();
-    }
+	@Override
+	public void init(Stage stage, Scene scene){
+		super.init(new DoctorOverview(this, stage, scene));
+		fillTableWithColumns();
+		loadDoctorsToTable();
+		checkButtons();
+	}
 
     private void fillTableWithColumns() {
         generateColumnFor("gender", 0, 50);
@@ -48,7 +51,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
         view.getDoctorTableView().getColumns().add(column);
     }
 
-    private void loadPersonsToTable() {
+    private void loadDoctorsToTable() {
         List<DAODoctor> doctors = service.getDoctors().stream().map(this::doctorToDao).collect(toList());
 
         log.debug("loaded " + doctors.size() + " doctorIds");
@@ -91,7 +94,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
         service.deleteDoctor(focusedItem.getId());
     }
 
-    public void infoDoctor() {
+	public void infoDoctor(){
 
-    }
+	}
 }
