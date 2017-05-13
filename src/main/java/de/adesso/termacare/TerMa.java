@@ -10,6 +10,8 @@ import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.database.services.PatientService;
 import de.adesso.termacare.gui.controller.DoctorEditController;
+import de.adesso.termacare.gui.controller.DoctorOverviewController;
+import de.adesso.termacare.gui.controller.MainController;
 import de.adesso.termacare.gui.controller.MedicationEditController;
 import de.adesso.termacare.gui.controller.PatientOverviewController;
 import de.adesso.termacare.gui.controller.PatientEditController;
@@ -29,14 +31,18 @@ public class TerMa extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		inject(PatientService.class, MedicationService.class, DoctorService.class, PatientRepo.class, AddressRepo.class,
-		       MedicationRepo.class, DoctorRepo.class, PatientOverviewController.class, PatientEditController.class,
+		       MedicationRepo.class, DoctorRepo.class, MainController.class, DoctorOverviewController.class,
+		       PatientOverviewController.class, PatientEditController.class,
 		       DoctorEditController.class, MedicationEditController.class
 		);
-//		createTestData();
+		createTestData();
 
-		PatientOverviewController overview = getInstance(PatientOverviewController.class);
-		overview.init(primaryStage, null);
-		overview.show();
+		primaryStage.setHeight(900);
+		primaryStage.setWidth(600);
+
+		MainController view = getInstance(MainController.class);
+		view.init(primaryStage, null);
+		view.show();
 	}
 
 	private void createTestData(){

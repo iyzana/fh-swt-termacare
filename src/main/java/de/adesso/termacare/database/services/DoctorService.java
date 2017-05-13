@@ -12,9 +12,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- * Created by kaiser on 09.05.2017.
- */
 public class DoctorService {
     private DoctorRepo doctors;
     private PatientRepo patients;
@@ -23,7 +20,11 @@ public class DoctorService {
     public List<Patient> getPatients() {
         return patients.list();
     }
-    
+
+    public List<Doctor> getDoctors() {
+        return doctors.list();
+    }
+
     public void createDoctor(String title, Gender gender, String givenName, String familyName) {
         Doctor doctor = new Doctor();
         
@@ -35,7 +36,7 @@ public class DoctorService {
         doctors.save(doctor);
     }
     
-    public List<Medication> getMedications(int doctorId) {
+    public List<Medication> getMedications(long doctorId) {
         Doctor doctor = doctors.getByID(doctorId);
         if (doctor == null)
             throw new IllegalArgumentException("doctor does not exist");
@@ -45,13 +46,13 @@ public class DoctorService {
                 .collect(toList());
     }
     
-    public List<Patient> getPatients(int doctorId) {
+    public List<Patient> getPatients(long doctorId) {
         return getMedications(doctorId).stream()
                 .map(Medication::getPatient)
                 .collect(toList());
     }
     
-    public void deleteDoctor(int doctorId) {
+    public void deleteDoctor(long doctorId) {
         doctors.delete(doctorId);
     }
 }

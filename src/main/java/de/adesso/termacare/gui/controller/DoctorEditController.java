@@ -1,14 +1,19 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
+import de.adesso.termacare.data.dao.DAODoctor;
 import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.DoctorEdit;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 public class DoctorEditController extends AbstractController<DoctorEdit>{
+
+	@Setter
+	private DAODoctor doctor;
 
 	private DoctorService service;
 
@@ -25,7 +30,7 @@ public class DoctorEditController extends AbstractController<DoctorEdit>{
 	}
 
 	public void backToOverview(){
-		PatientOverviewController oc = DependencyInjector.getInstance(PatientOverviewController.class);
+		DoctorOverviewController oc = DependencyInjector.getInstance(DoctorOverviewController.class);
 		oc.init(stage, scene);
 		oc.show();
 	}

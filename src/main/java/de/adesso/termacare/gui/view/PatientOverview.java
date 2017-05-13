@@ -37,8 +37,7 @@ public class PatientOverview extends AbstractView<PatientOverviewController>{
 		pane.setCenter(patientTableView);
 		pane.setBottom(bottomBox);
 
-		scene = new Scene(pane);
-		scene.getStylesheets().add("main.css");
+		scene.setRoot(pane);
 	}
 
 	@Override
