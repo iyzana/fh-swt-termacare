@@ -10,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
+@Slf4j
 public class DoctorOverviewController extends AbstractController<DoctorOverview> {
 
     private DoctorService service;
@@ -49,6 +51,8 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
 
     private void loadPersonsToTable() {
         List<DAODoctor> doctors = service.getDoctors().stream().map(this::doctorToDao).collect(toList());
+
+        log.debug("loaded " + doctors.size() + " doctors");
 
         view.getDoctors().addAll(doctors);
     }

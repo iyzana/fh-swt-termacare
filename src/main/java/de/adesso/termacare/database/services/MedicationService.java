@@ -35,17 +35,17 @@ public class MedicationService {
         medications.save(medication);
     }
 
-    public List<Medication> getMedications(int patientId) {
+    public List<Medication> getMedications(long patientId) {
         return medications.list().stream()
                          .filter(med -> patientId == med.getPatient().getId())
                          .collect(toList());
     }
 
-    public void deleteMedication(int medicationId) {
+    public void deleteMedication(long medicationId) {
         medications.delete(medicationId);
     }
     
-    public void reschedule(int medicationId, LocalDateTime appointment) {
+    public void reschedule(long medicationId, LocalDateTime appointment) {
         Medication medication = medications.getByID(medicationId);
         if (medication == null)
             throw new IllegalArgumentException("Medication does not exist");

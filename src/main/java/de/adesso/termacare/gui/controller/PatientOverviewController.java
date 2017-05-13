@@ -77,8 +77,8 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
         patientEditController.show();
     }
 
-    public void deletePatient() {
-
+    public void deletePatient(DAOPatient daoPatient) {
+        service.deletePatient(daoPatient.getId());
     }
 
     public void infoPatient() {

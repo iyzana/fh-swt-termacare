@@ -36,13 +36,13 @@ public class PatientService {
         patients.save(patient);
     }
 
-     public List<Medication> getMedications(int patientId) {
+     public List<Medication> getMedications(long patientId) {
          return medications.list().stream()
                  .filter(med -> patientId == med.getPatient().getId())
                  .collect(toList());
      }
 
-    public void deletePatient(int patientId) {
+    public void deletePatient(long patientId) {
         patients.delete(patientId);
     }
 }
