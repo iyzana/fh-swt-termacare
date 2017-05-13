@@ -51,7 +51,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     private void loadPersonsToTable() {
         List<DAODoctor> doctors = service.getDoctors().stream().map(this::doctorToDao).collect(toList());
 
-        log.debug("loaded " + doctors.size() + " doctors");
+        log.debug("loaded " + doctors.size() + " doctorIds");
 
         view.getDoctors().addAll(doctors);
     }
