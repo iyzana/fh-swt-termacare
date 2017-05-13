@@ -10,14 +10,11 @@ import de.adesso.termacare.gui.view.PatientEdit;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 public class PatientEditController extends AbstractController<PatientEdit>{
 
-	@Setter
-	private DAOPatient patient;
-
+	private long id = 0;
 	private PatientService service;
 
 	@Override
@@ -26,20 +23,20 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 	}
 
 	public void save(){
-		service.createPatient(view.getTitleField().getText(), Gender.MALE, view.getGivenNameField().getText(),
+		service.createOrUpdatePatient(id, view.getTitleField().getText(), Gender.MALE, view.getGivenNameField().getText(),
 		                      view.getFamilyNameField().getText(), generateBillingAddress(), generateLivingAddress()
 		);
 		backToOverview();
 	}
 
-	private Address generateLivingAddress(){
+	private Address generateBillingAddress(){
 		return createAddress(
 						view.getBillingPostcodeField().getText(), view.getBillingDepartureField().getText(),
 						view.getBillingStreetField().getText(), view.getBillingNumberField().getText()
 		);
 	}
 
-	private Address generateBillingAddress(){
+	private Address generateLivingAddress(){
 		return createAddress(
 						view.getLivingPostcodeField().getText(), view.getLivingDepartureField().getText(),
 						view.getLivingStreetField().getText(), view.getLivingNumberField().getText()
@@ -61,4 +58,8 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 		oc.show();
 	}
 
+	public void setPatient(DAOPatient patient) {
+		id = patient.getId();
+		view.setPatient(patient);
+	}
 }

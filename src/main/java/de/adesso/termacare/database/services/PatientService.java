@@ -22,9 +22,10 @@ public class PatientService {
         return patients.list();
     }
 
-    public void createPatient(String title, Gender gender, String givenName, String familyName, Address billing, Address living) {
+    public void createOrUpdatePatient(long id, String title, Gender gender, String givenName, String familyName, Address billing, Address living) {
         Patient patient = new Patient();
 
+        patient.setId(id);
         patient.setTitle(title);
         patient.setGender(gender);
         patient.setGivenName(givenName);
@@ -32,10 +33,6 @@ public class PatientService {
         patient.setBillingAddress(billing);
         patient.setLivingAddress(living);
 
-        patients.save(patient);
-    }
-    
-    public void updatePatient(Patient patient) {
         patients.save(patient);
     }
 

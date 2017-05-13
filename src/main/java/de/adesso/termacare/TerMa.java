@@ -1,7 +1,5 @@
 package de.adesso.termacare;
 
-import de.adesso.termacare.data.entity.Address;
-import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.database.repo.AddressRepo;
 import de.adesso.termacare.database.repo.DoctorRepo;
 import de.adesso.termacare.database.repo.MedicationRepo;
@@ -9,19 +7,15 @@ import de.adesso.termacare.database.repo.PatientRepo;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.database.services.PatientService;
-import de.adesso.termacare.gui.controller.DoctorEditController;
-import de.adesso.termacare.gui.controller.DoctorOverviewController;
-import de.adesso.termacare.gui.controller.MainController;
-import de.adesso.termacare.gui.controller.MedicationEditController;
-import de.adesso.termacare.gui.controller.PatientOverviewController;
-import de.adesso.termacare.gui.controller.PatientEditController;
+import de.adesso.termacare.gui.controller.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static de.adesso.termacare.data.DependencyInjector.*;
+import static de.adesso.termacare.data.DependencyInjector.getInstance;
+import static de.adesso.termacare.data.DependencyInjector.inject;
 
 @Slf4j
 public class TerMa extends Application{
@@ -35,21 +29,13 @@ public class TerMa extends Application{
 		       PatientOverviewController.class, PatientEditController.class,
 		       DoctorEditController.class, MedicationEditController.class
 		);
-		createTestData();
 
 		primaryStage.setHeight(900);
-		primaryStage.setWidth(600);
+		primaryStage.setWidth(1200);
 
 		MainController view = getInstance(MainController.class);
 		view.init(primaryStage, null);
 		view.show();
-	}
-
-	private void createTestData(){
-		PatientService patientService = getInstance(PatientService.class);
-		patientService.createPatient("Herr", Gender.MALE, "Jannis", "Kaiser", new Address(), new Address());
-
-		patientService.getPatients().forEach(p -> log.debug(p.toString()));
 	}
 
 	public static void main(String[] args){

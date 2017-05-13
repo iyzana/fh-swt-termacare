@@ -9,6 +9,7 @@ public final class DAOPatient{
 	private long id;
 
 	private String gender;
+	private String title;
 	private String givenName;
 	private String familyName;
 
