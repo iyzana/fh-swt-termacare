@@ -15,16 +15,16 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Selection<T extends DAOData> extends AbstractView<SelectionController<T>>{
+public class Selection extends AbstractView<SelectionController>{
 
 	private Button selectItem = new Button("Auswahl bestätigen");
 
-	private ObservableList<T> data = FXCollections.observableArrayList();
-	private TableView<T> tableView = new TableView<>(data);
+	private ObservableList<DAOData> data = FXCollections.observableArrayList();
+	private TableView<DAOData> tableView = new TableView<>(data);
 
 	private BorderPane pane = new BorderPane();
 
-	public Selection(SelectionController<T> controller, Stage stage, Scene scene){
+	public Selection(SelectionController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
 	}
 

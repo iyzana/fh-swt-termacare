@@ -29,7 +29,7 @@ public class TerMa extends Application{
 		inject(PatientService.class, MedicationService.class, DoctorService.class, PatientRepo.class, AddressRepo.class,
 		       MedicationRepo.class, DoctorRepo.class, MedicationOverviewController.class, DoctorOverviewController.class,
 		       PatientOverviewController.class, PatientEditController.class,
-		       DoctorEditController.class, MedicationEditController.class
+		       DoctorEditController.class, MedicationEditController.class, SelectionController.class
 		);
 
 		primaryStage.setHeight(900);

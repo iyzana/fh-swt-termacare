@@ -58,19 +58,19 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	}
 
 	public void selectPatient(){
-		SelectionController<DAOPatient> controller = getInstance(SelectionController.class);
+		SelectionController controller = getInstance(SelectionController.class);
 		controller.init(stage, scene);
 		controller.show();
 	}
 
 	public void addDoctor(){
-		SelectionController<DAODoctor> controller = getInstance(SelectionController.class);
+		SelectionController controller = getInstance(SelectionController.class);
 		controller.init(stage, scene);
 		controller.show();
 	}
 
 	public void removeDoctor(){
-		SelectionController<DAODoctor> controller = getInstance(SelectionController.class);
+		SelectionController controller = getInstance(SelectionController.class);
 		controller.setData(doctors);
 		controller.init(stage, scene);
 		controller.show();
