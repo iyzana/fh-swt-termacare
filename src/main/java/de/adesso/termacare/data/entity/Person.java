@@ -21,7 +21,7 @@ abstract class Person {
     @Column(name = "familyNameLabel")
     protected String familyName;
 
-	String getName(){
+	public String getName(){
 		return familyName + ", " + givenName;
 	}
 }

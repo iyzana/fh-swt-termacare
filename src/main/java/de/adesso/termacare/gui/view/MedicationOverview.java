@@ -19,24 +19,18 @@ import lombok.EqualsAndHashCode;
 @Data
 public class MedicationOverview extends AbstractView<MedicationOverviewController>{
 
-	private BorderPane pane = new BorderPane();
-	private ObservableList<DAOMedication> daoDoctors;
-	private TableView<DAOMedication> doctorTableView = new TableView<>(daoDoctors);
-	private	Button newMedication = new Button("new");
-	private	Button editMedication = new Button("edit");
-	private	Button deleteMedication = new Button("delete");
-	private Button infoMedication = new Button("info");
-	private HBox bottomBox = new HBox();
-
-	private Button doctors = new Button("doktoren ansehen");
-	private Button patients = new Button("patienten ansehen");
-	private VBox gotoBox = new VBox();
+	private	Button newMedication = new Button("Neu");
+	private	Button editMedication = new Button("Bearbeiten");
+	private	Button deleteMedication = new Button("Löschen");
+	private Button infoMedication = new Button("Informationen");
+	private Button doctors = new Button("Alle Doktoren ansehen");
+	private Button patients = new Button("Alle Patienten ansehen");
 
 	private ObservableList<DAOMedication> medications = FXCollections.observableArrayList();
 	private TableView<DAOMedication> medicationTableView = new TableView<>(medications);
-	private	Button newMedication = new Button("new");
-	private	Button deleteMedication = new Button("delete");
-	private Button infoMedication = new Button("info");
+
+	private VBox gotoBox = new VBox();
+	private BorderPane pane = new BorderPane();
 	private HBox bottomBox = new HBox();
 
 	public MedicationOverview(MedicationOverviewController controller, Stage stage, Scene scene){
@@ -49,7 +43,7 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 		bottomBox.getChildren().addAll(newMedication, editMedication, deleteMedication, infoMedication);
 
 		pane.setBottom(bottomBox);
-		pane.setCenter(doctorTableView);
+		pane.setCenter(medicationTableView);
 		pane.setRight(gotoBox);
 		scene = new Scene(pane);
 		scene.getStylesheets().add("main.css");
@@ -70,9 +64,12 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 	@Override
 	public void registerListener(){
 		medicationTableView.setOnMouseClicked(event -> controller.checkButtons());
+
 		newMedication.setOnMouseClicked(event -> controller.newMedication());
+		editMedication.setOnMouseClicked(event -> controller.editMedication());
 		deleteMedication.setOnMouseClicked(event -> controller.deleteMedication());
 		infoMedication.setOnMouseClicked(event -> controller.infoMedication());
+
 		doctors.setOnMouseClicked(event -> controller.gotoDoctors());
 		patients.setOnMouseClicked(event -> controller.gotoPatients());
 	}

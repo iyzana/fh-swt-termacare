@@ -1,12 +1,5 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DAOMedication;
-import de.adesso.termacare.data.entity.Medication;
-import de.adesso.termacare.database.services.MedicationService;
-import de.adesso.termacare.gui.construct.AbstractController;
-import de.adesso.termacare.gui.view.MedicationOverview;
-import javafx.collections.FXCollections;
 import de.adesso.termacare.data.dao.DAOMedication;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.database.services.DoctorService;
@@ -22,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+import static de.adesso.termacare.data.DependencyInjector.getInstance;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j
@@ -35,16 +29,16 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     public void init(Stage stage, Scene scene) {
         super.init(new MedicationOverview(this, stage, scene));
         fillTableWithColumns();
-        loadMedicationssToTable();
+        loadMedicationsToTable();
         checkButtons();
     }
 
-    private void fillTableWithColumns() {
-        generateColumnFor("patientName", 0, 50);
-        generateColumnFor("doctorNames", 200, 0);
-        generateColumnFor("type", 100, 0);
+	private void fillTableWithColumns(){
+		generateColumnFor("patientName", 0, 50);
+		generateColumnFor("doctorNames", 200, 0);
+		generateColumnFor("type", 100, 0);
         generateColumnFor("time", 200, 0);
-    }
+	}
 
     private void generateColumnFor(String identifier) {
         generateColumnFor(identifier, 0, 0);
@@ -55,10 +49,10 @@ public class MedicationOverviewController extends AbstractController<MedicationO
 		if(minWidth != 0) column.setMinWidth(minWidth);
 		if(maxWidth != 0) column.setMaxWidth(maxWidth);
 		column.setCellValueFactory(new PropertyValueFactory<>(identifier));
-		view.getDoctorTableView().getColumns().add(column);
+		view.getMedicationTableView().getColumns().add(column);
 	}
 
-    private void loadMedicationssToTable() {
+    private void loadMedicationsToTable() {
         List<DAOMedication> medications = service.getMedications().stream().map(Medication::toDao).collect(toList());
 
         log.debug("loaded " + medications.size() + " medications");
@@ -75,10 +69,18 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     }
 
     public void newMedication() {
-        MedicationEditController medicationEditController = DependencyInjector.getInstance(MedicationEditController.class);
+        MedicationEditController medicationEditController = getInstance(MedicationEditController.class);
         medicationEditController.init(stage, scene);
         medicationEditController.show();
     }
+
+	public void editMedication(){
+		DAOMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
+		MedicationEditController controller = getInstance(MedicationEditController.class);
+		controller.setMedication(focusedItem);
+		controller.init(stage, scene);
+		controller.show();
+	}
 
     public void deleteMedication() {
         DAOMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
@@ -91,14 +93,15 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     }
 
 	public void gotoDoctors(){
-		DoctorOverviewController doctorOverviewController = DependencyInjector.getInstance(DoctorOverviewController.class);
+		DoctorOverviewController doctorOverviewController = getInstance(DoctorOverviewController.class);
 		doctorOverviewController.init(stage, scene);
 		doctorOverviewController.show();
 	}
 
 	public void gotoPatients(){
-		PatientOverviewController patientOverviewController = DependencyInjector.getInstance(PatientOverviewController.class);
+		PatientOverviewController patientOverviewController = getInstance(PatientOverviewController.class);
 		patientOverviewController.init(stage, scene);
 		patientOverviewController.show();
 	}
+
 }
