@@ -8,10 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,8 +37,7 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 	private ObservableList<MedicationType> data = FXCollections.observableArrayList();
 	private ComboBox<MedicationType> medicationType = new ComboBox<>(data);
 
-	private DatePicker datePicker = new DatePicker();
-	private TextField medicationStatTime = new TextField();
+	private DateTimePicker datePicker = new DateTimePicker();
 	private TextArea medicationInfo = new TextArea();
 
 	private HBox medicationSelection = new HBox();
@@ -61,7 +58,7 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 		patientSelection.getChildren().addAll(patient, selectPatient);
 		doctorSelection.getChildren().addAll(addDoctor, removeDoctor);
 		doctorsBox.getChildren().addAll(doctor, doctors, doctorSelection);
-		medicationSelection.getChildren().addAll(medication, medicationType, medicationDate, datePicker, medicationTime, medicationStatTime, medications);
+		medicationSelection.getChildren().addAll(medication, medicationType, medicationDate, datePicker, medications);
 
 		midPane.setTop(medicationSelection);
 		midPane.setCenter(medicationInfo);
