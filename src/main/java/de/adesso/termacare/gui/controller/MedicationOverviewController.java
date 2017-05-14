@@ -34,7 +34,7 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     }
 
 	private void fillTableWithColumns(){
-		generateColumnFor("patientName", 0, 50);
+		generateColumnFor("patientName", 0, 0);
 		generateColumnFor("doctorNames", 200, 0);
 		generateColumnFor("type", 100, 0);
         generateColumnFor("time", 200, 0);

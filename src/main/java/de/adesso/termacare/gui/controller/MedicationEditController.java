@@ -46,8 +46,9 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	}
 
 	public void save(){
-			service.createMedication(patient, doctors, medicationType, LocalDateTime.now());
-			backToOverview();
+		LocalDateTime dateTime = view.getDatePicker().getDateTimeValue();
+		service.createMedication(patient, doctors, medicationType, dateTime);
+		backToOverview();
 	}
 
 	public void backToOverview(){

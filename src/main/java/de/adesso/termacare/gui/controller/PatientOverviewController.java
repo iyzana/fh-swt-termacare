@@ -31,7 +31,7 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
         generateColumnFor("title", 100, 0);
         generateColumnFor("givenName", 100, 0);
         generateColumnFor("familyName", 100, 0);
-        generateColumnFor("gender", 0, 50);
+        generateColumnFor("gender", 0, 0);
         generateColumnFor("livingPostcode");
         generateColumnFor("livingAddress");
         generateColumnFor("billingPostcode");

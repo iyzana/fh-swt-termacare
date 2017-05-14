@@ -33,7 +33,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
 	}
 
     private void fillTableWithColumns() {
-        generateColumnFor("gender", 0, 50);
+        generateColumnFor("gender", 0, 0);
         generateColumnFor("givenName", 100, 0);
         generateColumnFor("familyName", 100, 0);
         generateColumnFor("amountOfPatients", 200, 0);
