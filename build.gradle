@@ -23,6 +23,7 @@ dependencies {
     compile 'org.apache.logging.log4j:log4j-core:2.8.2'
     compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
     compile 'org.hibernate:hibernate-core:5.2.9.Final'
+    compile 'org.hibernate:hibernate-java8:5.2.9.Final'
     compile 'org.xerial:sqlite-jdbc:3.16.1'
     compileOnly 'org.projectlombok:lombok:1.16.16'
     compile 'com.github.gwenn:sqlite-dialect:master'
