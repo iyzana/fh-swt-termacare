@@ -1,8 +1,6 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DAODoctor;
 import de.adesso.termacare.data.dao.DAOMedication;
-import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.MedicationType;
 import de.adesso.termacare.data.entity.Patient;

@@ -21,10 +21,10 @@ public class SelectionController extends AbstractController<Selection>{
 	}
 
 	private void fillTableWithColumns(){
-		generateColumnFor("Titel", 0, 100);
-		generateColumnFor("Vorname", 0, 200);
-		generateColumnFor("Nachname", 200, 0);
-		generateColumnFor("Gender", 100, 150);
+		generateColumnFor("title", 0, 100);
+		generateColumnFor("givenName", 0, 200);
+		generateColumnFor("familyName", 200, 0);
+		generateColumnFor("gender", 100, 150);
 	}
 
 	private void generateColumnFor(String identifier) {
