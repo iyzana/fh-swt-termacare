@@ -87,7 +87,6 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 
 	@Override
 	public void registerListener(){
-		medicationStatTime.setOnKeyReleased(event -> controller.isValid());
 		save.setOnMouseClicked(event -> controller.save());
 		cancel.setOnMouseClicked(event -> controller.backToOverview());
 	}
