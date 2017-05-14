@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import static de.adesso.termacare.TerMa.logger;
+
 public class MedicationEditController extends AbstractController<MedicationEdit>{
 
 	private MedicationService service;
@@ -44,13 +46,23 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	}
 
 	public void save(){
-		service.createMedication(patient, doctors, medicationType, LocalDateTime.now());
-		backToOverview();
+		if(isValid()){
+			service.createMedication(patient, doctors, medicationType, LocalDateTime.now());
+			backToOverview();
+		}
 	}
 
 	public void backToOverview(){
 		PatientOverviewController oc = DependencyInjector.getInstance(PatientOverviewController.class);
 		oc.init(stage, scene);
 		oc.show();
+	}
+
+	public boolean isValid(){
+		String startTime = view.getMedicationStatTime().getText().trim();
+		boolean valid = startTime.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+		String matches = valid ? "a valid time" : "not a valid time";
+		logger.debug("Time: " + startTime + " is " + matches);
+		return valid;
 	}
 }
