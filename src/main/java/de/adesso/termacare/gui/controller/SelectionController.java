@@ -8,11 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SelectionController extends AbstractController<Selection>{
+
+	@Setter
+	private MedicationEditController controller;
+	@Setter
+	private boolean isPatientSelection;
+	@Setter
+	private boolean isAddDoctor;
 
 	@Override
 	public void init(Stage stage, Scene scene){
@@ -27,7 +35,7 @@ public class SelectionController extends AbstractController<Selection>{
 		generateColumnFor("gender", 100, 150);
 	}
 
-	private void generateColumnFor(String identifier) {
+	private void generateColumnFor(String identifier){
 		generateColumnFor(identifier, 0, 0);
 	}
 
@@ -40,8 +48,20 @@ public class SelectionController extends AbstractController<Selection>{
 	}
 
 	public void setData(List<Doctor> doctors){
-		List<DAOData> daos = doctors.stream().map(Doctor::toDAO).collect(Collectors.toList());
-		
-		view.getData().addAll(daos);
+		view.getData().addAll(doctors.stream().map(Doctor::toDAO).collect(Collectors.toList()));
+	}
+
+	public void dataSelected(){
+		DAOData focusedItem = view.getTableView().getFocusModel().getFocusedItem();
+		if(focusedItem != null)
+			if(isPatientSelection){
+				controller.patient(focusedItem);
+				if(isAddDoctor) controller.doctorAdd(focusedItem);
+				else controller.doctorRemove(focusedItem);
+			}
+	}
+
+	public void back(){
+		controller.relaunch();
 	}
 }

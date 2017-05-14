@@ -18,6 +18,7 @@ import lombok.EqualsAndHashCode;
 public class Selection extends AbstractView<SelectionController>{
 
 	private Button selectItem = new Button("Auswahl bestätigen");
+	private Button back = new Button("Zurück");
 
 	private ObservableList<DAOData> data = FXCollections.observableArrayList();
 	private TableView<DAOData> tableView = new TableView<>(data);
@@ -48,7 +49,8 @@ public class Selection extends AbstractView<SelectionController>{
 
 	@Override
 	public void registerListener(){
-
+		selectItem.setOnMouseClicked(event -> controller.dataSelected());
+		back.setOnMouseClicked(event -> controller.back());
 	}
 
 	@Override

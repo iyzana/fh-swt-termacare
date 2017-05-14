@@ -1,5 +1,6 @@
 package de.adesso.termacare.gui.controller;
 
+import de.adesso.termacare.data.dao.DAOData;
 import de.adesso.termacare.data.dao.DAOMedication;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.MedicationType;
@@ -72,5 +73,22 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 		controller.setData(doctors);
 		controller.init(stage, scene);
 		controller.show();
+	}
+
+	void relaunch(){
+		launch();
+		view.show();
+	}
+
+	public void patient(DAOData focusedItem){
+
+	}
+
+	public void doctorAdd(DAOData focusedItem){
+
+	}
+
+	public void doctorRemove(DAOData focusedItem){
+
 	}
 }
