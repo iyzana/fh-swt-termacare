@@ -10,12 +10,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class SelectionController<T extends DAOData> extends AbstractController<Selection<T>>{
+public class SelectionController extends AbstractController<Selection<DAOData>>{
 
 	@Override
 	public void init(Stage stage, Scene scene){
-		init(new Selection<T>(this, stage, scene));
+		init(new Selection<>(this, stage, scene));
 		fillTableWithColumns();
 	}
 
@@ -31,15 +32,16 @@ public class SelectionController<T extends DAOData> extends AbstractController<S
 	}
 
 	private void generateColumnFor(String identifier, int minWidth, int maxWidth){
-		TableColumn<T, String> column = new TableColumn<>(identifier);
+		TableColumn<DAOData, String> column = new TableColumn<>(identifier);
 		if(minWidth != 0) column.setMinWidth(minWidth);
 		if(maxWidth != 0) column.setMaxWidth(maxWidth);
 		column.setCellValueFactory(new PropertyValueFactory<>(identifier));
 		view.getTableView().getColumns().add(column);
 	}
 
-	public void setData(List<Doctor> data){
-		// TODO: 14.05.2017 how to do this correct
-//		view.setData(FXCollections.observableArrayList(data.stream().map(Doctor::toDAO).collect(Collectors.toList())));
+	public void setData(List<Doctor> doctors){
+		List<DAOData> daos = doctors.stream().map(Doctor::toDAO).collect(Collectors.toList());
+		
+		view.getData().addAll(daos);
 	}
 }
