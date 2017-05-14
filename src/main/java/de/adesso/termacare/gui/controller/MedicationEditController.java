@@ -1,7 +1,8 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.DependencyInjector;
+import de.adesso.termacare.data.dao.DAODoctor;
 import de.adesso.termacare.data.dao.DAOMedication;
+import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.MedicationType;
 import de.adesso.termacare.data.entity.Patient;
@@ -16,6 +17,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+
+import static de.adesso.termacare.data.DependencyInjector.getInstance;
 
 public class MedicationEditController extends AbstractController<MedicationEdit>{
 
@@ -49,8 +52,27 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	}
 
 	public void backToOverview(){
-		PatientOverviewController oc = DependencyInjector.getInstance(PatientOverviewController.class);
+		PatientOverviewController oc = getInstance(PatientOverviewController.class);
 		oc.init(stage, scene);
 		oc.show();
+	}
+
+	public void selectPatient(){
+		SelectionController<DAOPatient> controller = getInstance(SelectionController.class);
+		controller.init(stage, scene);
+		controller.show();
+	}
+
+	public void addDoctor(){
+		SelectionController<DAODoctor> controller = getInstance(SelectionController.class);
+		controller.init(stage, scene);
+		controller.show();
+	}
+
+	public void removeDoctor(){
+		SelectionController<DAODoctor> controller = getInstance(SelectionController.class);
+		controller.setData(doctors);
+		controller.init(stage, scene);
+		controller.show();
 	}
 }

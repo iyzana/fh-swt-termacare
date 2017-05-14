@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public final class DAOPatient{
+public final class DAOPatient implements DAOData{
 	private long id;
 
 	private String gender;

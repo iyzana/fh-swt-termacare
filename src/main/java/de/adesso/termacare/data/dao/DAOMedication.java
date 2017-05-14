@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class DAOMedication {
+public class DAOMedication implements DAOData{
     long id;
     long patientId;
     String patientName;

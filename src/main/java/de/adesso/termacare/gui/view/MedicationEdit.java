@@ -84,6 +84,9 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 
 	@Override
 	public void registerListener(){
+		selectPatient.setOnMouseClicked(event -> controller.selectPatient());
+		addDoctor.setOnMouseClicked(event -> controller.addDoctor());
+		removeDoctor.setOnMouseClicked(event -> controller.removeDoctor());
 		save.setOnMouseClicked(event -> controller.save());
 		cancel.setOnMouseClicked(event -> controller.backToOverview());
 	}
