@@ -21,8 +21,8 @@ public class PatientEdit extends AbstractView<PatientEditController> {
     private Label familyNameLabel = new Label("family name");
     private Label titleLabel = new Label("title");
 
-    private Label billingAddressLabel = new Label("billing address");
-    private Label livingAddressLabel = new Label("living address");
+    private Label billingAddressLabel = new Label("billing address (postcode city street number)");
+    private Label livingAddressLabel = new Label("living address (postcode city street number)");
 
     private TextField givenNameField = new TextField();
     private TextField familyNameField = new TextField();

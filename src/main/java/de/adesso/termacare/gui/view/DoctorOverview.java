@@ -25,6 +25,7 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 	private	Button editDoctor = new Button("edit");
 	private	Button deleteDoctor = new Button("delete");
 	private Button infoDoctor = new Button("info");
+	private Button cancel = new Button("backToOverview");
 	private HBox bottomBox = new HBox();
 
 	public DoctorOverview(DoctorOverviewController controller, Stage stage, Scene scene){
@@ -33,7 +34,7 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 
 	@Override
 	public void init(){
-		bottomBox.getChildren().addAll(newDoctor, editDoctor, deleteDoctor, infoDoctor);
+		bottomBox.getChildren().addAll(newDoctor, editDoctor, deleteDoctor, infoDoctor, cancel);
 
 		pane.setCenter(doctorTableView);
 		pane.setBottom(bottomBox);
@@ -52,6 +53,7 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 		fillComponentWithText(editDoctor, "editDoctor");
 		fillComponentWithText(deleteDoctor, "deleteDoctor");
 		fillComponentWithText(infoDoctor, "infoDoctor");
+		fillComponentWithText(cancel, "backToOverview");
 	}
 
 	@Override
@@ -61,6 +63,7 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 		editDoctor.setOnMouseClicked(event -> controller.editDoctor());
 		deleteDoctor.setOnMouseClicked(event -> controller.deleteDoctor());
 		infoDoctor.setOnMouseClicked(event -> controller.infoDoctor());
+		cancel.setOnMouseClicked(event -> controller.backToOverview());
 	}
 
 	@Override
@@ -69,6 +72,7 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 		editDoctor.setId("editDoctor");
 		deleteDoctor.setId("deleteDoctor");
 		infoDoctor.setId("infoDoctor");
+		cancel.setId("doctorOverviewCancel");
 
 		doctorTableView.setId("patientList");
 		bottomBox.setId("bottomBox");

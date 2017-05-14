@@ -73,6 +73,12 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
             view.getInfoDoctor().setDisable(visible);
         });
     }
+    
+    public void backToOverview() {
+        MedicationOverviewController oc = DependencyInjector.getInstance(MedicationOverviewController.class);
+        oc.init(stage, scene);
+        oc.show();
+    }
 
     public void newDoctor() {
         DoctorEditController doctorEditController = DependencyInjector.getInstance(DoctorEditController.class);
