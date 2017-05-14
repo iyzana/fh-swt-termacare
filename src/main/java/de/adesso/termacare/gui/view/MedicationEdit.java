@@ -32,7 +32,7 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 	private Label medication = new Label("Art der Behandlung: ");
 	private Label medications = new Label("Behandlungsinhalte: ");
 
-	private ObservableList<MedicationType> data = FXCollections.emptyObservableList();
+	private ObservableList<MedicationType> data = FXCollections.observableArrayList();
 	private ComboBox<MedicationType> medicationType = new ComboBox<>(data);
 
 	private TextArea medicationInfo = new TextArea();
