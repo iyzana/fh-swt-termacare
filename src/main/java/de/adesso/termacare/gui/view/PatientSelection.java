@@ -1,38 +1,41 @@
 package de.adesso.termacare.gui.view;
 
-import de.adesso.termacare.data.dao.DAOData;
+import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.gui.construct.AbstractView;
-import de.adesso.termacare.gui.controller.SelectionController;
+import de.adesso.termacare.gui.controller.PatientSelectionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Selection extends AbstractView<SelectionController>{
+public class PatientSelection extends AbstractView<PatientSelectionController>{
 
 	private Button selectItem = new Button("Auswahl bestätigen");
 	private Button back = new Button("Zurück");
 
-	private ObservableList<DAOData> data = FXCollections.observableArrayList();
-	private TableView<DAOData> tableView = new TableView<>(data);
+	private ObservableList<DAOPatient> data = FXCollections.observableArrayList();
+	private TableView<DAOPatient> tableView = new TableView<>(data);
 
 	private BorderPane pane = new BorderPane();
+	private HBox bottomBox = new HBox();
 
-	public Selection(SelectionController controller, Stage stage, Scene scene){
+	public PatientSelection(PatientSelectionController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
 	}
 
 	@Override
 	public void init(){
+		bottomBox.getChildren().addAll(selectItem ,back);
 		pane.setCenter(tableView);
-		pane.setBottom(selectItem);
+		pane.setBottom(bottomBox);
 
 		scene.setRoot(pane);
 	}

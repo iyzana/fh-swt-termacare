@@ -1,9 +1,9 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DAOData;
+import de.adesso.termacare.data.dao.DAODoctor;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.gui.construct.AbstractController;
-import de.adesso.termacare.gui.view.Selection;
+import de.adesso.termacare.gui.view.DoctorSelection;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,7 +13,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SelectionController extends AbstractController<Selection>{
+public class DoctorSelectionController extends AbstractController<DoctorSelection>{
 
 	@Setter
 	private MedicationEditController controller;
@@ -24,7 +24,7 @@ public class SelectionController extends AbstractController<Selection>{
 
 	@Override
 	public void init(Stage stage, Scene scene){
-		init(new Selection(this, stage, scene));
+		init(new DoctorSelection(this, stage, scene));
 		fillTableWithColumns();
 	}
 
@@ -40,7 +40,7 @@ public class SelectionController extends AbstractController<Selection>{
 	}
 
 	private void generateColumnFor(String identifier, int minWidth, int maxWidth){
-		TableColumn<DAOData, String> column = new TableColumn<>(identifier);
+		TableColumn<DAODoctor, String> column = new TableColumn<>(identifier);
 		if(minWidth != 0) column.setMinWidth(minWidth);
 		if(maxWidth != 0) column.setMaxWidth(maxWidth);
 		column.setCellValueFactory(new PropertyValueFactory<>(identifier));
@@ -52,13 +52,9 @@ public class SelectionController extends AbstractController<Selection>{
 	}
 
 	public void dataSelected(){
-		DAOData focusedItem = view.getTableView().getFocusModel().getFocusedItem();
-		if(focusedItem != null)
-			if(isPatientSelection){
-				controller.patient(focusedItem);
-				if(isAddDoctor) controller.doctorAdd(focusedItem);
-				else controller.doctorRemove(focusedItem);
-			}
+		DAODoctor focusedItem = view.getTableView().getFocusModel().getFocusedItem();
+		if(isAddDoctor) controller.doctorAdd(focusedItem);
+		else controller.doctorRemove(focusedItem);
 	}
 
 	public void back(){

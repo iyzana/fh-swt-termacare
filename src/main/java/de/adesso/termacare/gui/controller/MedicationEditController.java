@@ -1,10 +1,13 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DAOData;
+import de.adesso.termacare.data.dao.DAODoctor;
 import de.adesso.termacare.data.dao.DAOMedication;
+import de.adesso.termacare.data.dao.DAOPatient;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.MedicationType;
 import de.adesso.termacare.data.entity.Patient;
+import de.adesso.termacare.database.repo.DoctorRepo;
+import de.adesso.termacare.database.repo.PatientRepo;
 import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.MedicationEdit;
@@ -22,6 +25,8 @@ import static de.adesso.termacare.data.DependencyInjector.getInstance;
 public class MedicationEditController extends AbstractController<MedicationEdit>{
 
 	private MedicationService service;
+	private PatientRepo patientService;
+	private DoctorRepo doctorService;
 
 	@Setter
 	private DAOMedication medication;
@@ -58,19 +63,19 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	}
 
 	public void selectPatient(){
-		SelectionController controller = getInstance(SelectionController.class);
+		PatientSelectionController controller = getInstance(PatientSelectionController.class);
 		controller.init(stage, scene);
 		controller.show();
 	}
 
 	public void addDoctor(){
-		SelectionController controller = getInstance(SelectionController.class);
+		DoctorSelectionController controller = getInstance(DoctorSelectionController.class);
 		controller.init(stage, scene);
 		controller.show();
 	}
 
 	public void removeDoctor(){
-		SelectionController controller = getInstance(SelectionController.class);
+		DoctorSelectionController controller = getInstance(DoctorSelectionController.class);
 		controller.setData(doctors);
 		controller.init(stage, scene);
 		controller.show();
@@ -78,18 +83,22 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 
 	void relaunch(){
 		launch();
-		view.show();
+		view.getScene().setRoot(view.getMainPane());
+		show();
 	}
 
-	public void patient(DAOData focusedItem){
-
+	public void patient(DAOPatient focusedItem){
+		patient = patientService.getByID(focusedItem.getId());
+		relaunch();
 	}
 
-	public void doctorAdd(DAOData focusedItem){
-
+	public void doctorAdd(DAODoctor focusedItem){
+		doctors.add(doctorService.getByID(focusedItem.getId()));
+		relaunch();
 	}
 
-	public void doctorRemove(DAOData focusedItem){
-
+	public void doctorRemove(DAODoctor focusedItem){
+		doctors.remove(doctorService.getByID(focusedItem.getId()));
+		relaunch();
 	}
 }
