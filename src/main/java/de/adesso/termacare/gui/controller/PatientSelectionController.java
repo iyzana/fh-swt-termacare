@@ -1,6 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.entity.Patient;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.PatientSelection;
 import javafx.scene.Scene;
@@ -8,6 +9,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.Setter;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PatientSelectionController extends AbstractController<PatientSelection>{
 
@@ -45,5 +49,9 @@ public class PatientSelectionController extends AbstractController<PatientSelect
 
 	public void back(){
 		controller.relaunch();
+	}
+
+	public void setData(List<Patient> patients){
+		view.getData().addAll(patients.stream().map(Patient::toDAO).collect(Collectors.toList()));
 	}
 }

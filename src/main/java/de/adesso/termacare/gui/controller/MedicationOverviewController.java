@@ -30,14 +30,13 @@ public class MedicationOverviewController extends AbstractController<MedicationO
         super.init(new MedicationOverview(this, stage, scene));
         fillTableWithColumns();
         loadMedicationsToTable();
-        checkButtons();
     }
 
 	private void fillTableWithColumns(){
 		generateColumnFor("patientName", 0, 0);
 		generateColumnFor("doctorNames", 200, 0);
 		generateColumnFor("type", 100, 0);
-        generateColumnFor("time", 200, 0);
+		generateColumnFor("time", 200, 0);
 	}
 
     private void generateColumnFor(String identifier) {
@@ -58,14 +57,6 @@ public class MedicationOverviewController extends AbstractController<MedicationO
         log.debug("loaded " + medications.size() + " medications");
 
         view.getMedications().addAll(medications);
-    }
-
-    public void checkButtons() {
-        view.getMedicationTableView().getFocusModel().focusedItemProperty().addListener((observable, oldValue, newValue) -> {
-            Boolean visible = newValue != null;
-            view.getDeleteMedication().setDisable(visible);
-            view.getInfoMedication().setDisable(visible);
-        });
     }
 
     public void newMedication() {

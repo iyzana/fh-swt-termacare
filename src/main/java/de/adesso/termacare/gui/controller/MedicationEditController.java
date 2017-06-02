@@ -19,6 +19,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static de.adesso.termacare.data.DependencyInjector.getInstance;
 
@@ -29,7 +30,7 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	private DoctorRepo doctorService;
 
 	@Setter
-	private DAOMedication medication;
+	private DAOMedication medication = null;
 
 	private Patient patient;
 	private List<Doctor> doctors = new LinkedList<>();
@@ -42,22 +43,26 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	}
 
 	private void launch(){
-		view.getPatient().setText(patient != null ? "Patient: " + patient.getName() : "keinen Patienten ausgewählt");
-		view.getDoctors().getChildren().clear();
-		doctors.forEach(d -> view.getDoctors().getChildren().add(new Label(" - "+ d.getName())));
-		view.getData().clear();
-		view.getData().addAll(MedicationType.values());
-		view.getMedicationType().getSelectionModel().select(medicationType != null ? medicationType : MedicationType.INSPECTION);
+		if(medication != null){
+			view.getPatient().setText("Patient: " + medication.getPatientName());
+			view.getDoctors().getChildren().clear();
+			view.getDoctors().getChildren().addAll(medication.getDoctorIds().stream().map(doctor -> new Label(" - " + doctorService.getByID(doctor).getName())).collect(Collectors.toList()));
+			view.getData().clear();
+			view.getData().addAll(MedicationType.values());
+			view.getMedicationType().getSelectionModel().select(medicationType != null ? medicationType : MedicationType.INSPECTION);
+		} else
+			view.getPatient().setText("kein Patient ausgewählt");
 	}
 
 	public void save(){
 		LocalDateTime dateTime = view.getDatePicker().getDateTimeValue();
-		service.createMedication(patient, doctors, medicationType, dateTime);
+		MedicationType type = view.getMedicationType().getValue();
+		service.createMedication(patient, doctors, type, dateTime);
 		backToOverview();
 	}
 
 	public void backToOverview(){
-		PatientOverviewController oc = getInstance(PatientOverviewController.class);
+		MedicationOverviewController oc = getInstance(MedicationOverviewController.class);
 		oc.init(stage, scene);
 		oc.show();
 	}
@@ -65,19 +70,24 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 	public void selectPatient(){
 		PatientSelectionController controller = getInstance(PatientSelectionController.class);
 		controller.init(stage, scene);
+		controller.setData(patientService.list());
+		controller.setController(this);
 		controller.show();
 	}
 
 	public void addDoctor(){
 		DoctorSelectionController controller = getInstance(DoctorSelectionController.class);
 		controller.init(stage, scene);
+		controller.setData(doctorService.list(), true);
+		controller.setController(this);
 		controller.show();
 	}
 
 	public void removeDoctor(){
 		DoctorSelectionController controller = getInstance(DoctorSelectionController.class);
-		controller.setData(doctors);
 		controller.init(stage, scene);
+		controller.setData(doctors, false);
+		controller.setController(this);
 		controller.show();
 	}
 
@@ -87,17 +97,17 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 		show();
 	}
 
-	public void patient(DAOPatient focusedItem){
+	void patient(DAOPatient focusedItem){
 		patient = patientService.getByID(focusedItem.getId());
 		relaunch();
 	}
 
-	public void doctorAdd(DAODoctor focusedItem){
+	void doctorAdd(DAODoctor focusedItem){
 		doctors.add(doctorService.getByID(focusedItem.getId()));
 		relaunch();
 	}
 
-	public void doctorRemove(DAODoctor focusedItem){
+	void doctorRemove(DAODoctor focusedItem){
 		doctors.remove(doctorService.getByID(focusedItem.getId()));
 		relaunch();
 	}

@@ -63,8 +63,6 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 
 	@Override
 	public void registerListener(){
-		medicationTableView.setOnMouseClicked(event -> controller.checkButtons());
-
 		newMedication.setOnMouseClicked(event -> controller.newMedication());
 		editMedication.setOnMouseClicked(event -> controller.editMedication());
 		deleteMedication.setOnMouseClicked(event -> controller.deleteMedication());

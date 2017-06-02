@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PatientOverviewController extends AbstractController<PatientOverview> {
@@ -24,7 +23,6 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
         super.init(new PatientOverview(this, stage, scene));
         fillTableWithColumns();
         loadPersonsToTable();
-        checkButtons();
     }
 
     private void fillTableWithColumns() {
@@ -55,14 +53,6 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
         view.getPatients().addAll(patients);
     }
 
-    public void checkButtons() {
-        Optional<DAOPatient> patient = Optional.ofNullable(view.getPatientTableView().getFocusModel().getFocusedItem());
-        Boolean visible = patient.map(daoPatient -> false).orElse(true);
-        view.getEditPatient().setDisable(visible);
-        view.getDeletePatient().setDisable(visible);
-        view.getInfoPatient().setDisable(visible);
-    }
-    
     public void backToOverview() {
         MedicationOverviewController oc = DependencyInjector.getInstance(MedicationOverviewController.class);
         oc.init(stage, scene);

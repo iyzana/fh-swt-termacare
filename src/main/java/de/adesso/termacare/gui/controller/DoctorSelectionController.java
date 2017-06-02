@@ -18,8 +18,6 @@ public class DoctorSelectionController extends AbstractController<DoctorSelectio
 	@Setter
 	private MedicationEditController controller;
 	@Setter
-	private boolean isPatientSelection;
-	@Setter
 	private boolean isAddDoctor;
 
 	@Override
@@ -47,8 +45,9 @@ public class DoctorSelectionController extends AbstractController<DoctorSelectio
 		view.getTableView().getColumns().add(column);
 	}
 
-	public void setData(List<Doctor> doctors){
+	void setData(List<Doctor> doctors, boolean isAddDoctor){
 		view.getData().addAll(doctors.stream().map(Doctor::toDAO).collect(Collectors.toList()));
+		this.isAddDoctor = isAddDoctor;
 	}
 
 	public void dataSelected(){

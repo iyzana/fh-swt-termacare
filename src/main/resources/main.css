@@ -1,0 +1,13 @@
+Button{
+    -fx-label-padding: 5px;
+}
+
+HBox{
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+}
+
+VBox{
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+}

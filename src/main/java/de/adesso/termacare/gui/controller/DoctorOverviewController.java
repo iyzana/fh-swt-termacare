@@ -6,15 +6,12 @@ import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.DoctorOverview;
-import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -29,7 +26,6 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
 		super.init(new DoctorOverview(this, stage, scene));
 		fillTableWithColumns();
 		loadDoctorsToTable();
-		checkButtons();
 	}
 
     private void fillTableWithColumns() {
@@ -65,15 +61,6 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
         return dao;
     }
 
-    public void checkButtons() {
-        view.getDoctorTableView().getFocusModel().focusedItemProperty().addListener((observable, oldValue, newValue) -> {
-            Boolean visible = newValue != null;
-            view.getEditDoctor().setDisable(visible);
-            view.getDeleteDoctor().setDisable(visible);
-            view.getInfoDoctor().setDisable(visible);
-        });
-    }
-    
     public void backToOverview() {
         MedicationOverviewController oc = DependencyInjector.getInstance(MedicationOverviewController.class);
         oc.init(stage, scene);
