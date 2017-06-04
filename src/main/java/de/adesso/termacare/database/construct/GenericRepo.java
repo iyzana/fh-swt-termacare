@@ -5,6 +5,7 @@ import de.adesso.termacare.database.entity.Doctor;
 import de.adesso.termacare.database.entity.EntityInterface;
 import de.adesso.termacare.database.entity.Medication;
 import de.adesso.termacare.database.entity.Patient;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,8 +16,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-import static de.adesso.termacare.TerMa.logger;
-
+@Slf4j
 public class GenericRepo<T extends EntityInterface, ID extends Serializable> implements Repo<T, ID> {
     
     private Class<T> clazz;
@@ -64,7 +64,7 @@ public class GenericRepo<T extends EntityInterface, ID extends Serializable> imp
                 tx.commit();
             } catch (HibernateException e) {
                 if (tx != null) tx.rollback();
-                logger.error("Failed to save an instance of " + clazz.getSimpleName(), e);
+                log.error("Failed to save an instance of " + clazz.getSimpleName(), e);
                 
                 throw e;
             }
@@ -82,16 +82,16 @@ public class GenericRepo<T extends EntityInterface, ID extends Serializable> imp
     @Override
     public void delete(ID id) {
         Transaction tx = null;
-        logger.debug("Try to delete the entity with ID:" + id);
+        log.debug("Try to delete the entity with ID:" + id);
         try (Session session = factory.openSession()) {
             tx = session.beginTransaction();
             T t = session.get(clazz, id);
             session.delete(t);
             tx.commit();
-            logger.info(clazz.getSimpleName() + " with ID:" + id + " deleted:\n" + t.toString());
+            log.info(clazz.getSimpleName() + " with ID:" + id + " deleted:\n" + t.toString());
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
-            logger.error("Failed to delete the " + clazz.getSimpleName() + " with ID:" + id, e);
+            log.error("Failed to delete the " + clazz.getSimpleName() + " with ID:" + id, e);
         }
     }
 }

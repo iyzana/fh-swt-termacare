@@ -3,9 +3,9 @@ package de.adesso.termacare.gui.construct;
 import de.adesso.termacare.gui.language.LanguageSelection;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
-import static de.adesso.termacare.TerMa.logger;
-
+@Slf4j
 public abstract class AbstractController<T extends AbstractView> implements Controller {
 
 	protected T view;
@@ -17,7 +17,7 @@ public abstract class AbstractController<T extends AbstractView> implements Cont
 		this.view = view;
 		scene = view.getScene();
 		stage = view.getStage();
-		logger.info("Initialised in: \"" + this.getClass().getSimpleName() + "\" the view: \"" + view.getClass().getSimpleName() + "\"");
+		log.info("Initialised in: \"" + this.getClass().getSimpleName() + "\" the view: \"" + view.getClass().getSimpleName() + "\"");
 	}
 
 	@Override

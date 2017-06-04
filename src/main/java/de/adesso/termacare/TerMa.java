@@ -9,9 +9,6 @@ import de.adesso.termacare.database.repo.AddressRepo;
 import de.adesso.termacare.database.repo.DoctorRepo;
 import de.adesso.termacare.database.repo.MedicationRepo;
 import de.adesso.termacare.database.repo.PatientRepo;
-import de.adesso.termacare.service.DoctorService;
-import de.adesso.termacare.service.MedicationService;
-import de.adesso.termacare.service.PatientService;
 import de.adesso.termacare.gui.controller.DoctorEditController;
 import de.adesso.termacare.gui.controller.DoctorOverviewController;
 import de.adesso.termacare.gui.controller.DoctorSelectionController;
@@ -20,11 +17,12 @@ import de.adesso.termacare.gui.controller.MedicationOverviewController;
 import de.adesso.termacare.gui.controller.PatientEditController;
 import de.adesso.termacare.gui.controller.PatientOverviewController;
 import de.adesso.termacare.gui.controller.PatientSelectionController;
+import de.adesso.termacare.service.DoctorService;
+import de.adesso.termacare.service.MedicationService;
+import de.adesso.termacare.service.PatientService;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,8 +33,6 @@ import static java.util.Arrays.asList;
 
 @Slf4j
 public class TerMa extends Application {
-    
-    public static Logger logger = LoggerFactory.getLogger(TerMa.class);
     
     @Override
     public void start(Stage primaryStage) throws Exception {

@@ -5,11 +5,11 @@ import de.adesso.termacare.util.Language;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Locale;
 
-import static de.adesso.termacare.TerMa.logger;
-
+@Slf4j
 @Data
 public class LanguageSelection{
 	private AbstractView view;
@@ -57,7 +57,7 @@ public class LanguageSelection{
 	 * Removes the LanguageButtons from the Box
 	 */
 	private void removeSelection() {
-		logger.info("Language selection is closed");
+		log.info("Language selection is closed");
 		for (Button language : optic.getLanguages()) {
 			optic.getLanguageSelectionBox().getChildren().remove(language);
 		}
@@ -67,7 +67,7 @@ public class LanguageSelection{
 	 * Adds the LanguageButtons to the Box
 	 */
 	private void showSelection() {
-		logger.info("Language selection is opened");
+		log.info("Language selection is opened");
 		for (Button language : optic.getLanguages()) {
 			optic.getLanguageSelectionBox().getChildren().add(language);
 		}
@@ -87,7 +87,7 @@ public class LanguageSelection{
 	}
 
 	private void setNewLanguage(Language language, Locale locale) {
-		logger.info(language.name() + " is selected as the new language, the old one was " + this.optic.getLanguage().name());
+		log.info(language.name() + " is selected as the new language, the old one was " + this.optic.getLanguage().name());
 		this.optic.setLanguage(language);
 		this.locale = locale;
 		view.fillComponentsWithSelectedLanguage();
