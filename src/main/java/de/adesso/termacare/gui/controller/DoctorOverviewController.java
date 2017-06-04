@@ -1,7 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DAODoctor;
+import de.adesso.termacare.data.dao.DtoDoctor;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.gui.construct.AbstractController;
@@ -40,7 +40,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     private void generateColumnFor(String identifier, int minWidth, int maxWidth) {
-        TableColumn<DAODoctor, String> column = new TableColumn<>(identifier);
+        TableColumn<DtoDoctor, String> column = new TableColumn<>(identifier);
         if (minWidth != 0) column.setMinWidth(minWidth);
         if (maxWidth != 0) column.setMaxWidth(maxWidth);
         column.setCellValueFactory(new PropertyValueFactory<>(identifier));
@@ -48,15 +48,15 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     private void loadDoctorsToTable() {
-        List<DAODoctor> doctors = service.getDoctors().stream().map(this::doctorToDao).collect(toList());
+        List<DtoDoctor> doctors = service.getDoctors().stream().map(this::doctorToDao).collect(toList());
 
         log.debug("loaded " + doctors.size() + " doctorIds");
 
         view.getDoctors().addAll(doctors);
     }
 
-    private DAODoctor doctorToDao(Doctor doctor) {
-        DAODoctor dao = doctor.toDAO();
+    private DtoDoctor doctorToDao(Doctor doctor) {
+        DtoDoctor dao = doctor.toDAO();
         dao.setAmountOfPatients(service.getPatients(dao.getId()).size());
         return dao;
     }
@@ -74,7 +74,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     public void editDoctor() {
-        DAODoctor focusedItem = view.getDoctorTableView().getFocusModel().getFocusedItem();
+        DtoDoctor focusedItem = view.getDoctorTableView().getFocusModel().getFocusedItem();
         DoctorEditController doctorEditController = DependencyInjector.getInstance(DoctorEditController.class);
         doctorEditController.init(stage, scene);
         doctorEditController.setDoctor(focusedItem);
@@ -82,7 +82,7 @@ public class DoctorOverviewController extends AbstractController<DoctorOverview>
     }
 
     public void deleteDoctor() {
-        DAODoctor focusedItem = view.getDoctorTableView().getFocusModel().getFocusedItem();
+        DtoDoctor focusedItem = view.getDoctorTableView().getFocusModel().getFocusedItem();
         view.getDoctors().remove(focusedItem);
         service.deleteDoctor(focusedItem.getId());
     }

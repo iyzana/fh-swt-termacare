@@ -1,6 +1,6 @@
 package de.adesso.termacare.data.entity;
 
-import de.adesso.termacare.data.dao.DAOMedication;
+import de.adesso.termacare.data.dao.DtoMedication;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -35,11 +34,11 @@ public class Medication implements EntityInterface{
     @Column(name = "appointment")
     private LocalDateTime appointment;
 
-    public DAOMedication toDao() {
+    public DtoMedication toDao() {
         String patientName = patient.familyName + ", " + patient.givenName;
         List<Long> doctorIds = doctors.stream().map(Doctor::getId).collect(toList());
         String doctorNames = doctors.stream().map(d -> d.familyName + ", " + d.givenName).collect(joining("; "));
         String time = appointment.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
-        return new DAOMedication(id, patient.getId(), patientName, doctorIds, doctorNames, medicationType.name(), time);
+        return new DtoMedication(id, patient.getId(), patientName, doctorIds, doctorNames, medicationType.name(), time);
     }
 }

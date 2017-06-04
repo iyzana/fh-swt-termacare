@@ -1,13 +1,13 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DAODoctor;
-import de.adesso.termacare.data.dao.DAOMedication;
-import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.dao.DtoDoctor;
+import de.adesso.termacare.data.dao.DtoMedication;
+import de.adesso.termacare.data.dao.DtoPatient;
 import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.MedicationType;
 import de.adesso.termacare.data.entity.Patient;
-import de.adesso.termacare.database.repo.DoctorRepo;
-import de.adesso.termacare.database.repo.PatientRepo;
+import de.adesso.termacare.database.dao.DoctorDao;
+import de.adesso.termacare.database.dao.PatientDao;
 import de.adesso.termacare.database.services.MedicationService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.MedicationEdit;
@@ -26,11 +26,11 @@ import static de.adesso.termacare.data.DependencyInjector.getInstance;
 public class MedicationEditController extends AbstractController<MedicationEdit>{
 
 	private MedicationService service;
-	private PatientRepo patientService;
-	private DoctorRepo doctorService;
+	private PatientDao patientService;
+	private DoctorDao doctorService;
 
 	@Setter
-	private DAOMedication medication = null;
+	private DtoMedication medication = null;
 
 	private Patient patient;
 	private List<Doctor> doctors = new LinkedList<>();
@@ -97,17 +97,17 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 		show();
 	}
 
-	void patient(DAOPatient focusedItem){
+	void patient(DtoPatient focusedItem){
 		patient = patientService.getByID(focusedItem.getId());
 		relaunch();
 	}
 
-	void doctorAdd(DAODoctor focusedItem){
+	void doctorAdd(DtoDoctor focusedItem){
 		doctors.add(doctorService.getByID(focusedItem.getId()));
 		relaunch();
 	}
 
-	void doctorRemove(DAODoctor focusedItem){
+	void doctorRemove(DtoDoctor focusedItem){
 		doctors.remove(doctorService.getByID(focusedItem.getId()));
 		relaunch();
 	}

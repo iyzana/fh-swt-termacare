@@ -44,7 +44,7 @@ public class TerMa extends Application{
 		       MedicationRepo.class, DoctorRepo.class, MedicationOverviewController.class, DoctorOverviewController.class,
 		       PatientOverviewController.class, PatientEditController.class, DoctorSelectionController.class,
 		      PatientSelectionController.class, DoctorEditController.class, MedicationEditController.class
-		);
+		); // create and put the correct instances into the fields of these classes
 
 		if (getInstance(PatientService.class).getPatients().isEmpty())
             createTestData();primaryStage.setHeight(900);

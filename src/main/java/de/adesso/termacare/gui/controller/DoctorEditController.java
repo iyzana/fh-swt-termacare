@@ -1,7 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DAODoctor;
+import de.adesso.termacare.data.dao.DtoDoctor;
 import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.gui.construct.AbstractController;
@@ -33,7 +33,7 @@ public class DoctorEditController extends AbstractController<DoctorEdit> {
         oc.show();
     }
 
-    public void setDoctor(DAODoctor doctor) {
+    public void setDoctor(DtoDoctor doctor) {
         id = doctor.getId();
         view.getTitleField().setText(doctor.getTitle());
         view.getGivenNameField().setText(doctor.getGivenName());

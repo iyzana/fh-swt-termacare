@@ -1,7 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.dao.DtoPatient;
 import de.adesso.termacare.data.entity.Address;
 import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.database.services.PatientService;
@@ -62,7 +62,7 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 		oc.show();
 	}
 
-	public void setPatient(DAOPatient patient) {
+	public void setPatient(DtoPatient patient) {
 		id = patient.getId();
 		view.getTitleField().setText(patient.getTitle());
 		view.getGivenNameField().setText(patient.getGivenName());
@@ -72,7 +72,7 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 		setLivingAddress(patient);
 	}
 
-	private void setBillingAddress(DAOPatient patient) {
+	private void setBillingAddress(DtoPatient patient) {
 		String[] billingPostcode = patient.getBillingPostcode().split(" ");
 		if (billingPostcode.length >= 2) {
 			String departure = IntStream.range(1, billingPostcode.length).mapToObj(i -> billingPostcode[i]).collect(Collectors.joining(" "));
@@ -90,7 +90,7 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 		}
 	}
 
-	private void setLivingAddress(DAOPatient patient) {
+	private void setLivingAddress(DtoPatient patient) {
 		String[] livingPostcode = patient.getLivingPostcode().split(" ");
 		if (livingPostcode.length >= 2) {
 			String departure = IntStream.range(1, livingPostcode.length).mapToObj(i -> livingPostcode[i]).collect(Collectors.joining(" "));

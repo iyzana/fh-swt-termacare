@@ -1,6 +1,6 @@
 package de.adesso.termacare.data.entity;
 
-import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.dao.DtoPatient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,23 +24,24 @@ import javax.persistence.Table;
 @RequiredArgsConstructor
 @Table(name = "patient")
 @ToString(callSuper = true)
-public class Patient extends Person implements EntityInterface{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
-	@OneToOne
-	@JoinColumn(name = "billingAddress")
-	@Cascade(value = CascadeType.ALL)
-	private Address billingAddress;
-	@OneToOne()
-	@JoinColumn(name = "livingAddress")
-	@Cascade(value = CascadeType.ALL)
-	private Address livingAddress;
-
-	public DAOPatient toDAO(){
-		return new DAOPatient(id, getGender().getValue(), getTitle(), getGivenName(), getFamilyName(),
-						getLivingAddress().getCompressedDeparture(), getLivingAddress().getCompressedAddress(),
-						getBillingAddress().getCompressedDeparture(), getBillingAddress().getCompressedAddress());
-	}
+public class Patient extends Person implements EntityInterface {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    
+    @OneToOne
+    @JoinColumn(name = "billingAddress")
+    @Cascade(value = CascadeType.ALL)
+    private Address billingAddress;
+    
+    @OneToOne()
+    @JoinColumn(name = "livingAddress")
+    @Cascade(value = CascadeType.ALL)
+    private Address livingAddress;
+    
+    public DtoPatient toDAO() {
+        return new DtoPatient(id, getGender().getValue(), getTitle(), getGivenName(), getFamilyName(),
+                getLivingAddress().getCompressedDeparture(), getLivingAddress().getCompressedAddress(),
+                getBillingAddress().getCompressedDeparture(), getBillingAddress().getCompressedAddress());
+    }
 }

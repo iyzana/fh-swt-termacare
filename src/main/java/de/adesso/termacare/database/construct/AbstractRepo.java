@@ -20,15 +20,19 @@ import static de.adesso.termacare.TerMa.logger;
 public abstract class AbstractRepo<T extends EntityInterface, ID extends Serializable> implements Repo<T, ID> {
     
     private Class<T> clazz;
-    protected static SessionFactory factory;
+    protected static SessionFactory factory = createFactory();
     
-    public AbstractRepo(Class<T> clazz) {
-        factory = new Configuration()
+    private static SessionFactory createFactory() {
+        return new Configuration()
                 .addAnnotatedClass(Patient.class)
                 .addAnnotatedClass(Address.class)
                 .addAnnotatedClass(Doctor.class)
                 .addAnnotatedClass(Medication.class)
+                .setProperty("hibernate.dialect.storage_engine", "innodb")
                 .buildSessionFactory();
+    }
+    
+    public AbstractRepo(Class<T> clazz) {
         this.clazz = clazz;
     }
     

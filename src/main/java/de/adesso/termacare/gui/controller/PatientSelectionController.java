@@ -1,6 +1,6 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.dao.DtoPatient;
 import de.adesso.termacare.data.entity.Patient;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.PatientSelection;
@@ -36,7 +36,7 @@ public class PatientSelectionController extends AbstractController<PatientSelect
 	}
 
 	private void generateColumnFor(String identifier, int minWidth, int maxWidth){
-		TableColumn<DAOPatient, String> column = new TableColumn<>(identifier);
+		TableColumn<DtoPatient, String> column = new TableColumn<>(identifier);
 		if(minWidth != 0) column.setMinWidth(minWidth);
 		if(maxWidth != 0) column.setMaxWidth(maxWidth);
 		column.setCellValueFactory(new PropertyValueFactory<>(identifier));

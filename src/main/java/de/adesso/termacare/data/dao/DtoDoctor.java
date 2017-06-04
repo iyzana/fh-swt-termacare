@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-public final class DAODoctor implements DAOData{
+public final class DtoDoctor implements DtoData {
 	@NonNull
 	private long id;
 

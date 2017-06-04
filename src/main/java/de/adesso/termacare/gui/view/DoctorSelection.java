@@ -1,6 +1,6 @@
 package de.adesso.termacare.gui.view;
 
-import de.adesso.termacare.data.dao.DAODoctor;
+import de.adesso.termacare.data.dao.DtoDoctor;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.DoctorSelectionController;
 import javafx.collections.FXCollections;
@@ -21,8 +21,8 @@ public class DoctorSelection extends AbstractView<DoctorSelectionController>{
 	private Button selectItem = new Button("Auswahl bestätigen");
 	private Button back = new Button("Zurück");
 
-	private ObservableList<DAODoctor> data = FXCollections.observableArrayList();
-	private TableView<DAODoctor> tableView = new TableView<>(data);
+	private ObservableList<DtoDoctor> data = FXCollections.observableArrayList();
+	private TableView<DtoDoctor> tableView = new TableView<>(data);
 
 	private HBox bottomBox = new HBox();
 	private BorderPane pane = new BorderPane();

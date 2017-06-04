@@ -1,6 +1,6 @@
 package de.adesso.termacare.data.entity;
 
-import de.adesso.termacare.data.dao.DAODoctor;
+import de.adesso.termacare.data.dao.DtoDoctor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,7 +17,7 @@ public class Doctor extends Person implements EntityInterface{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	public DAODoctor toDAO(){
-		return new DAODoctor(id, title, getGender().getValue(), getGivenName(), getFamilyName());
+	public DtoDoctor toDAO(){
+		return new DtoDoctor(id, title, getGender().getValue(), getGivenName(), getFamilyName());
 	}
 }

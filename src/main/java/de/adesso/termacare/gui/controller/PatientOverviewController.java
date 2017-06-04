@@ -1,7 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
 import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DAOPatient;
+import de.adesso.termacare.data.dao.DtoPatient;
 import de.adesso.termacare.data.entity.Patient;
 import de.adesso.termacare.database.services.PatientService;
 import de.adesso.termacare.gui.construct.AbstractController;
@@ -41,7 +41,7 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
     }
 
     private void generateColumnFor(String identifier, int minWidth, int maxWidth) {
-        TableColumn<DAOPatient, String> column = new TableColumn<>(identifier);
+        TableColumn<DtoPatient, String> column = new TableColumn<>(identifier);
         if (minWidth != 0) column.setMinWidth(minWidth);
         if (maxWidth != 0) column.setMaxWidth(maxWidth);
         column.setCellValueFactory(new PropertyValueFactory<>(identifier));
@@ -49,7 +49,7 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
     }
 
     private void loadPersonsToTable() {
-        List<DAOPatient> patients = service.getPatients().stream().map(Patient::toDAO).collect(Collectors.toList());
+        List<DtoPatient> patients = service.getPatients().stream().map(Patient::toDAO).collect(Collectors.toList());
         view.getPatients().addAll(patients);
     }
 
@@ -66,7 +66,7 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
     }
 
     public void editPatient() {
-        DAOPatient focusedItem = view.getPatientTableView().getFocusModel().getFocusedItem();
+        DtoPatient focusedItem = view.getPatientTableView().getFocusModel().getFocusedItem();
         PatientEditController patientEditController = DependencyInjector.getInstance(PatientEditController.class);
         patientEditController.init(stage, scene);
         patientEditController.setPatient(focusedItem);
@@ -74,7 +74,7 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
     }
 
     public void deletePatient() {
-        DAOPatient selectedItem = view.getPatientTableView().getSelectionModel().getSelectedItem();
+        DtoPatient selectedItem = view.getPatientTableView().getSelectionModel().getSelectedItem();
         view.getPatients().remove(selectedItem);
         service.deletePatient(selectedItem.getId());
     }

@@ -1,6 +1,6 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DAOMedication;
+import de.adesso.termacare.data.dao.DtoMedication;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.database.services.DoctorService;
 import de.adesso.termacare.database.services.MedicationService;
@@ -44,7 +44,7 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     }
 
 	private void generateColumnFor(String identifier, int minWidth, int maxWidth){
-		TableColumn<DAOMedication, String> column = new TableColumn<>(identifier);
+		TableColumn<DtoMedication, String> column = new TableColumn<>(identifier);
 		if(minWidth != 0) column.setMinWidth(minWidth);
 		if(maxWidth != 0) column.setMaxWidth(maxWidth);
 		column.setCellValueFactory(new PropertyValueFactory<>(identifier));
@@ -52,7 +52,7 @@ public class MedicationOverviewController extends AbstractController<MedicationO
 	}
 
     private void loadMedicationsToTable() {
-        List<DAOMedication> medications = service.getMedications().stream().map(Medication::toDao).collect(toList());
+        List<DtoMedication> medications = service.getMedications().stream().map(Medication::toDao).collect(toList());
 
         log.debug("loaded " + medications.size() + " medications");
 
@@ -66,7 +66,7 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     }
 
 	public void editMedication(){
-		DAOMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
+		DtoMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
 		MedicationEditController controller = getInstance(MedicationEditController.class);
 		controller.setMedication(focusedItem);
 		controller.init(stage, scene);
@@ -74,7 +74,7 @@ public class MedicationOverviewController extends AbstractController<MedicationO
 	}
 
     public void deleteMedication() {
-        DAOMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
+        DtoMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
         view.getMedications().remove(focusedItem);
         service.deleteMedication(focusedItem.getId());
     }

@@ -4,30 +4,40 @@ import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.Gender;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.data.entity.Patient;
-import de.adesso.termacare.database.repo.DoctorRepo;
-import de.adesso.termacare.database.repo.MedicationRepo;
-import de.adesso.termacare.database.repo.PatientRepo;
+import de.adesso.termacare.database.dao.DoctorDao;
+import de.adesso.termacare.database.dao.MedicationDao;
+import de.adesso.termacare.database.dao.PatientDao;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public class DoctorService {
-    private DoctorRepo doctors;
-    private PatientRepo patients;
-    private MedicationRepo medications;
+    private static DoctorService INSTANCE;
+    
+    public static DoctorService getInstance() {
+        return INSTANCE == null ? INSTANCE = new DoctorService() : INSTANCE;
+    }
+    
+    private DoctorService() {
+    
+    }
+    
+    private DoctorDao doctors;
+    private PatientDao patients;
+    private MedicationDao medications;
     
     public List<Patient> getPatients() {
         return patients.list();
     }
-
+    
     public List<Doctor> getDoctors() {
         return doctors.list();
     }
-
+    
     public void createOrUpdateDoctor(long id, String title, Gender gender, String givenName, String familyName) {
         Doctor doctor = new Doctor();
-
+        
         doctor.setId(id);
         doctor.setTitle(title);
         doctor.setGender(gender);

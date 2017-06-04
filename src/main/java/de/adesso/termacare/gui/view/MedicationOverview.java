@@ -1,6 +1,6 @@
 package de.adesso.termacare.gui.view;
 
-import de.adesso.termacare.data.dao.DAOMedication;
+import de.adesso.termacare.data.dao.DtoMedication;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.MedicationOverviewController;
 import javafx.collections.FXCollections;
@@ -26,8 +26,8 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 	private Button doctors = new Button("Alle Doktoren ansehen");
 	private Button patients = new Button("Alle Patienten ansehen");
 
-	private ObservableList<DAOMedication> medications = FXCollections.observableArrayList();
-	private TableView<DAOMedication> medicationTableView = new TableView<>(medications);
+	private ObservableList<DtoMedication> medications = FXCollections.observableArrayList();
+	private TableView<DtoMedication> medicationTableView = new TableView<>(medications);
 
 	private VBox gotoBox = new VBox();
 	private BorderPane pane = new BorderPane();

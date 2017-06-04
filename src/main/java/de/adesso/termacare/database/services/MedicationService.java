@@ -4,7 +4,7 @@ import de.adesso.termacare.data.entity.Doctor;
 import de.adesso.termacare.data.entity.Medication;
 import de.adesso.termacare.data.entity.MedicationType;
 import de.adesso.termacare.data.entity.Patient;
-import de.adesso.termacare.database.repo.MedicationRepo;
+import de.adesso.termacare.database.dao.MedicationDao;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,14 +15,24 @@ import static java.util.stream.Collectors.toList;
  * Created by kaiser on 09.05.2017.
  */
 public class MedicationService {
-    private MedicationRepo medications;
-
+    private static MedicationService INSTANCE;
+    
+    public static MedicationService getInstance() {
+        return INSTANCE == null ? INSTANCE = new MedicationService() : INSTANCE;
+    }
+    
+    private MedicationService() {
+    
+    }
+    
+    private MedicationDao medications;
+    
     public List<Medication> getMedications() {
         return medications.list();
     }
-
+    
     public void createMedication(Patient patient, List<Doctor> doctors, MedicationType type, LocalDateTime appointment) {
-        if(!timeSlotFree(appointment))
+        if (!timeSlotFree(appointment))
             throw new IllegalStateException("there is another appointment at this time");
         
         Medication medication = new Medication();
@@ -31,16 +41,16 @@ public class MedicationService {
         medication.setDoctors(doctors);
         medication.setMedicationType(type);
         medication.setAppointment(appointment);
-    
+        
         medications.save(medication);
     }
-
+    
     public List<Medication> getMedications(long patientId) {
         return medications.list().stream()
-                         .filter(med -> patientId == med.getPatient().getId())
-                         .collect(toList());
+                .filter(med -> patientId == med.getPatient().getId())
+                .collect(toList());
     }
-
+    
     public void deleteMedication(long medicationId) {
         medications.delete(medicationId);
     }
@@ -51,12 +61,12 @@ public class MedicationService {
             throw new IllegalArgumentException("Medication does not exist");
         
         medications.delete(medicationId);
-    
-        if(!timeSlotFree(appointment)) {
+        
+        if (!timeSlotFree(appointment)) {
             medications.save(medication);
             throw new IllegalStateException("there is another appointment at this time");
         }
-    
+        
         medication.setAppointment(appointment);
         medications.save(medication);
     }
