@@ -26,6 +26,6 @@ public abstract class AbstractController<T extends AbstractView> implements Cont
 	}
 
 	LanguageSelection getLanguageSelection(){
-		return null;
+		return LanguageSelection.getInstance();
 	}
 }

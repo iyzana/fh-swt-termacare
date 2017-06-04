@@ -48,11 +48,11 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 		scene = new Scene(pane);
 		scene.getStylesheets().add("main.css");
 	}
-
-
+	
 	@Override
 	public void fillComponentsWithSelectedLanguage(){
 		fillComponentWithText(newMedication, "newMedication");
+		fillComponentWithText(editMedication, "editMedication");
 		fillComponentWithText(deleteMedication, "deleteMedication");
 		fillComponentWithText(infoMedication, "infoMedication");
 	}

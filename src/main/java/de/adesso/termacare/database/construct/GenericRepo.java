@@ -17,10 +17,10 @@ import java.util.List;
 
 import static de.adesso.termacare.TerMa.logger;
 
-public abstract class AbstractRepo<T extends EntityInterface, ID extends Serializable> implements Repo<T, ID> {
+public class GenericRepo<T extends EntityInterface, ID extends Serializable> implements Repo<T, ID> {
     
     private Class<T> clazz;
-    protected static SessionFactory factory = createFactory();
+    private static SessionFactory factory = createFactory();
     
     private static SessionFactory createFactory() {
         return new Configuration()
@@ -32,7 +32,7 @@ public abstract class AbstractRepo<T extends EntityInterface, ID extends Seriali
                 .buildSessionFactory();
     }
     
-    public AbstractRepo(Class<T> clazz) {
+    public GenericRepo(Class<T> clazz) {
         this.clazz = clazz;
     }
     
