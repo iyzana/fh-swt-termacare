@@ -75,10 +75,6 @@ public class PatientEdit extends AbstractView<PatientEditController> {
         scene.setRoot(pain);
     }
 
-    @Override
-    public void addPicturesToButtons() {
-
-    }
 
     @Override
     public void fillComponentsWithSelectedLanguage() {

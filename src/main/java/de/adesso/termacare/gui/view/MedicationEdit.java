@@ -72,10 +72,6 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 		scene.setRoot(mainPane);
 	}
 
-	@Override
-	public void addPicturesToButtons(){
-
-	}
 
 	@Override
 	public void fillComponentsWithSelectedLanguage(){
@@ -93,6 +89,10 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 
 	@Override
 	public void setStyleClasses(){
+
+	}
+
+	public void setMutable(boolean mutable){
 
 	}
 }

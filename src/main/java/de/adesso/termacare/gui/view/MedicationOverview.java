@@ -49,10 +49,6 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 		scene.getStylesheets().add("main.css");
 	}
 
-	@Override
-	public void addPicturesToButtons(){
-
-	}
 
 	@Override
 	public void fillComponentsWithSelectedLanguage(){

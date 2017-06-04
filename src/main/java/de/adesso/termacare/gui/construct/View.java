@@ -1,8 +1,6 @@
 package de.adesso.termacare.gui.construct;
 
-import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Labeled;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 interface View{
@@ -15,19 +13,7 @@ interface View{
 	 * Calls {@link Stage#show()}
 	 */
 	void show();
-
-	/**
-	 * The {@link #pictureForButton(Image, ButtonBase)}-method for all components
-	 */
-	void addPicturesToButtons();
-
-	/**
-	 * Adds the icon to the button and further text is under the picture
-	 * @param icon The picture for the button
-	 * @param button The button
-	 */
-	void pictureForButton(Image icon, ButtonBase button);
-
+	
 	/**
 	 * The {@link #fillComponentWithText(Labeled, String)}-method for all components
 	 */

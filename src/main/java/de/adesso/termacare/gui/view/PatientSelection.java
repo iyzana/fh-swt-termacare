@@ -40,10 +40,6 @@ public class PatientSelection extends AbstractView<PatientSelectionController>{
 		scene.setRoot(pane);
 	}
 
-	@Override
-	public void addPicturesToButtons(){
-
-	}
 
 	@Override
 	public void fillComponentsWithSelectedLanguage(){

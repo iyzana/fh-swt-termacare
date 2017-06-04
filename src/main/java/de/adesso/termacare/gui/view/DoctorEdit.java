@@ -53,10 +53,6 @@ public class DoctorEdit extends AbstractView<DoctorEditController>{
 		scene.setRoot(pain);
 	}
 
-	@Override
-	public void addPicturesToButtons(){
-
-	}
 
 	@Override
 	public void fillComponentsWithSelectedLanguage(){

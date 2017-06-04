@@ -42,10 +42,6 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 		scene.setRoot(pane);
 	}
 
-	@Override
-	public void addPicturesToButtons(){
-
-	}
 
 	@Override
 	public void fillComponentsWithSelectedLanguage(){
@@ -58,7 +54,6 @@ public class DoctorOverview extends AbstractView<DoctorOverviewController>{
 
 	@Override
 	public void registerListener(){
-		doctorTableView.setOnMouseClicked(event -> controller.checkButtons());
 		newDoctor.setOnMouseClicked(event -> controller.newDoctor());
 		editDoctor.setOnMouseClicked(event -> controller.editDoctor());
 		deleteDoctor.setOnMouseClicked(event -> controller.deleteDoctor());
