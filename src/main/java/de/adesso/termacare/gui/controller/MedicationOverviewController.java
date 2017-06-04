@@ -6,7 +6,6 @@ import de.adesso.termacare.gui.construct.AbstractOverviewController;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.dto.DtoAbstractData;
 import de.adesso.termacare.gui.dto.DtoMedication;
-import de.adesso.termacare.gui.util.TableViewController;
 import de.adesso.termacare.gui.view.MedicationOverview;
 import de.adesso.termacare.service.DoctorService;
 import de.adesso.termacare.service.MedicationService;
@@ -46,7 +45,6 @@ public class MedicationOverviewController extends AbstractOverviewController<Med
 	}
 
 	private void fillTableWithColumns(){
-		view.setTableViewController(new TableViewController<>(this));
 		view.getTableViewController().generateColumnFor("patientName");
 		view.getTableViewController().generateColumnFor("doctorNames", 200, 0);
 		view.getTableViewController().generateColumnFor("type", 100, 0);
