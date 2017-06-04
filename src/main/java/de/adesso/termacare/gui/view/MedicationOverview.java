@@ -22,10 +22,11 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 
 	private VBox gotoBox = new VBox();
 	private BorderPane pane = new BorderPane();
-	private TableViewController<DtoMedication, MedicationOverviewController> tableViewController = new TableViewController<>(controller);
+	private TableViewController<DtoMedication, MedicationOverviewController> tableViewController;
 
 	public MedicationOverview(MedicationOverviewController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
+		tableViewController = new TableViewController<>(controller);
 	}
 
 	@Override

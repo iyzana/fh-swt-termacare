@@ -48,9 +48,8 @@ public abstract class AbstractView<T extends AbstractController> implements View
      */
     public static void fillComponentWithText(Labeled labeled, String nameInBundle) {
         try {
-            labeled.setText(ResourceBundle.getBundle("languages", LanguageSelection
-                    .getInstance().getLocale()).getString(nameInBundle));
-            log.debug("The " + labeled.getClass().getSimpleName() + " with the CSS-ID=\"" + labeled.getId() + "\" is filled with \"" + labeled.getText() + "\"");
+            labeled.setText(ResourceBundle.getBundle("languages", LanguageSelection.getInstance().getLocale()).getString(nameInBundle));
+            log.debug("The " + labeled.getClass().getSimpleName() + " with the name \"" + nameInBundle + "\" is filled with \"" + labeled.getText() + "\"");
         } catch (MissingResourceException e) {
             labeled.setText(nameInBundle);
             log.error("Can not find \"" + nameInBundle + "\" in ResourceBundle");
