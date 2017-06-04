@@ -4,6 +4,7 @@ import de.adesso.termacare.gui.dto.DtoData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class TableViewOptic<T extends DtoData>{
 	private HBox bottomBox = new HBox();
 
 	private ObservableList<T> data = FXCollections.observableArrayList();
-	private javafx.scene.control.TableView<T> table = new javafx.scene.control.TableView<>(data);
+	private TableView<T> table = new TableView<>(data);
 
 	public TableViewOptic(TableViewController controller){
 		this.controller = controller;

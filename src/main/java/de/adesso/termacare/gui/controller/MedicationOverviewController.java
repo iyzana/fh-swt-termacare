@@ -34,8 +34,7 @@ public class MedicationOverviewController extends AbstractOverviewController<Med
     }
 
 	@Override
-	public <I extends DtoAbstractData> AbstractEditController<AbstractView> initEditController(
-					I focusedItem){
+	public <I extends DtoAbstractData> AbstractEditController<AbstractView> initEditController(I focusedItem){
 		return null;
 	}
 
