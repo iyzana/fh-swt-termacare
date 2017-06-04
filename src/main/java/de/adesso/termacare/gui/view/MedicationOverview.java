@@ -24,8 +24,8 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 	private	Button editMedication = new Button();
 	private	Button deleteMedication = new Button();
 	private Button infoMedication = new Button();
-	private Button doctors = new Button("Alle Doktoren ansehen");
-	private Button patients = new Button("Alle Patienten ansehen");
+	private Button doctors = new Button();
+	private Button patients = new Button();
 
 	private ObservableList<DtoMedication> medications = FXCollections.observableArrayList();
 	private TableView<DtoMedication> medicationTableView = new TableView<>(medications);
@@ -57,6 +57,8 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 		fillComponentWithText(editMedication, "edit");
 		fillComponentWithText(deleteMedication, "delete");
 		fillComponentWithText(infoMedication, "info");
+		fillComponentWithText(doctors, "allDoctors");
+		fillComponentWithText(patients, "allPatients");
 	}
 
 	@Override
