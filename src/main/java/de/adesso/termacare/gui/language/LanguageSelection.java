@@ -69,7 +69,7 @@ public class LanguageSelection{
 	private void showSelection() {
 		log.info("Language selection is opened");
 		for (Button language : optic.getLanguages()) {
-			optic.getLanguageSelectionBox().getChildren().add(language);
+			optic.getLanguageSelectionBox().getChildren().add(0, language);
 		}
 	}
 
