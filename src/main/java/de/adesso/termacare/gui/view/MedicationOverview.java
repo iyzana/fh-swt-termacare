@@ -22,7 +22,7 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 
 	private VBox gotoBox = new VBox();
 	private BorderPane pane = new BorderPane();
-	private TableViewController<DtoMedication, ?> tableViewController;
+	private TableViewController<DtoMedication, MedicationOverviewController> tableViewController = new TableViewController<>(controller);
 
 	public MedicationOverview(MedicationOverviewController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
@@ -33,7 +33,7 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 		gotoBox.getChildren().addAll(doctors, patients);
 
 		pane.setTop(LanguageSelection.getInstance().showLanguageSelection());
-		pane.setCenter(tableViewController);
+		pane.setCenter(tableViewController.getTable());
 		pane.setRight(gotoBox);
 		scene = new Scene(pane);
 		scene.getStylesheets().add("main.css");

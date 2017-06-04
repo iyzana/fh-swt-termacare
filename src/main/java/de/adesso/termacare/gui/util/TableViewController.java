@@ -5,17 +5,24 @@ import de.adesso.termacare.gui.construct.AbstractOverviewController;
 import de.adesso.termacare.gui.dto.DtoAbstractData;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 
 import java.util.List;
 
-public class TableViewController<T extends DtoAbstractData, C extends AbstractOverviewController> extends Pane{
+public class TableViewController<T extends DtoAbstractData, C extends AbstractOverviewController>{
 	private final C controller;
 	private TableViewOptic<T> view;
 
 	public TableViewController(C controller){
 		this.controller = controller;
 		view = new TableViewOptic<>(this);
+		view.fillComponentsWithSelectedLanguage();
+		view.setStyleClasses();
+		view.registerListener();
+	}
+
+	public BorderPane getTable(){
+		return view.getTablePane();
 	}
 
 	public void generateColumnFor(String identifier) {
