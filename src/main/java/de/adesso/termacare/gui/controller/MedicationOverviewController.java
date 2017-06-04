@@ -80,7 +80,12 @@ public class MedicationOverviewController extends AbstractController<MedicationO
     }
 
     public void infoMedication() {
-
+	    DtoMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
+	    MedicationEditController controller = getInstance(MedicationEditController.class);
+	    controller.setMedication(focusedItem);
+	    controller.init(stage, scene);
+	    controller.setDisable(true);
+	    controller.show();
     }
 
 	public void gotoDoctors(){

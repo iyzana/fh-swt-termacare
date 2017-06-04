@@ -45,10 +45,10 @@ public class PatientOverview extends AbstractView<PatientOverviewController>{
 
 	@Override
 	public void fillComponentsWithSelectedLanguage(){
-		fillComponentWithText(newPatient, "newPatient");
-		fillComponentWithText(editPatient, "editPatient");
-		fillComponentWithText(deletePatient, "deletePatient");
-		fillComponentWithText(infoPatient, "infoPatient");
+		fillComponentWithText(newPatient, "new");
+		fillComponentWithText(editPatient, "edit");
+		fillComponentWithText(deletePatient, "delete");
+		fillComponentWithText(infoPatient, "info");
 		fillComponentWithText(cancel, "backToOverview");
 	}
 
@@ -63,10 +63,10 @@ public class PatientOverview extends AbstractView<PatientOverviewController>{
 
 	@Override
 	public void setStyleClasses(){
-		newPatient.setId("newPatient");
-		editPatient.setId("editPatient");
-		deletePatient.setId("deletePatient");
-		infoPatient.setId("infoPatient");
+		newPatient.setId("new");
+		editPatient.setId("edit");
+		deletePatient.setId("delete");
+		infoPatient.setId("info");
 		cancel.setId("patientOverviewCancel");
 
 		patientTableView.setId("patientList");

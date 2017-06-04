@@ -3,6 +3,7 @@ package de.adesso.termacare.gui.view;
 import de.adesso.termacare.gui.dto.DtoMedication;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.MedicationOverviewController;
+import de.adesso.termacare.gui.language.LanguageSelection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -19,10 +20,10 @@ import lombok.EqualsAndHashCode;
 @Data
 public class MedicationOverview extends AbstractView<MedicationOverviewController>{
 
-	private	Button newMedication = new Button("Neu");
-	private	Button editMedication = new Button("Bearbeiten");
-	private	Button deleteMedication = new Button("Löschen");
-	private Button infoMedication = new Button("Informationen");
+	private	Button newMedication = new Button();
+	private	Button editMedication = new Button();
+	private	Button deleteMedication = new Button();
+	private Button infoMedication = new Button();
 	private Button doctors = new Button("Alle Doktoren ansehen");
 	private Button patients = new Button("Alle Patienten ansehen");
 
@@ -42,19 +43,20 @@ public class MedicationOverview extends AbstractView<MedicationOverviewControlle
 		gotoBox.getChildren().addAll(doctors, patients);
 		bottomBox.getChildren().addAll(newMedication, editMedication, deleteMedication, infoMedication);
 
+		pane.setTop(LanguageSelection.getInstance().showLanguageSelection());
 		pane.setBottom(bottomBox);
 		pane.setCenter(medicationTableView);
 		pane.setRight(gotoBox);
 		scene = new Scene(pane);
 		scene.getStylesheets().add("main.css");
 	}
-	
+
 	@Override
 	public void fillComponentsWithSelectedLanguage(){
-		fillComponentWithText(newMedication, "newMedication");
-		fillComponentWithText(editMedication, "editMedication");
-		fillComponentWithText(deleteMedication, "deleteMedication");
-		fillComponentWithText(infoMedication, "infoMedication");
+		fillComponentWithText(newMedication, "new");
+		fillComponentWithText(editMedication, "edit");
+		fillComponentWithText(deleteMedication, "delete");
+		fillComponentWithText(infoMedication, "info");
 	}
 
 	@Override

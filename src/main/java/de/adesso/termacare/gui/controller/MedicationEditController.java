@@ -111,4 +111,9 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 		doctors.remove(doctorService.getByID(focusedItem.getId()));
 		relaunch();
 	}
+
+	void setDisable(boolean disable){
+		view.setDisable(disable);
+	}
+
 }

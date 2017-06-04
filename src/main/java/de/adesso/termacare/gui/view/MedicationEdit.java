@@ -92,7 +92,13 @@ public class MedicationEdit extends AbstractView<MedicationEditController>{
 
 	}
 
-	public void setMutable(boolean mutable){
-
+	public void setDisable(boolean disable){
+		medicationInfo.setDisable(disable);
+		selectPatient.setDisable(disable);
+		addDoctor.setDisable(disable);
+		removeDoctor.setDisable(disable);
+		save.setDisable(disable);
+		datePicker.setDisable(disable);
+		medicationType.setDisable(disable);
 	}
 }

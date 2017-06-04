@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
+import static de.adesso.termacare.TerMa.logger;
+import static de.adesso.termacare.gui.language.LanguageSelection.*;
+
 @Slf4j
 public abstract class AbstractController<T extends AbstractView> implements Controller {
 
@@ -15,6 +18,7 @@ public abstract class AbstractController<T extends AbstractView> implements Cont
 	protected void init(T view) {
 		view.init();
 		this.view = view;
+		getInstance().setView(view);
 		scene = view.getScene();
 		stage = view.getStage();
 		log.info("Initialised in: \"" + this.getClass().getSimpleName() + "\" the view: \"" + view.getClass().getSimpleName() + "\"");
@@ -26,6 +30,6 @@ public abstract class AbstractController<T extends AbstractView> implements Cont
 	}
 
 	LanguageSelection getLanguageSelection(){
-		return LanguageSelection.getInstance();
+		return getInstance();
 	}
 }
