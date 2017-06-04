@@ -4,9 +4,9 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 
 public enum Textures{
-	LANGUAGESELECTIONIMAGE( new Image("Images/PNG/ic_language_black_48dp_2x.png")),
-	GERMANFLAG(new Image("Images/PNG/german_flag.png")),
-	BRITISHFLAG(new Image("Images/PNG/british-flag-small.png"));
+	LANGUAGESELECTIONIMAGE( new Image("images/ic_language_black_48dp_2x.png")),
+	GERMANFLAG(new Image("images/german_flag.png")),
+	BRITISHFLAG(new Image("images/british-flag-small.png"));
 
 	@Getter
 	Image image;
