@@ -1,4 +1,4 @@
-package de.adesso.termacare.data.dao;
+package de.adesso.termacare.gui.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

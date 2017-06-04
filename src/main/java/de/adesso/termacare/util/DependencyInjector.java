@@ -1,4 +1,4 @@
-package de.adesso.termacare.data;
+package de.adesso.termacare.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

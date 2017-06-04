@@ -1,9 +1,9 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.DependencyInjector;
-import de.adesso.termacare.data.dao.DtoDoctor;
-import de.adesso.termacare.data.entity.Doctor;
-import de.adesso.termacare.database.services.DoctorService;
+import de.adesso.termacare.util.DependencyInjector;
+import de.adesso.termacare.gui.dto.DtoDoctor;
+import de.adesso.termacare.database.entity.Doctor;
+import de.adesso.termacare.service.DoctorService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.DoctorOverview;
 import javafx.scene.Scene;

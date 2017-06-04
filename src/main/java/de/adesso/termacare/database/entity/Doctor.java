@@ -1,6 +1,6 @@
-package de.adesso.termacare.data.entity;
+package de.adesso.termacare.database.entity;
 
-import de.adesso.termacare.data.dao.DtoDoctor;
+import de.adesso.termacare.gui.dto.DtoDoctor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

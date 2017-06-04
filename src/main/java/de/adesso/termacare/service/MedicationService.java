@@ -1,9 +1,9 @@
-package de.adesso.termacare.database.services;
+package de.adesso.termacare.service;
 
-import de.adesso.termacare.data.entity.Doctor;
-import de.adesso.termacare.data.entity.Medication;
-import de.adesso.termacare.data.entity.MedicationType;
-import de.adesso.termacare.data.entity.Patient;
+import de.adesso.termacare.database.entity.Doctor;
+import de.adesso.termacare.database.entity.Medication;
+import de.adesso.termacare.database.entity.MedicationType;
+import de.adesso.termacare.database.entity.Patient;
 import de.adesso.termacare.database.dao.MedicationDao;
 
 import java.time.LocalDateTime;

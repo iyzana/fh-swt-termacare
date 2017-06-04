@@ -1,6 +1,6 @@
 package de.adesso.termacare.database.construct;
 
-import de.adesso.termacare.data.entity.EntityInterface;
+import de.adesso.termacare.database.entity.EntityInterface;
 
 import java.io.Serializable;
 import java.util.List;

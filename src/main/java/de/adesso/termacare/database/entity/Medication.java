@@ -1,6 +1,6 @@
-package de.adesso.termacare.data.entity;
+package de.adesso.termacare.database.entity;
 
-import de.adesso.termacare.data.dao.DtoMedication;
+import de.adesso.termacare.gui.dto.DtoMedication;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

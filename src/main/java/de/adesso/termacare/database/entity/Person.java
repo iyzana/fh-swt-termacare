@@ -1,4 +1,4 @@
-package de.adesso.termacare.data.entity;
+package de.adesso.termacare.database.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

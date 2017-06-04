@@ -1,6 +1,6 @@
 package de.adesso.termacare.database.dao;
 
-import de.adesso.termacare.data.entity.Address;
+import de.adesso.termacare.database.entity.Address;
 
 import java.util.List;
 

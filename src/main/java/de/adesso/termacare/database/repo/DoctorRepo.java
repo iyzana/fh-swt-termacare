@@ -1,6 +1,6 @@
 package de.adesso.termacare.database.repo;
 
-import de.adesso.termacare.data.entity.Doctor;
+import de.adesso.termacare.database.entity.Doctor;
 import de.adesso.termacare.database.construct.GenericRepo;
 import de.adesso.termacare.database.dao.DoctorDao;
 

@@ -1,9 +1,9 @@
-package de.adesso.termacare.database.services;
+package de.adesso.termacare.service;
 
-import de.adesso.termacare.data.entity.Address;
-import de.adesso.termacare.data.entity.Gender;
-import de.adesso.termacare.data.entity.Medication;
-import de.adesso.termacare.data.entity.Patient;
+import de.adesso.termacare.database.entity.Address;
+import de.adesso.termacare.database.entity.Gender;
+import de.adesso.termacare.database.entity.Medication;
+import de.adesso.termacare.database.entity.Patient;
 import de.adesso.termacare.database.dao.MedicationDao;
 import de.adesso.termacare.database.dao.PatientDao;
 

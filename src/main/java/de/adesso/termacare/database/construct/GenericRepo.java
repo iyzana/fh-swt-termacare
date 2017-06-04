@@ -1,10 +1,10 @@
 package de.adesso.termacare.database.construct;
 
-import de.adesso.termacare.data.entity.Address;
-import de.adesso.termacare.data.entity.Doctor;
-import de.adesso.termacare.data.entity.EntityInterface;
-import de.adesso.termacare.data.entity.Medication;
-import de.adesso.termacare.data.entity.Patient;
+import de.adesso.termacare.database.entity.Address;
+import de.adesso.termacare.database.entity.Doctor;
+import de.adesso.termacare.database.entity.EntityInterface;
+import de.adesso.termacare.database.entity.Medication;
+import de.adesso.termacare.database.entity.Patient;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

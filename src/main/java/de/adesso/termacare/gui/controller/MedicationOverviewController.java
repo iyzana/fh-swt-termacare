@@ -1,10 +1,10 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.data.dao.DtoMedication;
-import de.adesso.termacare.data.entity.Medication;
-import de.adesso.termacare.database.services.DoctorService;
-import de.adesso.termacare.database.services.MedicationService;
-import de.adesso.termacare.database.services.PatientService;
+import de.adesso.termacare.gui.dto.DtoMedication;
+import de.adesso.termacare.database.entity.Medication;
+import de.adesso.termacare.service.DoctorService;
+import de.adesso.termacare.service.MedicationService;
+import de.adesso.termacare.service.PatientService;
 import de.adesso.termacare.gui.construct.AbstractController;
 import de.adesso.termacare.gui.view.MedicationOverview;
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static de.adesso.termacare.data.DependencyInjector.getInstance;
+import static de.adesso.termacare.util.DependencyInjector.getInstance;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j

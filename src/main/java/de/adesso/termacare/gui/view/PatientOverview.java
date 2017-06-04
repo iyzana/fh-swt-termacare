@@ -1,6 +1,6 @@
 package de.adesso.termacare.gui.view;
 
-import de.adesso.termacare.data.dao.DtoPatient;
+import de.adesso.termacare.gui.dto.DtoPatient;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.PatientOverviewController;
 import javafx.collections.FXCollections;
