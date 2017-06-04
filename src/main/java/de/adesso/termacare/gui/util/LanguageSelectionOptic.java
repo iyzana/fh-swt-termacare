@@ -1,4 +1,4 @@
-package de.adesso.termacare.gui.language;
+package de.adesso.termacare.gui.util;
 
 import de.adesso.termacare.util.Language;
 import de.adesso.termacare.util.Textures;
@@ -21,30 +21,30 @@ class LanguageSelectionOptic {
     private List<Button> languages = new ArrayList<>();
     private boolean show;
     private Language language = Language.GERMAN;
-    
+
     /**
      * Build the Language Selection
      */
     LanguageSelectionOptic(LanguageSelection controller) {
-        
+
         fillButtonsWithText();
         fillButtonListWithButtons();
-        
+
         languageSelectionBox.getChildren().add(selectLanguage);
         languageSelectionBox.setAlignment(Pos.TOP_RIGHT);
-        
+
         selectLanguage.setOnMouseClicked(event -> controller.showOrRemoveSelection());
-        
+
         german.setOnMouseClicked(event -> controller.setLanguageAndRemoveButtons(Language.GERMAN, new Locale("de", "DE")));
         english.setOnMouseClicked(event -> controller.setLanguageAndRemoveButtons(Language.ENGLISH, new Locale("en", "GB")));
         languageSelectionBox.getStyleClass().add("languageSelectionBox");
-        
+
         for (Button button : languages)
             button.getStyleClass().add("languageSelection");
         selectLanguage.getStyleClass().add("languageSelection");
     }
-    
-    
+
+
     /**
      * fills the buttons with images<br>
      * <br>
@@ -63,20 +63,20 @@ class LanguageSelectionOptic {
         german.setGraphic(getImageView(Textures.GERMANFLAG));
         english.setGraphic(getImageView(Textures.BRITISHFLAG));
     }
-    
+
     private ImageView getImageView(Textures texture) {
         ImageView languageImage = new ImageView(texture.getImage());
         languageImage.setFitWidth(30);
         languageImage.setFitHeight(20);
         return languageImage;
     }
-    
+
     /**
      * fills the list of languages with the languages <br>
      * <br>
      * Codetemplate: <br>
      * {@code
-     * <list>.add(<language>);
+     * <list>.add(<util>);
      * }
      * <br>
      * Codeexample: <br>

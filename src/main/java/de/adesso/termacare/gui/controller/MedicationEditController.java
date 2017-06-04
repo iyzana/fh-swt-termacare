@@ -1,16 +1,16 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.gui.dto.DtoDoctor;
-import de.adesso.termacare.gui.dto.DtoMedication;
-import de.adesso.termacare.gui.dto.DtoPatient;
+import de.adesso.termacare.database.dao.DoctorDao;
+import de.adesso.termacare.database.dao.PatientDao;
 import de.adesso.termacare.database.entity.Doctor;
 import de.adesso.termacare.database.entity.MedicationType;
 import de.adesso.termacare.database.entity.Patient;
-import de.adesso.termacare.database.dao.DoctorDao;
-import de.adesso.termacare.database.dao.PatientDao;
-import de.adesso.termacare.service.MedicationService;
-import de.adesso.termacare.gui.construct.AbstractController;
+import de.adesso.termacare.gui.construct.AbstractEditController;
+import de.adesso.termacare.gui.dto.DtoDoctor;
+import de.adesso.termacare.gui.dto.DtoMedication;
+import de.adesso.termacare.gui.dto.DtoPatient;
 import de.adesso.termacare.gui.view.MedicationEdit;
+import de.adesso.termacare.service.MedicationService;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import static de.adesso.termacare.util.DependencyInjector.getInstance;
 
-public class MedicationEditController extends AbstractController<MedicationEdit>{
+public class MedicationEditController extends AbstractEditController<MedicationEdit>{
 
 	private MedicationService service;
 	private PatientDao patientService;
@@ -112,7 +112,8 @@ public class MedicationEditController extends AbstractController<MedicationEdit>
 		relaunch();
 	}
 
-	void setDisable(boolean disable){
+	@Override
+	public void setDisable(boolean disable){
 		view.setDisable(disable);
 	}
 

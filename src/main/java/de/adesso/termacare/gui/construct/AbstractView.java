@@ -1,5 +1,6 @@
 package de.adesso.termacare.gui.construct;
 
+import de.adesso.termacare.gui.util.LanguageSelection;
 import javafx.scene.Scene;
 import javafx.scene.control.Labeled;
 import javafx.stage.Stage;
@@ -19,14 +20,11 @@ public abstract class AbstractView<T extends AbstractController> implements View
     private Stage stage;
     @Getter
     protected Scene scene;
-    private ResourceBundle resources;
-    
+
     public AbstractView(T controller, Stage stage, Scene scene) {
         this.controller = controller;
         this.stage = stage;
         this.scene = scene;
-    
-        resources = ResourceBundle.getBundle("languages", controller.getLanguageSelection().getLocale());
     }
     
     @Override
@@ -37,15 +35,25 @@ public abstract class AbstractView<T extends AbstractController> implements View
         stage.setScene(scene);
         stage.show();
     }
-    
-    @Override
-    public void fillComponentWithText(Labeled labeled, String nameInBundle) {
+
+    /**
+     * The {@link #fillComponentWithText(Labeled, String)}-method for all components
+     */
+    public abstract void fillComponentsWithSelectedLanguage();
+
+    /**
+     * This Method fills the component with text
+     * @param labeled The component
+     * @param nameInBundle The identifier in resource-bundle
+     */
+    public static void fillComponentWithText(Labeled labeled, String nameInBundle) {
         try {
-            labeled.setText(resources.getString(nameInBundle));
-            log.debug("The " + labeled.getClass().getSimpleName() + " with the CSS-ID=\"" + labeled.getId() + "\" is filled with \"" + labeled.getText() + "\" in class " + this.getClass().getName());
+            labeled.setText(ResourceBundle.getBundle("languages", LanguageSelection
+                    .getInstance().getLocale()).getString(nameInBundle));
+            log.debug("The " + labeled.getClass().getSimpleName() + " with the CSS-ID=\"" + labeled.getId() + "\" is filled with \"" + labeled.getText() + "\"");
         } catch (MissingResourceException e) {
             labeled.setText(nameInBundle);
-            log.error("Can not find \"" + nameInBundle + "\" in ResourceBundle for " + this.getClass().getName(), e);
+            log.error("Can not find \"" + nameInBundle + "\" in ResourceBundle", e);
         }
     }
 }

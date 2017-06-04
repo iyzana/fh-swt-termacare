@@ -1,4 +1,4 @@
-package de.adesso.termacare.gui.view;
+package de.adesso.termacare.gui.util;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,7 +13,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTimePicker extends DatePicker {
-    public static final String DefaultFormat = "yyyy-MM-dd HH:mm";
+    private static final String DefaultFormat = "yyyy-MM-dd HH:mm";
 
     private DateTimeFormatter formatter;
     private ObjectProperty<LocalDateTime> dateTimeValue = new SimpleObjectProperty<>(LocalDateTime.now());
@@ -29,7 +29,6 @@ public class DateTimePicker extends DatePicker {
         setFormat(DefaultFormat);
         setConverter(new InternalConverter());
 
-        // Syncronize changes to the underlying date value back to the dateTimeValue
         valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 dateTimeValue.set(null);
@@ -43,10 +42,8 @@ public class DateTimePicker extends DatePicker {
             }
         });
 
-        // Syncronize changes to dateTimeValue back to the underlying date value
         dateTimeValue.addListener((observable, oldValue, newValue) -> setValue(newValue == null ? null : newValue.toLocalDate()));
 
-        // Persist changes onblur
         getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue)
                 simulateEnterPressed();
@@ -82,7 +79,7 @@ public class DateTimePicker extends DatePicker {
         this.format.set(format);
     }
 
-    class InternalConverter extends StringConverter<LocalDate> {
+    public class InternalConverter extends StringConverter<LocalDate> {
         public String toString(LocalDate object) {
             LocalDateTime value = getDateTimeValue();
             return (value != null) ? value.format(formatter) : "";

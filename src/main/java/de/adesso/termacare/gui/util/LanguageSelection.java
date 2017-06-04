@@ -1,4 +1,4 @@
-package de.adesso.termacare.gui.language;
+package de.adesso.termacare.gui.util;
 
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.util.Language;
@@ -87,7 +87,7 @@ public class LanguageSelection{
 	}
 
 	private void setNewLanguage(Language language, Locale locale) {
-		log.info(language.name() + " is selected as the new language, the old one was " + this.optic.getLanguage().name());
+		log.info(language.name() + " is selected as the new util, the old one was " + this.optic.getLanguage().name());
 		this.optic.setLanguage(language);
 		this.locale = locale;
 		view.fillComponentsWithSelectedLanguage();

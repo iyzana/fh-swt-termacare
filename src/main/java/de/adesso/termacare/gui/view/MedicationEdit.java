@@ -3,6 +3,7 @@ package de.adesso.termacare.gui.view;
 import de.adesso.termacare.database.entity.MedicationType;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.controller.MedicationEditController;
+import de.adesso.termacare.gui.util.DateTimePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;

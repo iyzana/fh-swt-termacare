@@ -1,15 +1,17 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.gui.dto.DtoMedication;
 import de.adesso.termacare.database.entity.Medication;
+import de.adesso.termacare.gui.construct.AbstractEditController;
+import de.adesso.termacare.gui.construct.AbstractOverviewController;
+import de.adesso.termacare.gui.construct.AbstractView;
+import de.adesso.termacare.gui.dto.DtoAbstractData;
+import de.adesso.termacare.gui.dto.DtoMedication;
+import de.adesso.termacare.gui.util.TableView;
+import de.adesso.termacare.gui.view.MedicationOverview;
 import de.adesso.termacare.service.DoctorService;
 import de.adesso.termacare.service.MedicationService;
 import de.adesso.termacare.service.PatientService;
-import de.adesso.termacare.gui.construct.AbstractController;
-import de.adesso.termacare.gui.view.MedicationOverview;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +21,7 @@ import static de.adesso.termacare.util.DependencyInjector.getInstance;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j
-public class MedicationOverviewController extends AbstractController<MedicationOverview> {
+public class MedicationOverviewController extends AbstractOverviewController<MedicationOverview> {
 
     private MedicationService service;
     private PatientService patientService;
@@ -32,23 +34,23 @@ public class MedicationOverviewController extends AbstractController<MedicationO
         loadMedicationsToTable();
     }
 
-	private void fillTableWithColumns(){
-		generateColumnFor("patientName", 0, 0);
-		generateColumnFor("doctorNames", 200, 0);
-		generateColumnFor("type", 100, 0);
-		generateColumnFor("time", 200, 0);
+	@Override
+	public <I extends DtoAbstractData> AbstractEditController<AbstractView> initEditController(
+					I focusedItem){
+		return null;
 	}
 
-    private void generateColumnFor(String identifier) {
-        generateColumnFor(identifier, 0, 0);
-    }
+	@Override
+	public AbstractEditController<AbstractView> initEditController(){
+		return null;
+	}
 
-	private void generateColumnFor(String identifier, int minWidth, int maxWidth){
-		TableColumn<DtoMedication, String> column = new TableColumn<>(identifier);
-		if(minWidth != 0) column.setMinWidth(minWidth);
-		if(maxWidth != 0) column.setMaxWidth(maxWidth);
-		column.setCellValueFactory(new PropertyValueFactory<>(identifier));
-		view.getMedicationTableView().getColumns().add(column);
+	private void fillTableWithColumns(){
+		view.setTableView(new TableView<>(this));
+		view.getTableView().generateColumnFor("patientName");
+		view.getTableView().generateColumnFor("doctorNames", 200, 0);
+		view.getTableView().generateColumnFor("type", 100, 0);
+		view.getTableView().generateColumnFor("time", 200, 0);
 	}
 
     private void loadMedicationsToTable() {
@@ -56,36 +58,7 @@ public class MedicationOverviewController extends AbstractController<MedicationO
 
         log.debug("loaded " + medications.size() + " medications");
 
-        view.getMedications().addAll(medications);
-    }
-
-    public void newMedication() {
-        MedicationEditController medicationEditController = getInstance(MedicationEditController.class);
-        medicationEditController.init(stage, scene);
-        medicationEditController.show();
-    }
-
-	public void editMedication(){
-		DtoMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
-		MedicationEditController controller = getInstance(MedicationEditController.class);
-		controller.setMedication(focusedItem);
-		controller.init(stage, scene);
-		controller.show();
-	}
-
-    public void deleteMedication() {
-        DtoMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
-        view.getMedications().remove(focusedItem);
-        service.deleteMedication(focusedItem.getId());
-    }
-
-    public void infoMedication() {
-	    DtoMedication focusedItem = view.getMedicationTableView().getFocusModel().getFocusedItem();
-	    MedicationEditController controller = getInstance(MedicationEditController.class);
-	    controller.setMedication(focusedItem);
-	    controller.init(stage, scene);
-	    controller.setDisable(true);
-	    controller.show();
+        view.getTableView().addAll(medications);
     }
 
 	public void gotoDoctors(){
@@ -99,5 +72,4 @@ public class MedicationOverviewController extends AbstractController<MedicationO
 		patientOverviewController.init(stage, scene);
 		patientOverviewController.show();
 	}
-
 }

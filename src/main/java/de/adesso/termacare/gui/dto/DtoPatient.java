@@ -1,13 +1,11 @@
 package de.adesso.termacare.gui.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-public final class DtoPatient implements DtoData {
-	private long id;
-
+public final class DtoPatient extends DtoAbstractData{
 	private String gender;
 	private String title;
 	private String givenName;
@@ -18,4 +16,18 @@ public final class DtoPatient implements DtoData {
 
 	private String billingPostcode;
 	private String billingAddress;
+
+	public DtoPatient(
+					long id, String gender, String title, String givenName, String familyName, String livingPostcode,
+					String livingAddress, String billingPostcode, String billingAddress){
+		super(id);
+		this.gender = gender;
+		this.title = title;
+		this.givenName = givenName;
+		this.familyName = familyName;
+		this.livingPostcode = livingPostcode;
+		this.livingAddress = livingAddress;
+		this.billingPostcode = billingPostcode;
+		this.billingAddress = billingAddress;
+	}
 }
