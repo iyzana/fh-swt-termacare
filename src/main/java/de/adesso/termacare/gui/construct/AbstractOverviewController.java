@@ -7,7 +7,7 @@ import lombok.Getter;
 public abstract class AbstractOverviewController<T extends AbstractOverviewView> extends AbstractController<T>{
 
 	@Getter
-	private GenericRepo repo;
+	protected GenericRepo repo;
 
 	public abstract <I extends DtoAbstractData> AbstractEditController<AbstractView> initEditController(I focusedItem);
 
