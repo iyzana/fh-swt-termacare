@@ -1,5 +1,6 @@
 package de.adesso.termacare.gui.construct;
 
+import de.adesso.termacare.gui.language.LanguageSelection;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -22,5 +23,9 @@ public abstract class AbstractController<T extends AbstractView> implements Cont
 	@Override
 	public void show() {
 		view.show();
+	}
+
+	LanguageSelection getLanguageSelection(){
+		return null;
 	}
 }

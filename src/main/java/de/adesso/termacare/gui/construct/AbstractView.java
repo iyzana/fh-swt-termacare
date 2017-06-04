@@ -6,6 +6,11 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import static de.adesso.termacare.TerMa.logger;
+
 @NoArgsConstructor
 public abstract class AbstractView<T extends AbstractController> implements View {
 
@@ -32,6 +37,12 @@ public abstract class AbstractView<T extends AbstractController> implements View
 
 	@Override
 	public void fillComponentWithText(Labeled labeled, String nameInBundle) {
-		// stuff to do
+		try {
+			labeled.setText(ResourceBundle.getBundle("languages", controller.getLanguageSelection().getLocale()).getString(nameInBundle));
+			logger.debug("The " + labeled.getClass().getSimpleName() + " with the CSS-ID=\"" + labeled.getId() + "\" is filled with \"" + labeled.getText() + "\" in class " + this.getClass().getName());
+		} catch (MissingResourceException e) {
+			labeled.setText(nameInBundle);
+			logger.error("Can not find \"" + nameInBundle + "\" in ResourceBundle for " + this.getClass().getName(), e);
+		}
 	}
 }
