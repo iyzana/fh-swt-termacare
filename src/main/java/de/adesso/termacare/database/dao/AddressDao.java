@@ -4,10 +4,7 @@ import de.adesso.termacare.data.entity.Address;
 
 import java.util.List;
 
-/**
- * Created by jannis on 6/4/17.
- */
-public interface AdressDao {
+public interface AddressDao{
     List<Address> list();
     
     void save(Address instance);
