@@ -4,7 +4,7 @@ import de.adesso.termacare.gui.construct.AbstractOverviewView;
 import de.adesso.termacare.gui.controller.MedicationOverviewController;
 import de.adesso.termacare.gui.dto.DtoMedication;
 import de.adesso.termacare.gui.util.LanguageSelection;
-import de.adesso.termacare.gui.util.TableView;
+import de.adesso.termacare.gui.util.TableViewController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -22,7 +22,7 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 
 	private VBox gotoBox = new VBox();
 	private BorderPane pane = new BorderPane();
-	private TableView<DtoMedication, ?> tableView;
+	private TableViewController<DtoMedication, ?> tableViewController;
 
 	public MedicationOverview(MedicationOverviewController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
@@ -33,7 +33,7 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 		gotoBox.getChildren().addAll(doctors, patients);
 
 		pane.setTop(LanguageSelection.getInstance().showLanguageSelection());
-		pane.setCenter(tableView);
+		pane.setCenter(tableViewController);
 		pane.setRight(gotoBox);
 		scene = new Scene(pane);
 		scene.getStylesheets().add("main.css");

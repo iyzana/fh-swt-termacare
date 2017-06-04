@@ -13,7 +13,7 @@ import static de.adesso.termacare.gui.construct.AbstractView.fillComponentWithTe
 @Data
 public class TableViewOptic<T extends DtoData>{
 
-	private final TableView controller;
+	private final TableViewController controller;
 	private final BorderPane tablePane = new BorderPane();
 	private Button create = new Button();
 	private	Button edit = new Button();
@@ -25,7 +25,7 @@ public class TableViewOptic<T extends DtoData>{
 	private ObservableList<T> data = FXCollections.observableArrayList();
 	private javafx.scene.control.TableView<T> table = new javafx.scene.control.TableView<>(data);
 
-	public TableViewOptic(TableView controller){
+	public TableViewOptic(TableViewController controller){
 		this.controller = controller;
 		bottomBox.getChildren().addAll(create, edit, delete, info);
 		tablePane.setBottom(bottomBox);

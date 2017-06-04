@@ -9,12 +9,13 @@ import javafx.scene.layout.Pane;
 
 import java.util.List;
 
-public class TableView<T extends DtoAbstractData, C extends AbstractOverviewController> extends Pane{
+public class TableViewController<T extends DtoAbstractData, C extends AbstractOverviewController> extends Pane{
 	private final C controller;
 	private TableViewOptic<T> view;
 
-	public TableView(C controller){
+	public TableViewController(C controller){
 		this.controller = controller;
+		view = new TableViewOptic<>(this);
 	}
 
 	public void generateColumnFor(String identifier) {

@@ -6,7 +6,7 @@ import de.adesso.termacare.gui.construct.AbstractOverviewController;
 import de.adesso.termacare.gui.construct.AbstractView;
 import de.adesso.termacare.gui.dto.DtoAbstractData;
 import de.adesso.termacare.gui.dto.DtoMedication;
-import de.adesso.termacare.gui.util.TableView;
+import de.adesso.termacare.gui.util.TableViewController;
 import de.adesso.termacare.gui.view.MedicationOverview;
 import de.adesso.termacare.service.DoctorService;
 import de.adesso.termacare.service.MedicationService;
@@ -46,11 +46,11 @@ public class MedicationOverviewController extends AbstractOverviewController<Med
 	}
 
 	private void fillTableWithColumns(){
-		view.setTableView(new TableView<>(this));
-		view.getTableView().generateColumnFor("patientName");
-		view.getTableView().generateColumnFor("doctorNames", 200, 0);
-		view.getTableView().generateColumnFor("type", 100, 0);
-		view.getTableView().generateColumnFor("time", 200, 0);
+		view.setTableViewController(new TableViewController<>(this));
+		view.getTableViewController().generateColumnFor("patientName");
+		view.getTableViewController().generateColumnFor("doctorNames", 200, 0);
+		view.getTableViewController().generateColumnFor("type", 100, 0);
+		view.getTableViewController().generateColumnFor("time", 200, 0);
 	}
 
     private void loadMedicationsToTable() {
@@ -58,7 +58,7 @@ public class MedicationOverviewController extends AbstractOverviewController<Med
 
         log.debug("loaded " + medications.size() + " medications");
 
-        view.getTableView().addAll(medications);
+        view.getTableViewController().addAll(medications);
     }
 
 	public void gotoDoctors(){

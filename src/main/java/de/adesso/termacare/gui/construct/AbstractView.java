@@ -53,7 +53,7 @@ public abstract class AbstractView<T extends AbstractController> implements View
             log.debug("The " + labeled.getClass().getSimpleName() + " with the CSS-ID=\"" + labeled.getId() + "\" is filled with \"" + labeled.getText() + "\"");
         } catch (MissingResourceException e) {
             labeled.setText(nameInBundle);
-            log.error("Can not find \"" + nameInBundle + "\" in ResourceBundle", e);
+            log.error("Can not find \"" + nameInBundle + "\" in ResourceBundle");
         }
     }
 }

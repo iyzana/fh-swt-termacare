@@ -6,8 +6,6 @@ import lombok.Getter;
 
 public abstract class AbstractOverviewController<T extends AbstractOverviewView> extends AbstractController<T>{
 
-	protected T view;
-
 	@Getter
 	private GenericRepo repo;
 
