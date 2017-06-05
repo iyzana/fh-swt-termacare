@@ -1,7 +1,7 @@
 package de.adesso.termacare.gui.controller;
 
+import de.adesso.termacare.database.dao.MedicationDao;
 import de.adesso.termacare.database.entity.Medication;
-import de.adesso.termacare.database.repo.MedicationRepo;
 import de.adesso.termacare.gui.construct.AbstractEditController;
 import de.adesso.termacare.gui.construct.AbstractOverviewController;
 import de.adesso.termacare.gui.construct.AbstractView;
@@ -30,7 +30,7 @@ public class MedicationOverviewController extends AbstractOverviewController<Med
     @Override
     public void init(Stage stage, Scene scene) {
         super.init(new MedicationOverview(this, stage, scene));
-        repo = getInstance(MedicationRepo.class);
+        repo = getInstance(MedicationDao.class);
         fillTableWithColumns();
         loadMedicationsToTable();
     }

@@ -18,8 +18,8 @@ import static java.util.stream.Collectors.toMap;
 public class DependencyInjector {
     private static Map<Class<?>, Object> instances;
     
-    public static <T> T getInstance(Class<T> clazz) {
-        return (T) instances.get(clazz);
+    public static <T> T getInstance(Class<? super T> clazz) {
+        return (T) getInjectable(clazz, instances.keySet()).map(instances::get).orElse(null);
     }
     
     /**
@@ -59,7 +59,7 @@ public class DependencyInjector {
             if (field.get(instance) != null)
                 return;
             
-            Optional<Object> inject = getInjectable(field, instances.keySet()).map(instances::get);
+            Optional<Object> inject = getInjectable(field.getType(), instances.keySet()).map(instances::get);
             
             if (inject.isPresent())
                 field.set(instance, inject.get());
@@ -75,15 +75,15 @@ public class DependencyInjector {
      * @param injectables The classes that are available to inject
      * @return correct injectable instance or Optional.empty() if none or multiple exist
      */
-    private static Optional<Class<?>> getInjectable(Field field, Set<Class<?>> injectables) {
+    private static Optional<Class<?>> getInjectable(Class<?> type, Set<Class<?>> injectables) {
         List<Class<?>> collect = injectables.stream()
-                .filter(injectable -> field.getType().isAssignableFrom(injectable))
+                .filter(type::isAssignableFrom)
                 .collect(toList());
         
         if (collect.isEmpty()) return Optional.empty();
         if (collect.size() == 1) return Optional.of(collect.get(0));
         
-        throw new IllegalStateException("more than one possible injectable found for field " + field);
+        throw new IllegalStateException("more than one possible injectable found for type " + type);
     }
     
     /**
