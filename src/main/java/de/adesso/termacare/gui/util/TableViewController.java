@@ -9,12 +9,12 @@ import javafx.scene.layout.BorderPane;
 
 import java.util.List;
 
-public class TableViewController<T extends DtoAbstractData, C extends AbstractOverviewController>{
-	private final C controller;
+public class TableViewController<T extends DtoAbstractData, O extends AbstractOverviewController, E extends AbstractEditController>{
+	private final O overview;
 	private TableViewOptic<T> view;
 
-	public TableViewController(C controller){
-		this.controller = controller;
+	public TableViewController(O overview){
+		this.overview = overview;
 		view = new TableViewOptic<>(this);
 		view.fillComponentsWithSelectedLanguage();
 		view.setStyleClasses();
@@ -37,31 +37,35 @@ public class TableViewController<T extends DtoAbstractData, C extends AbstractOv
 		view.getTable().getColumns().add(column);
 	}
 
-	public void create() {
-		AbstractEditController controller = this.controller.initEditController();
+	void create() {
+		E controller = (E) this.overview.initEditController();
 		controller.show();
 	}
 
-	public void edit(){
+	void edit(){
 		T focusedItem = view.getTable().getFocusModel().getFocusedItem();
-		AbstractEditController controller = this.controller.initEditController(focusedItem);
+		E controller = (E) this.overview.initEditController(focusedItem);
 		controller.show();
 	}
 
-	public void delete() {
+	void delete() {
 		T focusedItem = view.getTable().getFocusModel().getFocusedItem();
 		view.getData().remove(focusedItem);
-		controller.getRepo().delete(focusedItem.getId());
+		overview.getRepo().delete(focusedItem.getId());
 	}
 
-	public void info() {
+	void info() {
 		T focusedItem = view.getTable().getFocusModel().getFocusedItem();
-		AbstractEditController controller = this.controller.initEditController(focusedItem);
+		E controller = (E) this.overview.initEditController(focusedItem);
 		controller.setDisable(true);
 		controller.show();
 	}
 
 	public void addAll(List<T> data){
 		view.getData().addAll(data);
+	}
+
+	public void fillComponents(){
+		view.fillComponentsWithSelectedLanguage();
 	}
 }

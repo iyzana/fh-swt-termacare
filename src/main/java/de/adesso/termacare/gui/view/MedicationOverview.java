@@ -1,6 +1,7 @@
 package de.adesso.termacare.gui.view;
 
 import de.adesso.termacare.gui.construct.AbstractOverviewView;
+import de.adesso.termacare.gui.controller.MedicationEditController;
 import de.adesso.termacare.gui.controller.MedicationOverviewController;
 import de.adesso.termacare.gui.dto.DtoMedication;
 import de.adesso.termacare.gui.util.LanguageSelection;
@@ -22,7 +23,7 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 
 	private VBox gotoBox = new VBox();
 	private BorderPane pane = new BorderPane();
-	private TableViewController<DtoMedication, MedicationOverviewController> tableViewController;
+	private TableViewController<DtoMedication, MedicationOverviewController, MedicationEditController> tableViewController;
 
 	public MedicationOverview(MedicationOverviewController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
@@ -44,6 +45,7 @@ public class MedicationOverview extends AbstractOverviewView<MedicationOverviewC
 	public void fillComponentsWithSelectedLanguage(){
 		fillComponentWithText(doctors, "allDoctors");
 		fillComponentWithText(patients, "allPatients");
+		tableViewController.fillComponents();
 	}
 
 	@Override

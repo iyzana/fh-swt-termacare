@@ -1,15 +1,15 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.util.DependencyInjector;
-import de.adesso.termacare.gui.dto.DtoDoctor;
 import de.adesso.termacare.database.entity.Gender;
-import de.adesso.termacare.service.DoctorService;
-import de.adesso.termacare.gui.construct.AbstractController;
+import de.adesso.termacare.gui.construct.AbstractEditController;
+import de.adesso.termacare.gui.dto.DtoDoctor;
 import de.adesso.termacare.gui.view.DoctorEdit;
+import de.adesso.termacare.service.DoctorService;
+import de.adesso.termacare.util.DependencyInjector;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class DoctorEditController extends AbstractController<DoctorEdit> {
+public class DoctorEditController extends AbstractEditController<DoctorEdit>{
 
     private DoctorService service;
     private long id;
@@ -38,5 +38,10 @@ public class DoctorEditController extends AbstractController<DoctorEdit> {
         view.getTitleField().setText(doctor.getTitle());
         view.getGivenNameField().setText(doctor.getGivenName());
         view.getFamilyNameField().setText(doctor.getFamilyName());
+    }
+
+    @Override
+    public void setDisable(boolean disable){
+
     }
 }

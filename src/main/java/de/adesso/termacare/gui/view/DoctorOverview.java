@@ -1,75 +1,56 @@
 package de.adesso.termacare.gui.view;
 
-import de.adesso.termacare.gui.dto.DtoDoctor;
-import de.adesso.termacare.gui.construct.AbstractView;
+import de.adesso.termacare.gui.construct.AbstractOverviewView;
+import de.adesso.termacare.gui.controller.DoctorEditController;
 import de.adesso.termacare.gui.controller.DoctorOverviewController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import de.adesso.termacare.gui.dto.DtoDoctor;
+import de.adesso.termacare.gui.util.LanguageSelection;
+import de.adesso.termacare.gui.util.TableViewController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class DoctorOverview extends AbstractView<DoctorOverviewController>{
+public class DoctorOverview extends AbstractOverviewView<DoctorOverviewController>{
 
 	private BorderPane pane = new BorderPane();
-	private ObservableList<DtoDoctor> doctors = FXCollections.observableArrayList();
-	private TableView<DtoDoctor> doctorTableView = new TableView<>(doctors);
-	private	Button newDoctor = new Button("new");
-	private	Button editDoctor = new Button("edit");
-	private	Button deleteDoctor = new Button("delete");
-	private Button infoDoctor = new Button("info");
-	private Button cancel = new Button("backToOverview");
-	private HBox bottomBox = new HBox();
+	private Button cancel = new Button();
+	private VBox right = new VBox();
+	private TableViewController<DtoDoctor, DoctorOverviewController, DoctorEditController> tableViewController;
 
 	public DoctorOverview(DoctorOverviewController controller, Stage stage, Scene scene){
 		super(controller, stage, scene);
+		tableViewController = new TableViewController<>(controller);
 	}
 
 	@Override
 	public void init(){
-		bottomBox.getChildren().addAll(newDoctor, editDoctor, deleteDoctor, infoDoctor, cancel);
+		right.getChildren().addAll(cancel);
 
-		pane.setCenter(doctorTableView);
-		pane.setBottom(bottomBox);
-
+		pane.setRight(right);
+		pane.setCenter(tableViewController.getTable());
+		pane.setTop(LanguageSelection.getInstance().showLanguageSelection());
 		scene.setRoot(pane);
 	}
 
-
 	@Override
 	public void fillComponentsWithSelectedLanguage(){
-		fillComponentWithText(newDoctor, "newDoctor");
-		fillComponentWithText(editDoctor, "editDoctor");
-		fillComponentWithText(deleteDoctor, "deleteDoctor");
-		fillComponentWithText(infoDoctor, "infoDoctor");
 		fillComponentWithText(cancel, "backToOverview");
+		tableViewController.fillComponents();
 	}
 
 	@Override
 	public void registerListener(){
-		newDoctor.setOnMouseClicked(event -> controller.newDoctor());
-		editDoctor.setOnMouseClicked(event -> controller.editDoctor());
-		deleteDoctor.setOnMouseClicked(event -> controller.deleteDoctor());
-		infoDoctor.setOnMouseClicked(event -> controller.infoDoctor());
 		cancel.setOnMouseClicked(event -> controller.backToOverview());
 	}
 
 	@Override
 	public void setStyleClasses(){
-		newDoctor.setId("newDoctor");
-		editDoctor.setId("editDoctor");
-		deleteDoctor.setId("deleteDoctor");
-		infoDoctor.setId("infoDoctor");
 		cancel.setId("doctorOverviewCancel");
-
-		doctorTableView.setId("patientList");
-		bottomBox.setId("bottomBox");
 	}
 }

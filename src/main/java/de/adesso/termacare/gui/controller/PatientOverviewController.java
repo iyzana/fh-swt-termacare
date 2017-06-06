@@ -1,20 +1,20 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.util.DependencyInjector;
-import de.adesso.termacare.gui.dto.DtoPatient;
 import de.adesso.termacare.database.entity.Patient;
-import de.adesso.termacare.service.PatientService;
-import de.adesso.termacare.gui.construct.AbstractController;
+import de.adesso.termacare.gui.construct.AbstractOverviewController;
+import de.adesso.termacare.gui.dto.DtoAbstractData;
+import de.adesso.termacare.gui.dto.DtoPatient;
 import de.adesso.termacare.gui.view.PatientOverview;
+import de.adesso.termacare.service.PatientService;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PatientOverviewController extends AbstractController<PatientOverview> {
+import static de.adesso.termacare.util.DependencyInjector.getInstance;
+
+public class PatientOverviewController extends AbstractOverviewController<PatientOverview, PatientEditController>{
 
     private PatientService service;
 
@@ -25,61 +25,40 @@ public class PatientOverviewController extends AbstractController<PatientOvervie
         loadPersonsToTable();
     }
 
+    @Override
+    public <I extends DtoAbstractData> PatientEditController initEditController(
+            I focusedItem){
+        PatientEditController controller = initEditController();
+        controller.setPatient((DtoPatient) focusedItem);
+        return controller;
+    }
+
+    @Override
+    public PatientEditController initEditController(){
+        PatientEditController controller = getInstance(PatientEditController.class);
+        controller.init(stage, scene);
+        return controller;
+    }
+
     private void fillTableWithColumns() {
-        generateColumnFor("title", 100, 0);
-        generateColumnFor("givenName", 100, 0);
-        generateColumnFor("familyName", 100, 0);
-        generateColumnFor("gender", 0, 0);
-        generateColumnFor("livingPostcode");
-        generateColumnFor("livingAddress");
-        generateColumnFor("billingPostcode");
-        generateColumnFor("billingAddress");
-    }
-
-    private void generateColumnFor(String identifier) {
-        generateColumnFor(identifier, 0, 0);
-    }
-
-    private void generateColumnFor(String identifier, int minWidth, int maxWidth) {
-        TableColumn<DtoPatient, String> column = new TableColumn<>(identifier);
-        if (minWidth != 0) column.setMinWidth(minWidth);
-        if (maxWidth != 0) column.setMaxWidth(maxWidth);
-        column.setCellValueFactory(new PropertyValueFactory<>(identifier));
-        view.getPatientTableView().getColumns().add(column);
+        view.getTableViewController().generateColumnFor("title", 100, 0);
+        view.getTableViewController().generateColumnFor("givenName", 100, 0);
+        view.getTableViewController().generateColumnFor("familyName", 100, 0);
+        view.getTableViewController().generateColumnFor("gender", 0, 50);
+        view.getTableViewController().generateColumnFor("livingPostcode");
+        view.getTableViewController().generateColumnFor("livingAddress");
+        view.getTableViewController().generateColumnFor("billingPostcode");
+        view.getTableViewController().generateColumnFor("billingAddress");
     }
 
     private void loadPersonsToTable() {
         List<DtoPatient> patients = service.getPatients().stream().map(Patient::toDAO).collect(Collectors.toList());
-        view.getPatients().addAll(patients);
+        view.getTableViewController().addAll(patients);
     }
 
     public void backToOverview() {
-        MedicationOverviewController oc = DependencyInjector.getInstance(MedicationOverviewController.class);
+        MedicationOverviewController oc = getInstance(MedicationOverviewController.class);
         oc.init(stage, scene);
         oc.show();
-    }
-
-    public void newPatient() {
-        PatientEditController patientEditController = DependencyInjector.getInstance(PatientEditController.class);
-        patientEditController.init(stage, scene);
-        patientEditController.show();
-    }
-
-    public void editPatient() {
-        DtoPatient focusedItem = view.getPatientTableView().getFocusModel().getFocusedItem();
-        PatientEditController patientEditController = DependencyInjector.getInstance(PatientEditController.class);
-        patientEditController.init(stage, scene);
-        patientEditController.setPatient(focusedItem);
-        patientEditController.show();
-    }
-
-    public void deletePatient() {
-        DtoPatient selectedItem = view.getPatientTableView().getSelectionModel().getSelectedItem();
-        view.getPatients().remove(selectedItem);
-        service.deletePatient(selectedItem.getId());
-    }
-
-    public void infoPatient() {
-
     }
 }

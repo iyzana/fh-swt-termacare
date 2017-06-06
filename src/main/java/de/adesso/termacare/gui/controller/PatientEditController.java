@@ -1,12 +1,12 @@
 package de.adesso.termacare.gui.controller;
 
-import de.adesso.termacare.util.DependencyInjector;
-import de.adesso.termacare.gui.dto.DtoPatient;
 import de.adesso.termacare.database.entity.Address;
 import de.adesso.termacare.database.entity.Gender;
-import de.adesso.termacare.service.PatientService;
-import de.adesso.termacare.gui.construct.AbstractController;
+import de.adesso.termacare.gui.construct.AbstractEditController;
+import de.adesso.termacare.gui.dto.DtoPatient;
 import de.adesso.termacare.gui.view.PatientEdit;
+import de.adesso.termacare.service.PatientService;
+import de.adesso.termacare.util.DependencyInjector;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @NoArgsConstructor
-public class PatientEditController extends AbstractController<PatientEdit>{
+public class PatientEditController extends AbstractEditController<PatientEdit>{
 
 	private long id;
 	private PatientService service;
@@ -106,5 +106,10 @@ public class PatientEditController extends AbstractController<PatientEdit>{
 			view.getLivingStreetField().setText(street);
 			view.getLivingNumberField().setText(livingAddress[livingAddress.length - 1]);
 		}
+	}
+
+	@Override
+	public void setDisable(boolean disable){
+
 	}
 }
