@@ -26,18 +26,16 @@ public class PatientOverviewController extends AbstractOverviewController<Patien
     }
 
     @Override
-    public <I extends DtoAbstractData> PatientEditController initEditController(
-            I focusedItem){
+    public <I extends DtoAbstractData> PatientEditController initEditController(I focusedItem){
         PatientEditController controller = initEditController();
         controller.setPatient((DtoPatient) focusedItem);
+        controller.init(stage, scene);
         return controller;
     }
 
     @Override
     public PatientEditController initEditController(){
-        PatientEditController controller = getInstance(PatientEditController.class);
-        controller.init(stage, scene);
-        return controller;
+        return getInstance(PatientEditController.class);
     }
 
     private void fillTableWithColumns() {

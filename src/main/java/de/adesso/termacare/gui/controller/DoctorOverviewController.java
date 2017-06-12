@@ -31,14 +31,13 @@ public class DoctorOverviewController extends AbstractOverviewController<DoctorO
     public <I extends DtoAbstractData> DoctorEditController initEditController(I focusedItem){
 	    DoctorEditController controller = initEditController();
 	    controller.setDoctor((DtoDoctor) focusedItem);
+        controller.init(stage, scene);
 	    return controller;
     }
 
     @Override
     public DoctorEditController initEditController(){
-	    DoctorEditController controller = getInstance(DoctorEditController.class);
-	    controller.init(stage, scene);
-	    return controller;
+        return getInstance(DoctorEditController.class);
     }
 
     private void fillTableWithColumns() {

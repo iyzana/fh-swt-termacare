@@ -31,12 +31,13 @@ public class MedicationService {
         return medications.list();
     }
     
-    public void createMedication(Patient patient, List<Doctor> doctors, MedicationType type, LocalDateTime appointment) {
-        if (!timeSlotFree(appointment))
+    public void createMedication(long id, Patient patient, List<Doctor> doctors, MedicationType type, LocalDateTime appointment) {
+        if (id == 0 && !timeSlotFree(appointment))
             throw new IllegalStateException("there is another appointment at this time");
         
         Medication medication = new Medication();
         
+        medication.setId(id);
         medication.setPatient(patient);
         medication.setDoctors(doctors);
         medication.setMedicationType(type);

@@ -86,9 +86,9 @@ public class TerMa extends Application {
         List<Doctor> doctors = doctorService.getDoctors();
         List<Patient> patients = patientService.getPatients();
         
-        medicationService.createMedication(patients.get(0), asList(doctors.get(1)), MedicationType.INSPECTION, LocalDateTime.now().plusWeeks(1));
-        medicationService.createMedication(patients.get(0), asList(doctors.get(0), doctors.get(1)), MedicationType.OPERATION, LocalDateTime.now().plusWeeks(2));
-        medicationService.createMedication(patients.get(1), asList(doctors.get(0)), MedicationType.INSPECTION, LocalDateTime.now().plusDays(3));
+        medicationService.createMedication(0, patients.get(0), asList(doctors.get(1)), MedicationType.INSPECTION, LocalDateTime.now().plusWeeks(1));
+        medicationService.createMedication(0, patients.get(0), asList(doctors.get(0), doctors.get(1)), MedicationType.OPERATION, LocalDateTime.now().plusWeeks(2));
+        medicationService.createMedication(0, patients.get(1), asList(doctors.get(0)), MedicationType.INSPECTION, LocalDateTime.now().plusDays(3));
     }
     
     public static void main(String[] args) {

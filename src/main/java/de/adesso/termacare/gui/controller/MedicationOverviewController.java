@@ -37,14 +37,13 @@ public class MedicationOverviewController extends AbstractOverviewController<Med
 	public <I extends DtoAbstractData> MedicationEditController initEditController(I focusedItem){
 		MedicationEditController controller = initEditController();
 		controller.setMedication((DtoMedication) focusedItem);
+		controller.init(stage, scene);
 		return controller;
 	}
 
 	@Override
 	public MedicationEditController initEditController(){
-		MedicationEditController controller = getInstance(MedicationEditController.class);
-		controller.init(stage, scene);
-		return controller;
+		return getInstance(MedicationEditController.class);
 	}
 
 	private void fillTableWithColumns(){
