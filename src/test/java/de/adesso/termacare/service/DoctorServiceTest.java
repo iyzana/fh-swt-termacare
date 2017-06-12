@@ -27,7 +27,7 @@ class DoctorServiceTest {
     private static List<Doctor> doctors;
     
     @BeforeAll
-    public static void init() {
+    static void init() {
         doctorService = DoctorService.getInstance();
         
         doctorRepo = mock(DoctorRepo.class);
