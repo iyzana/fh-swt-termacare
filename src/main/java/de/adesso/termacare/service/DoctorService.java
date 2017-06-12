@@ -23,9 +23,9 @@ public class DoctorService {
     
     }
     
-    private DoctorDao doctors;
-    private PatientDao patients;
-    private MedicationDao medications;
+    public DoctorDao doctors;
+    public PatientDao patients;
+    public MedicationDao medications;
     
     public List<Patient> getPatients() {
         return patients.list();
