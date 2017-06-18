@@ -41,12 +41,3 @@ dependencies {
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M4'
     testCompile 'org.mockito:mockito-core:2.8.9'
 }
-
-jar {
-    manifest {
-        attributes(
-                'Class-Path': (configurations.compile).collect { it.getName() }.join(' '),
-                'Main-Class': 'de.adesso.termacare.TerMa'
-        )
-    }
-}
