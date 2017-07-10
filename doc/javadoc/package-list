@@ -1,0 +1,12 @@
+de.adesso.termacare
+de.adesso.termacare.database.construct
+de.adesso.termacare.database.dao
+de.adesso.termacare.database.entity
+de.adesso.termacare.database.repo
+de.adesso.termacare.gui.construct
+de.adesso.termacare.gui.controller
+de.adesso.termacare.gui.dto
+de.adesso.termacare.gui.util
+de.adesso.termacare.gui.view
+de.adesso.termacare.service
+de.adesso.termacare.util
