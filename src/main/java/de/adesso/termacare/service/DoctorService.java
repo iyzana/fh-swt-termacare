@@ -12,6 +12,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Singleton class for querying for/by doctors or modifying doctors
+ */
 public class DoctorService {
     private static DoctorService INSTANCE;
     
@@ -27,14 +30,25 @@ public class DoctorService {
     public PatientDao patients;
     public MedicationDao medications;
     
-    public List<Patient> getPatients() {
-        return patients.list();
-    }
-    
+    /**
+     * load all doctors from the database
+     *
+     * @return list of all doctors
+     */
     public List<Doctor> getDoctors() {
         return doctors.list();
     }
     
+    /**
+     * Save or update the data for a doctor
+     * If the given id is zero a new medication is created
+     *
+     * @param id id of the doctor to update or 0 to create new doctor
+     * @param title title of the doctor
+     * @param gender gender of the doctor
+     * @param givenName givenName of the doctor
+     * @param familyName familyName of the doctor
+     */
     public void createOrUpdateDoctor(long id, String title, Gender gender, String givenName, String familyName) {
         Doctor doctor = new Doctor();
         
@@ -47,6 +61,13 @@ public class DoctorService {
         doctors.save(doctor);
     }
     
+    /**
+     * get all the medications the given doctor has to attend to.
+     *
+     * @throws IllegalArgumentException if the doctor does not exist
+     * @param doctorId doctor to load medications for
+     * @return list of all medications of the doctor
+     */
     public List<Medication> getMedications(long doctorId) {
         Doctor doctor = doctors.getByID(doctorId);
         if (doctor == null)
@@ -57,12 +78,23 @@ public class DoctorService {
                 .collect(toList());
     }
     
+    /**
+     * get all the patients the given doctor is treating
+     *
+     * @param doctorId doctor to load patients for
+     * @return list of all the doctors patients
+     */
     public List<Patient> getPatients(long doctorId) {
         return getMedications(doctorId).stream()
                 .map(Medication::getPatient)
                 .collect(toList());
     }
     
+    /**
+     * delete a doctor
+     *
+     * @param doctorId doctor to delete
+     */
     public void deleteDoctor(long doctorId) {
         doctors.delete(doctorId);
     }

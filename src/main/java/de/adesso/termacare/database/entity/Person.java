@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Abstract Entity for a person including title, gender, givenName, familyName
+ */
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor

@@ -5,20 +5,25 @@ import de.adesso.termacare.database.entity.EntityInterface;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Interface that represents a repository connection to the database
+ *
+ * @param <T> Type of class to use this repository for
+ * @param <ID> type of id the entity has
+ */
 interface Repo<T extends EntityInterface, ID extends Serializable> {
 
 	/**
-	 * Returns all entities saved in the database
+	 * Returns all entities saved in the table
 	 *
 	 * @return A list of all entities
 	 */
 	List<T> list();
 	
 	/**
-	 * Method to save an instance of T in the database
+	 * Method to save an instance of T in the table
 	 *
 	 * @param instance The instance to save
-	 * @return The ID of the created entity
 	 */
 	void save(T instance);
 

@@ -12,7 +12,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by kaiser on 09.05.2017.
+ * Singleton class for querying for/by patients or modifying patients
  */
 public class PatientService {
     private static PatientService INSTANCE;
@@ -28,10 +28,27 @@ public class PatientService {
     private PatientDao patients;
     private MedicationDao medications;
     
+    /**
+     * Load a list of all Patients from the database
+     *
+     * @return List of all patients
+     */
     public List<Patient> getPatients() {
         return patients.list();
     }
     
+    /**
+     * Save or update a patients data.
+     * If the given id is zero a new patient is created
+     *
+     * @param id id of the patient to update or 0 to create new patient
+     * @param title title of the patient
+     * @param gender gender of the patient
+     * @param givenName givenName of the patient
+     * @param familyName familyName of the patient
+     * @param billing billing address of the patient
+     * @param living living address of the patient
+     */
     public void createOrUpdatePatient(long id, String title, Gender gender, String givenName, String familyName, Address billing, Address living) {
         Patient patient = new Patient();
         
@@ -46,12 +63,24 @@ public class PatientService {
         patients.save(patient);
     }
     
+    /**
+     * Get all medications - future or past - for a given patient
+     *
+     * @param patientId patientId to query for
+     * @return List of medications of this patient
+     */
     public List<Medication> getMedications(long patientId) {
         return medications.list().stream()
                 .filter(med -> patientId == med.getPatient().getId())
                 .collect(toList());
     }
     
+    /**
+     * Delete a patient
+     * All medications of this patient must be delete first
+     *
+     * @param patientId patientId to delete
+     */
     public void deletePatient(long patientId) {
         patients.delete(patientId);
     }

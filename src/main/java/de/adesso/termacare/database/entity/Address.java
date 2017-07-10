@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entity for saving an address including postcode, departure, address and number
+ */
 @Data
 @Entity
 @RequiredArgsConstructor
@@ -27,10 +30,18 @@ public class Address implements EntityInterface {
     @Column(name = "homeNumber")
     private String number;
     
+    /**
+     * Format the city and postcode for user output
+     * @return formatted string
+     */
     String getCompressedDeparture() {
         return postcode + " " + departure;
     }
     
+    /**
+     * Format the number and address for user output
+     * @return formatted string
+     */
     String getCompressedAddress() {
         return address + " " + number;
     }

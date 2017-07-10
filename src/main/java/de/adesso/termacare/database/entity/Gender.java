@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enum for representing the gender of a person
+ */
 @Getter
 @AllArgsConstructor
 @RequiredArgsConstructor

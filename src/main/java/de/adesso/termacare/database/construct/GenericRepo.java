@@ -16,6 +16,13 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Generic database repository used for listing, saving, loading and deleteing of any entity that implements the
+ * marker interface EntityInterface
+ *
+ * @param <T> Type of class to use this repository for
+ * @param <ID> type of id the entity has
+ */
 @Slf4j
 public class GenericRepo<T extends EntityInterface, ID extends Serializable> implements Repo<T, ID> {
     
@@ -36,6 +43,11 @@ public class GenericRepo<T extends EntityInterface, ID extends Serializable> imp
         this.clazz = clazz;
     }
     
+    /**
+     * Returns all entities saved in the table
+     *
+     * @return A list of all entities
+     */
     @Override
     public List<T> list() {
         Transaction tx = null;
@@ -54,6 +66,11 @@ public class GenericRepo<T extends EntityInterface, ID extends Serializable> imp
         }
     }
     
+    /**
+     * Method to save an instance of T in the table
+     *
+     * @param instance The instance to save
+     */
     @Override
     public void save(T instance) {
         try (Session session = factory.openSession()) {
@@ -71,6 +88,12 @@ public class GenericRepo<T extends EntityInterface, ID extends Serializable> imp
         }
     }
     
+    /**
+     * Method to get an instance with the given id
+     *
+     * @param id The id of the entity in the database
+     * @return The instance with the id
+     */
     @Override
     public T getByID(ID id) {
         Session session = factory.openSession();
@@ -79,6 +102,11 @@ public class GenericRepo<T extends EntityInterface, ID extends Serializable> imp
         return t;
     }
     
+    /**
+     * Method to DELETE an employee from the records
+     *
+     * @param id The id of the entity in the database
+     */
     @Override
     public void delete(ID id) {
         Transaction tx = null;

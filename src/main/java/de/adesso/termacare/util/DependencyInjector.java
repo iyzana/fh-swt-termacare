@@ -18,6 +18,13 @@ import static java.util.stream.Collectors.toMap;
 public class DependencyInjector {
     private static Map<Class<?>, Object> instances;
     
+    /**
+     * Get the created instance of the specified class
+     *
+     * @param clazz Class object for passing the type T
+     * @param <T> type of class to get instance of
+     * @return The instance
+     */
     public static <T> T getInstance(Class<? super T> clazz) {
         return (T) getInjectable(clazz, instances.keySet()).map(instances::get).orElse(null);
     }

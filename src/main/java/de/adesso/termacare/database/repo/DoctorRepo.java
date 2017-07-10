@@ -4,6 +4,9 @@ import de.adesso.termacare.database.entity.Doctor;
 import de.adesso.termacare.database.construct.GenericRepo;
 import de.adesso.termacare.database.dao.DoctorDao;
 
+/**
+ * DAO implementation for doctors
+ */
 public class DoctorRepo extends GenericRepo<Doctor, Long> implements DoctorDao {
     
     public DoctorRepo() {

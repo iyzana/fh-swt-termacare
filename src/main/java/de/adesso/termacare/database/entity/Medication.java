@@ -14,6 +14,9 @@ import java.util.List;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Entity for representing a medication including patient, doctors and appointment
+ */
 @Data
 @Entity
 @AllArgsConstructor

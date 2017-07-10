@@ -34,8 +34,13 @@ import static java.util.Arrays.asList;
 @Slf4j
 public class TerMa extends Application {
     
+    /**
+     * Startpunkt der Anwendung. Wir von JavaFX aufgerufen
+     *
+     * @param primaryStage Die Stage, in die die Anwendung geladen wird (von JavaFX bereitgestellt)
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         inject(PatientService.class, MedicationService.class, DoctorService.class, PatientRepo.class, AddressRepo.class,
                 MedicationRepo.class, DoctorRepo.class, MedicationOverviewController.class, DoctorOverviewController.class,
                 PatientOverviewController.class, PatientEditController.class, DoctorSelectionController.class,
@@ -52,6 +57,11 @@ public class TerMa extends Application {
         view.show();
     }
     
+    /**
+     * Initiale Testdaten in die Datenbank einfügen
+     *
+     * Anglegt werden vier Adressen, zwei Patienten/innen, zwei Doktoren/innen und drei Behandlungen
+     */
     private void createTestData() {
         PatientService patientService = getInstance(PatientService.class);
         DoctorService doctorService = getInstance(DoctorService.class);

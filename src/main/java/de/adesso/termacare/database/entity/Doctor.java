@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/**
+ * Entity for representing an doctor
+ */
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
