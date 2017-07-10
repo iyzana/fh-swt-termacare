@@ -1,5 +1,7 @@
 package de.adesso.termacare.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +16,7 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
+@Slf4j
 @SuppressWarnings("unchecked")
 public class DependencyInjector {
     private static Map<Class<?>, Object> instances;
@@ -22,7 +25,7 @@ public class DependencyInjector {
      * Get the created instance of the specified class
      *
      * @param clazz Class object for passing the type T
-     * @param <T> type of class to get instance of
+     * @param <T>   type of class to get instance of
      * @return The instance
      */
     public static <T> T getInstance(Class<? super T> clazz) {
@@ -49,6 +52,7 @@ public class DependencyInjector {
      * @param instance The instance to inject into
      */
     private static void injectAllFields(Object instance) {
+        log.trace("injecting fields into {}", instance.getClass().getSimpleName());
         Arrays.stream(instance.getClass().getDeclaredFields()).forEach(field -> tryInjectField(instance, field));
     }
     
@@ -57,19 +61,27 @@ public class DependencyInjector {
      * If it is inject the fitting instance into the field of the provided instance
      *
      * @param instance The instance to inject into
-     * @param field The field to inject into if possible
+     * @param field    The field to inject into if possible
      */
     private static void tryInjectField(Object instance, Field field) {
         try {
+            log.trace("field '{}': loading for injection", field.getName());
+            
             field.setAccessible(true);
             
-            if (field.get(instance) != null)
+            if (field.get(instance) != null) {
+                log.trace("field '{}': aborting injection: field is already set", field.getName());
                 return;
+            }
             
             Optional<Object> inject = getInjectable(field.getType(), instances.keySet()).map(instances::get);
             
-            if (inject.isPresent())
+            if (inject.isPresent()) {
+                log.trace("field '{}': injecting object of type '{}'", field.getName(), inject.get().getClass().getSimpleName());
                 field.set(instance, inject.get());
+            } else {
+                log.trace("field '{}': aborting injection: no field of type '{}' found", field.getName(), field.getType().getSimpleName());
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -78,7 +90,7 @@ public class DependencyInjector {
     /**
      * Get the correct injectable instance for a given field
      *
-     * @param field The field to inject into
+     * @param type        Type of injectable to search for
      * @param injectables The classes that are available to inject
      * @return correct injectable instance or Optional.empty() if none or multiple exist
      */
@@ -95,21 +107,23 @@ public class DependencyInjector {
     
     /**
      * Creates an instance of the given class
-     *
+     * <p>
      * If a factory method named 'getInstance' is available this method is used for creation
      * Else a parameterless constructor is expected to exist
      *
      * @param clazz The class to create
-     * @param <T> The class type
+     * @param <T>   The class type
      * @return An instance of the given class
      */
     private static <T> T createInstance(Class<T> clazz) {
         try {
             try {
                 Method factoryMethod = clazz.getDeclaredMethod("getInstance");
+                log.trace("creating instance of {} using getInstance method", clazz.getSimpleName());
                 return (T) factoryMethod.invoke(null);
             } catch (NoSuchMethodException e) {
                 Constructor<T> constructor = clazz.getConstructor();
+                log.trace("creating instance of {} using constructor", clazz.getSimpleName());
                 return constructor.newInstance();
             }
         } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {

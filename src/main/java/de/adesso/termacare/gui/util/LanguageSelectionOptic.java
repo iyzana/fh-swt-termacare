@@ -24,6 +24,8 @@ class LanguageSelectionOptic {
 
     /**
      * Build the Language Selection
+     *
+     * @param controller language selection controller for this optic
      */
     LanguageSelectionOptic(LanguageSelection controller) {
 
@@ -43,7 +45,6 @@ class LanguageSelectionOptic {
             button.getStyleClass().add("languageSelection");
         selectLanguage.getStyleClass().add("languageSelection");
     }
-
 
     /**
      * fills the buttons with images<br>

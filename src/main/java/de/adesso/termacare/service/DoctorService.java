@@ -7,6 +7,7 @@ import de.adesso.termacare.database.entity.Patient;
 import de.adesso.termacare.database.dao.DoctorDao;
 import de.adesso.termacare.database.dao.MedicationDao;
 import de.adesso.termacare.database.dao.PatientDao;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Singleton class for querying for/by doctors or modifying doctors
  */
+@Slf4j
 public class DoctorService {
     private static DoctorService INSTANCE;
     
@@ -36,6 +38,7 @@ public class DoctorService {
      * @return list of all doctors
      */
     public List<Doctor> getDoctors() {
+        log.info("getting all doctors");
         return doctors.list();
     }
     
@@ -58,6 +61,9 @@ public class DoctorService {
         doctor.setGivenName(givenName);
         doctor.setFamilyName(familyName);
         
+        if (id == 0) log.info("creating new doctor");
+        else log.info("updating doctor with id {}", id);
+        
         doctors.save(doctor);
     }
     
@@ -69,6 +75,8 @@ public class DoctorService {
      * @return list of all medications of the doctor
      */
     public List<Medication> getMedications(long doctorId) {
+        log.info("loading medications for doctor with id {}", doctorId);
+        
         Doctor doctor = doctors.getByID(doctorId);
         if (doctor == null)
             throw new IllegalArgumentException("doctor does not exist");
@@ -85,6 +93,8 @@ public class DoctorService {
      * @return list of all the doctors patients
      */
     public List<Patient> getPatients(long doctorId) {
+        log.info("loading patients for doctor with id {}", doctorId);
+        
         return getMedications(doctorId).stream()
                 .map(Medication::getPatient)
                 .collect(toList());
@@ -96,6 +106,8 @@ public class DoctorService {
      * @param doctorId doctor to delete
      */
     public void deleteDoctor(long doctorId) {
+        log.info("deleting doctor with id {}", doctorId);
+        
         doctors.delete(doctorId);
     }
 }

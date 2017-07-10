@@ -35,9 +35,9 @@ import static java.util.Arrays.asList;
 public class TerMa extends Application {
     
     /**
-     * Startpunkt der Anwendung. Wir von JavaFX aufgerufen
+     * starting point of the application, run by Javafx
      *
-     * @param primaryStage Die Stage, in die die Anwendung geladen wird (von JavaFX bereitgestellt)
+     * @param primaryStage The stage used to display the applicationD
      */
     @Override
     public void start(Stage primaryStage) {
@@ -58,9 +58,9 @@ public class TerMa extends Application {
     }
     
     /**
-     * Initiale Testdaten in die Datenbank einfügen
+     * Insert initial testdata into the database
      *
-     * Anglegt werden vier Adressen, zwei Patienten/innen, zwei Doktoren/innen und drei Behandlungen
+     * Created are four adresses, two patients, two doctors and three medications
      */
     private void createTestData() {
         PatientService patientService = getInstance(PatientService.class);

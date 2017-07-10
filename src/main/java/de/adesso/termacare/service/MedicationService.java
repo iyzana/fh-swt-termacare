@@ -5,6 +5,7 @@ import de.adesso.termacare.database.entity.Medication;
 import de.adesso.termacare.database.entity.MedicationType;
 import de.adesso.termacare.database.entity.Patient;
 import de.adesso.termacare.database.dao.MedicationDao;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Singleton class for querying for/by medications or modifying medications
  */
+@Slf4j
 public class MedicationService {
     private static MedicationService INSTANCE;
     
@@ -33,6 +35,7 @@ public class MedicationService {
      * @return list of all medications
      */
     public List<Medication> getMedications() {
+        log.info("getting all medications");
         return medications.list();
     }
     
@@ -58,17 +61,22 @@ public class MedicationService {
         medication.setDoctors(doctors);
         medication.setMedicationType(type);
         medication.setAppointment(appointment);
+    
+        if (id == 0) log.info("creating new medication");
+        else log.info("updating medication with id {}", id);
         
         medications.save(medication);
     }
     
     /**
-     * Get all medications for a given patient
+     * Get all medications - future or past - for a given patient
      *
      * @param patientId patient to search for
      * @return list of patients medications
      */
     public List<Medication> getMedications(long patientId) {
+        log.info("loading medications for patient with id {}", patientId);
+        
         return medications.list().stream()
                 .filter(med -> patientId == med.getPatient().getId())
                 .collect(toList());
@@ -92,6 +100,8 @@ public class MedicationService {
      * @param appointment new appointment details
      */
     public void reschedule(long medicationId, LocalDateTime appointment) {
+        log.info("rescheduling medication with id {}", medicationId);
+        
         Medication medication = medications.getByID(medicationId);
         if (medication == null)
             throw new IllegalArgumentException("Medication does not exist");
@@ -100,10 +110,12 @@ public class MedicationService {
         
         if (!timeSlotFree(appointment)) {
             medications.save(medication);
+            log.info("appointment is already taken");
             throw new IllegalStateException("there is another appointment at this time");
         }
         
         medication.setAppointment(appointment);
+        
         medications.save(medication);
     }
     
