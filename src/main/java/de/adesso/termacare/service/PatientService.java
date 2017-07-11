@@ -4,10 +4,13 @@ import de.adesso.termacare.database.dao.MedicationDao;
 import de.adesso.termacare.database.dao.PatientDao;
 import de.adesso.termacare.database.entity.Address;
 import de.adesso.termacare.database.entity.Gender;
+import de.adesso.termacare.database.entity.Medication;
 import de.adesso.termacare.database.entity.Patient;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Singleton class for querying for/by patients or modifying patients
@@ -26,7 +29,8 @@ public class PatientService {
     
     private PatientDao patients;
     private MedicationDao medications;
-    
+    private MedicationService medicationService;
+
     /**
      * Load a list of all Patients from the database
      *
@@ -64,6 +68,20 @@ public class PatientService {
         else log.info("updating patient with id {}", id);
         
         patients.save(patient);
+    }
+
+    /**
+     * get all the patients the given doctor is treating
+     *
+     * @param doctorId doctor to load patients for
+     * @return list of all the doctors patients
+     */
+    public List<Patient> getPatients(long doctorId) {
+        log.info("loading patients for doctor with id {}", doctorId);
+
+        return medicationService.getMedicationsForDoctor(doctorId).stream()
+                                .map(Medication::getPatient)
+                                .collect(toList());
     }
     
     /**

@@ -1,10 +1,11 @@
 package de.adesso.termacare.service;
 
+import de.adesso.termacare.database.dao.DoctorDao;
+import de.adesso.termacare.database.dao.MedicationDao;
 import de.adesso.termacare.database.entity.Doctor;
 import de.adesso.termacare.database.entity.Medication;
 import de.adesso.termacare.database.entity.MedicationType;
 import de.adesso.termacare.database.entity.Patient;
-import de.adesso.termacare.database.dao.MedicationDao;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -28,7 +29,8 @@ public class MedicationService {
     }
     
     private MedicationDao medications;
-    
+    private DoctorDao doctors;
+
     /**
      * load all medications from the database
      *
@@ -74,12 +76,31 @@ public class MedicationService {
      * @param patientId patient to search for
      * @return list of patients medications
      */
-    public List<Medication> getMedications(long patientId) {
+    public List<Medication> getMedicationsForPatient(long patientId) {
         log.info("loading medications for patient with id {}", patientId);
         
         return medications.list().stream()
                 .filter(med -> patientId == med.getPatient().getId())
                 .collect(toList());
+    }
+
+    /**
+     * get all the medications the given doctor has to attend to.
+     *
+     * @throws IllegalArgumentException if the doctor does not exist
+     * @param doctorId doctor to load medications for
+     * @return list of all medications of the doctor
+     */
+    public List<Medication> getMedicationsForDoctor(long doctorId) {
+        log.info("loading medications for doctor with id {}", doctorId);
+
+        Doctor doctor = doctors.getByID(doctorId);
+        if (doctor == null)
+            throw new IllegalArgumentException("doctor does not exist");
+
+        return medications.list().stream()
+                          .filter(med -> med.getDoctors().contains(doctor))
+                          .collect(toList());
     }
     
     /**
