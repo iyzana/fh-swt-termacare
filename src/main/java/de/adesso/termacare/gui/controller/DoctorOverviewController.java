@@ -6,6 +6,7 @@ import de.adesso.termacare.gui.dto.DtoAbstractData;
 import de.adesso.termacare.gui.dto.DtoDoctor;
 import de.adesso.termacare.gui.view.DoctorOverview;
 import de.adesso.termacare.service.DoctorService;
+import de.adesso.termacare.service.PatientService;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,8 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class DoctorOverviewController extends AbstractOverviewController<DoctorOverview, DoctorEditController>{
 
-	private DoctorService service;
+	private DoctorService doctorService;
+	private PatientService patientService;
 
 	@Override
 	public void init(Stage stage, Scene scene){
@@ -48,7 +50,7 @@ public class DoctorOverviewController extends AbstractOverviewController<DoctorO
     }
 
     private void loadDoctorsToTable() {
-        List<DtoDoctor> doctors = service.getDoctors().stream().map(this::doctorToDao).collect(toList());
+        List<DtoDoctor> doctors = doctorService.getDoctors().stream().map(this::doctorToDao).collect(toList());
 
         log.debug("loaded " + doctors.size() + " doctorIds");
 
@@ -57,7 +59,7 @@ public class DoctorOverviewController extends AbstractOverviewController<DoctorO
 
     private DtoDoctor doctorToDao(Doctor doctor) {
         DtoDoctor dao = doctor.toDAO();
-        dao.setAmountOfPatients(service.getPatients(dao.getId()).size());
+        dao.setAmountOfPatients(patientService.getPatients(dao.getId()).size());
         return dao;
     }
 
